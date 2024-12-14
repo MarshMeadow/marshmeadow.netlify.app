@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Link Hub</title>
+    <link rel="icon" href="images/f16a67b93d7e7c64355e35851377e1eb.jpg" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .terminal {
+            background-color: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: flex-start;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .terminal-header span {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 1.6rem;
+            color: #58a6ff;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1rem;
+            background-color: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            background-color: #58a6ff;
+            color: #0d1117;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #8b949e;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="red"></span>
+            <span class="yellow"></span>
+            <span class="green"></span>
+        </div>
+        <h1>~/Welcome to Meadow's Links</h1>
+        <div class="links">
+            <a href="https://example.com" target="_blank">Main Website</a>
+            <a href="https://github.com/MarshMeadow" target="_blank">GitHub</a>
+            <a href="https://neko-dns.netlify.app" target="_blank">Neko DNS</a>
+            <a href="https://xspottv.netlify.app/" target="_blank">XSpot TV</a>
+            <a href="https://hdopro.neocities.org/" target="_blank">HDO Pro</a>
+        </div>
+        <footer>
+            <p>&#169; 2024 Meadow | Linux Inspired</p>
+        </footer>
+    </div>
+</body>
+</html>
