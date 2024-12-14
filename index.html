@@ -117,60 +117,6 @@
             text-align: center;
             color: #8b949e;
         }
-
-        /* Popup styling */
-        .popup {
-            display: none;
-            background-color: #21262d;
-            color: #c9d1d9;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-        }
-
-        .popup input {
-            padding: 10px;
-            margin: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #30363d;
-            background-color: #161b22;
-            color: #c9d1d9;
-        }
-
-        .popup button {
-            padding: 10px;
-            background-color: #58a6ff;
-            border: none;
-            border-radius: 5px;
-            color: #0d1117;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .popup button:hover {
-            background-color: #27c93f;
-        }
-
-        .hint {
-            font-size: 0.9rem;
-            color: #58a6ff;
-            cursor: pointer;
-            text-decoration: underline;
-            margin-top: 10px;
-        }
-
-        .look-up-message {
-            font-size: 0.9rem;
-            color: #58a6ff;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -187,7 +133,7 @@
         </div>
 
         <div class="dropdown">
-            <a href="javascript:void(0)" onclick="askForRobotVerification('Gaming YouTube')">Gaming</a>
+            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Gaming</a>
             <div class="dropdown-content">
                 <a href="https://www.youtube.com/channel/UCEut9fHi6A1HbBdVnyEfU_w" target="_blank">Gaming YouTube</a>
                 <a href="https://www.youtube.com/channel/UCaPh_lbZLmn0ik3R50RS6vA" target="_blank">YouTube</a>
@@ -196,7 +142,7 @@
         </div>
 
         <div class="dropdown">
-            <a href="javascript:void(0)" onclick="askForRobotVerification('Social Links')">Social</a>
+            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Social</a>
             <div class="dropdown-content">
                 <a href="https://en.pronouns.page/@marshmeadow" target="_blank">Pronouns</a>
                 <a href="https://discord.com/users/1028088462508839035" target="_blank">Discord</a>
@@ -205,7 +151,7 @@
         </div>
 
         <div class="dropdown">
-            <a href="javascript:void(0)" onclick="askForRobotVerification('Personal Projects')">Personal Projects</a>
+            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Personal Projects</a>
             <div class="dropdown-content">
                 <a href="https://github.com/MarshMeadow" target="_blank">GitHub :: Meadow</a>
                 <a href="https://sites.google.com/view/fancyexplore/home" target="_blank">FPA Site</a>
@@ -215,75 +161,25 @@
             </div>
         </div>
 
+        <!-- New section added -->
+        <div class="dropdown">
+            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Resources</a>
+            <div class="dropdown-content">
+                <a href="https://www.w3schools.com/" target="_blank">W3Schools</a>
+                <a href="https://developer.mozilla.org/en-US/" target="_blank">MDN Web Docs</a>
+                <a href="https://www.freecodecamp.org/" target="_blank">FreeCodeCamp</a>
+            </div>
+        </div>
+
         <footer>
             <p>&#169; 2024 Meadow | Linux Inspired</p>
         </footer>
     </div>
 
-    <!-- Popup for robot verification -->
-    <div id="robotPopup" class="popup">
-        <p>Are you a robot? Complete the Linux puzzle:</p>
-        <p>What is the command to list files in a directory?</p>
-        <input type="text" id="robotAnswer" placeholder="Type your answer here..." />
-        <button onclick="verifyAnswer()">Submit</button>
-        <p class="hint" onclick="showHint()">Hint: It's a common command for listing contents of a folder in Unix-like systems.</p>
-        <p class="look-up-message">Feel free to look up the answer!</p>
-    </div>
-
     <script>
-        // Check if the user has already completed the robot verification
-        if(localStorage.getItem('robotVerified') === 'true') {
-            document.querySelectorAll('.dropdown').forEach(dropdown => {
-                dropdown.classList.add('active'); // Open the dropdown if already verified
-            });
-        }
-
-        function askForRobotVerification(section) {
-            // If the user hasn't answered the robot question yet
-            if(localStorage.getItem('robotVerified') !== 'true') {
-                // Show the popup
-                document.getElementById("robotPopup").style.display = "block";
-                // Store the section name for further logic if needed
-                sessionStorage.setItem('verificationSection', section);
-            } else {
-                // If already verified, open the dropdown
-                openDropdown(section);
-            }
-        }
-
-        function verifyAnswer() {
-            const answer = document.getElementById("robotAnswer").value.trim().toLowerCase();
-
-            // Regular expressions to allow similar answers
-            const validAnswers = [/^ls$/, /^list$/, /^dir$/];
-
-            // Check if the answer matches any of the acceptable variations
-            if (validAnswers.some(regex => regex.test(answer))) {
-                // Correct answer, mark as verified and open the correct dropdown
-                localStorage.setItem('robotVerified', 'true');
-                const section = sessionStorage.getItem('verificationSection');
-                openDropdown(section);
-                // Hide the popup
-                document.getElementById("robotPopup").style.display = "none";
-            } else {
-                alert("Incorrect answer, try again!");
-            }
-        }
-
-        function openDropdown(section) {
-            const dropdowns = document.querySelectorAll('.dropdown');
-            dropdowns.forEach(dropdown => {
-                const links = dropdown.querySelectorAll('a');
-                links.forEach(link => {
-                    if (link.textContent.includes(section)) {
-                        dropdown.classList.add('active'); // Open the dropdown for that section
-                    }
-                });
-            });
-        }
-
-        function showHint() {
-            alert("Hint: It's a common command for listing contents of a folder in Unix-like systems.");
+        function toggleDropdown(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('active');
         }
     </script>
 </body>
