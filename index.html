@@ -94,10 +94,14 @@
             padding: 10px;
             margin-top: 10px;
             border-radius: 8px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
         }
 
-        .dropdown:hover .dropdown-content {
+        .dropdown.active .dropdown-content {
             display: block;
+            max-height: 300px;
         }
 
         footer {
@@ -118,7 +122,16 @@
         <h1>~/Welcome to Meadow's Links</h1>
 
         <div class="dropdown">
-            <a href="#">Social</a>
+            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Gaming</a>
+            <div class="dropdown-content">
+                <a href="https://discord.gg/yourserverlink" target="_blank">Join My Discord</a>
+                <a href="https://steamcommunity.com/id/yoursteamid" target="_blank">Steam Profile</a>
+                <a href="https://www.reddit.com/user/yourredditusername" target="_blank">Reddit Profile</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Social</a>
             <div class="dropdown-content">
                 <a href="https://en.pronouns.page/@marshmeadow" target="_blank">Pronouns</a>
                 <a href="https://github.com/MarshMeadow" target="_blank">GitHub</a>
@@ -129,16 +142,7 @@
         </div>
 
         <div class="dropdown">
-            <a href="#">Gaming</a>
-            <div class="dropdown-content">
-                <a href="https://discord.gg/yourserverlink" target="_blank">Join My Discord</a>
-                <a href="https://steamcommunity.com/id/yoursteamid" target="_blank">Steam Profile</a>
-                <a href="https://www.reddit.com/user/yourredditusername" target="_blank">Reddit Profile</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <a href="#">Personal Projects</a>
+            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Personal Projects</a>
             <div class="dropdown-content">
                 <a href="https://yourprojectwebsite.com" target="_blank">Project 1</a>
                 <a href="https://yoursecondproject.com" target="_blank">Project 2</a>
@@ -150,5 +154,12 @@
             <p>&#169; 2024 Meadow | Linux Inspired</p>
         </footer>
     </div>
+
+    <script>
+        function toggleDropdown(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
