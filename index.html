@@ -138,6 +138,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            pointer-events: none; /* Disable all interactions on the page */
         }
 
         .popup {
@@ -242,13 +243,13 @@
         // Check if the user has passed the robot check
         if (!localStorage.getItem('isHuman')) {
             document.getElementById('popup-overlay').style.display = 'flex';
-            document.body.style.pointerEvents = 'none'; // Disable all interactions
+            document.body.style.pointerEvents = 'none'; // Disable interactions with the body, but the popup is still clickable
         }
 
         function acceptHuman() {
             localStorage.setItem('isHuman', 'true');
             document.getElementById('popup-overlay').style.display = 'none';
-            document.body.style.pointerEvents = 'auto'; // Re-enable interactions
+            document.body.style.pointerEvents = 'auto'; // Re-enable interactions with the body
         }
 
         // Dropdown toggle
