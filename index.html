@@ -230,13 +230,13 @@
             </div>
         </div>
 
+        <div class="footer-note">
+            <p>Please do not abuse or you will be reported</p>
+        </div>
+
         <footer>
             <p>&#169; 2024 Meadow | Linux Inspired</p>
         </footer>
-    </div>
-
-    <div class="footer-note">
-        <p>Please do not abuse or you will be reported</p>
     </div>
 
     <script>
@@ -251,6 +251,13 @@
             document.getElementById('popup-overlay').style.display = 'none';
             document.body.style.pointerEvents = 'auto'; // Re-enable interactions with the body
         }
+
+        // Bypass popup by pressing 'B'
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'b' || e.key === 'B') {
+                acceptHuman();
+            }
+        });
 
         // Dropdown toggle
         function toggleDropdown(element) {
