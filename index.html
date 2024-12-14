@@ -61,25 +61,14 @@
             text-align: center;
         }
 
-        .section {
-            margin-top: 30px;
-        }
-
-        .section h2 {
-            font-size: 1.5rem;
-            color: #58a6ff;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .links {
+        .dropdown {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        a {
+        .dropdown a {
             display: block;
             padding: 15px;
             text-align: center;
@@ -93,10 +82,22 @@
             transition: all 0.3s ease-in-out;
         }
 
-        a:hover {
+        .dropdown a:hover {
             background-color: #58a6ff;
             color: #0d1117;
             transform: translateY(-5px);
+        }
+
+        .dropdown-content {
+            display: none;
+            background-color: #21262d;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         footer {
@@ -116,9 +117,9 @@
         </div>
         <h1>~/Welcome to Meadow's Links</h1>
 
-        <div class="section">
-            <h2>Social</h2>
-            <div class="links">
+        <div class="dropdown">
+            <a href="#">Social</a>
+            <div class="dropdown-content">
                 <a href="https://en.pronouns.page/@marshmeadow" target="_blank">Pronouns</a>
                 <a href="https://github.com/MarshMeadow" target="_blank">GitHub</a>
                 <a href="https://neko-dns.netlify.app" target="_blank">Neko DNS</a>
@@ -127,18 +128,18 @@
             </div>
         </div>
 
-        <div class="section">
-            <h2>Gaming</h2>
-            <div class="links">
+        <div class="dropdown">
+            <a href="#">Gaming</a>
+            <div class="dropdown-content">
                 <a href="https://discord.gg/yourserverlink" target="_blank">Join My Discord</a>
                 <a href="https://steamcommunity.com/id/yoursteamid" target="_blank">Steam Profile</a>
                 <a href="https://www.reddit.com/user/yourredditusername" target="_blank">Reddit Profile</a>
             </div>
         </div>
 
-        <div class="section">
-            <h2>Personal Projects</h2>
-            <div class="links">
+        <div class="dropdown">
+            <a href="#">Personal Projects</a>
+            <div class="dropdown-content">
                 <a href="https://yourprojectwebsite.com" target="_blank">Project 1</a>
                 <a href="https://yoursecondproject.com" target="_blank">Project 2</a>
                 <a href="https://github.com/MarshMeadow/my-private-repo" target="_blank">Private Repo</a>
