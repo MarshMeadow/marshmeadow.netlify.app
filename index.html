@@ -117,9 +117,44 @@
             text-align: center;
             color: #8b949e;
         }
+
+        /* Popup Styles */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #21262d;
+            color: #c9d1d9;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .popup button {
+            background-color: #27c93f;
+            color: #0d1117;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #58a6ff;
+        }
     </style>
 </head>
 <body>
+    <!-- "Are you human?" popup -->
+    <div id="popup" class="popup" style="display: none;">
+        <p>Are you human?</p>
+        <button onclick="acceptHuman()">Yes</button>
+    </div>
+
     <div class="terminal">
         <div class="terminal-header">
             <span class="red"></span>
@@ -178,10 +213,32 @@
     </div>
 
     <script>
+        // Check if the user has passed the robot check
+        if (!localStorage.getItem('isHuman')) {
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function acceptHuman() {
+            localStorage.setItem('isHuman', 'true');
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Dropdown toggle
         function toggleDropdown(element) {
             const parent = element.parentElement;
             parent.classList.toggle('active');
         }
+
+        // Prevent right-click and text selection
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>
