@@ -21,7 +21,8 @@
             align-items: center;
             min-height: 100vh;
             flex-direction: column;
-            overflow: hidden;
+            overflow: auto;
+            padding: 10px;
         }
 
         .terminal {
@@ -29,23 +30,23 @@
             border: 2px solid #30363d;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            width: 90%;
-            max-width: 600px;
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
             text-align: left;
         }
 
         .terminal-header {
             display: flex;
             justify-content: flex-start;
-            gap: 8px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .terminal-header span {
             display: block;
-            width: 12px;
-            height: 12px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
         }
 
@@ -54,27 +55,28 @@
         .green { background-color: #27c93f; }
 
         h1 {
-            margin-bottom: 10px;
-            font-size: 1.6rem;
+            margin-bottom: 20px;
+            font-size: 2rem;
             color: #58a6ff;
+            text-align: center;
         }
 
         .links {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         a {
             display: block;
-            padding: 10px;
+            padding: 15px;
             text-align: center;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.2rem;
             background-color: #21262d;
             color: #c9d1d9;
             border: 1px solid #30363d;
-            border-radius: 5px;
+            border-radius: 8px;
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease-in-out;
         }
@@ -82,12 +84,12 @@
         a:hover {
             background-color: #58a6ff;
             color: #0d1117;
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
 
         footer {
-            margin-top: 20px;
-            font-size: 0.8rem;
+            margin-top: 30px;
+            font-size: 1rem;
             text-align: center;
             color: #8b949e;
         }
