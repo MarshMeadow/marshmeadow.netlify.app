@@ -166,6 +166,11 @@
             margin-top: 10px;
         }
 
+        .look-up-message {
+            font-size: 0.9rem;
+            color: #58a6ff;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -222,14 +227,28 @@
         <input type="text" id="robotAnswer" placeholder="Type your answer here..." />
         <button onclick="verifyAnswer()">Submit</button>
         <p class="hint" onclick="showHint()">Hint: It's a common command for listing contents of a folder in Unix-like systems.</p>
+        <p class="look-up-message">Feel free to look up the answer!</p>
     </div>
 
     <script>
+        // Check if the user has already completed the robot verification
+        if(localStorage.getItem('robotVerified') === 'true') {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.add('active'); // Open the dropdown if already verified
+            });
+        }
+
         function askForRobotVerification(section) {
-            // Show the popup
-            document.getElementById("robotPopup").style.display = "block";
-            // Store the section name for further logic if needed
-            sessionStorage.setItem('verificationSection', section);
+            // If the user hasn't answered the robot question yet
+            if(localStorage.getItem('robotVerified') !== 'true') {
+                // Show the popup
+                document.getElementById("robotPopup").style.display = "block";
+                // Store the section name for further logic if needed
+                sessionStorage.setItem('verificationSection', section);
+            } else {
+                // If already verified, open the dropdown
+                openDropdown(section);
+            }
         }
 
         function verifyAnswer() {
@@ -240,19 +259,27 @@
 
             // Check if the answer matches any of the acceptable variations
             if (validAnswers.some(regex => regex.test(answer))) {
-                // Correct answer, proceed to the link
+                // Correct answer, mark as verified and open the correct dropdown
+                localStorage.setItem('robotVerified', 'true');
                 const section = sessionStorage.getItem('verificationSection');
-                const links = document.querySelectorAll(`.dropdown-content a`);
-                links.forEach(link => {
-                    if (link.textContent.includes(section)) {
-                        window.open(link.href, '_blank');
-                    }
-                });
+                openDropdown(section);
                 // Hide the popup
                 document.getElementById("robotPopup").style.display = "none";
             } else {
                 alert("Incorrect answer, try again!");
             }
+        }
+
+        function openDropdown(section) {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                const links = dropdown.querySelectorAll('a');
+                links.forEach(link => {
+                    if (link.textContent.includes(section)) {
+                        dropdown.classList.add('active'); // Open the dropdown for that section
+                    }
+                });
+            });
         }
 
         function showHint() {
