@@ -234,7 +234,12 @@
 
         function verifyAnswer() {
             const answer = document.getElementById("robotAnswer").value.trim().toLowerCase();
-            if (answer === "ls") {
+
+            // Regular expressions to allow similar answers
+            const validAnswers = [/^ls$/, /^list$/, /^dir$/];
+
+            // Check if the answer matches any of the acceptable variations
+            if (validAnswers.some(regex => regex.test(answer))) {
                 // Correct answer, proceed to the link
                 const section = sessionStorage.getItem('verificationSection');
                 const links = document.querySelectorAll(`.dropdown-content a`);
