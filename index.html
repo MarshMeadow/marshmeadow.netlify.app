@@ -158,6 +158,14 @@
             background-color: #27c93f;
         }
 
+        .hint {
+            font-size: 0.9rem;
+            color: #58a6ff;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -213,6 +221,7 @@
         <p>What is the command to list files in a directory?</p>
         <input type="text" id="robotAnswer" placeholder="Type your answer here..." />
         <button onclick="verifyAnswer()">Submit</button>
+        <p class="hint" onclick="showHint()">Hint: It's a common command for listing contents of a folder in Unix-like systems.</p>
     </div>
 
     <script>
@@ -239,6 +248,10 @@
             } else {
                 alert("Incorrect answer, try again!");
             }
+        }
+
+        function showHint() {
+            alert("Hint: It's a common command for listing contents of a folder in Unix-like systems.");
         }
     </script>
 </body>
