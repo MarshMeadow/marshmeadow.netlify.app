@@ -34,6 +34,7 @@
             width: 100%;
             max-width: 800px;
             text-align: left;
+            z-index: 1;
         }
 
         .terminal-header {
@@ -118,27 +119,44 @@
             color: #8b949e;
         }
 
+        .footer-note {
+            font-size: 0.9rem;
+            color: #ff5f56;
+            margin-bottom: 10px;
+        }
+
         /* Popup Styles */
-        .popup {
+        .popup-overlay {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
             background-color: #21262d;
             color: #c9d1d9;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px;
+            border-radius: 15px;
             text-align: center;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 300px;
             z-index: 1000;
+            font-size: 1.5rem;
         }
 
         .popup button {
             background-color: #27c93f;
             color: #0d1117;
             border: none;
-            padding: 10px 20px;
-            margin-top: 15px;
+            padding: 15px 30px;
+            margin-top: 20px;
             border-radius: 5px;
             cursor: pointer;
         }
@@ -150,9 +168,11 @@
 </head>
 <body>
     <!-- "Are you human?" popup -->
-    <div id="popup" class="popup" style="display: none;">
-        <p>Are you human?</p>
-        <button onclick="acceptHuman()">Yes</button>
+    <div id="popup-overlay" class="popup-overlay" style="display: none;">
+        <div id="popup" class="popup">
+            <p>Are you human?</p>
+            <button onclick="acceptHuman()">Yes</button>
+        </div>
     </div>
 
     <div class="terminal">
@@ -197,14 +217,8 @@
             </div>
         </div>
 
-        <!-- New section added -->
-        <div class="dropdown">
-            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Resources</a>
-            <div class="dropdown-content">
-                <a href="https://www.w3schools.com/" target="_blank">W3Schools</a>
-                <a href="https://developer.mozilla.org/en-US/" target="_blank">MDN Web Docs</a>
-                <a href="https://www.freecodecamp.org/" target="_blank">FreeCodeCamp</a>
-            </div>
+        <div class="footer-note">
+            <p>Please do not abuse or you will be reported</p>
         </div>
 
         <footer>
@@ -215,12 +229,14 @@
     <script>
         // Check if the user has passed the robot check
         if (!localStorage.getItem('isHuman')) {
-            document.getElementById('popup').style.display = 'block';
+            document.getElementById('popup-overlay').style.display = 'flex';
+            document.body.style.pointerEvents = 'none'; // Disable all interactions
         }
 
         function acceptHuman() {
             localStorage.setItem('isHuman', 'true');
-            document.getElementById('popup').style.display = 'none';
+            document.getElementById('popup-overlay').style.display = 'none';
+            document.body.style.pointerEvents = 'auto'; // Re-enable interactions
         }
 
         // Dropdown toggle
