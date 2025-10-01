@@ -317,6 +317,11 @@
             width: 48px; /* Set the width to 48px for better visibility */
             height: 48px; /* Set the height to 48px for better visibility */
             cursor: pointer; /* Change cursor to pointer on hover */
+            opacity: 0; /* Start with the GIF hidden */
+            transition: opacity 1s ease; /* Fade in effect */
+        }
+        .visible {
+            opacity: 1; /* Make the GIF visible */
         }
         .shake {
             animation: shake 0.5s; /* Duration of the shake */
@@ -346,6 +351,7 @@
             const y = Math.random() * (window.innerHeight - 48); // 48 is the height of the GIF
             gifContainer.style.left = `${x}px`;
             gifContainer.style.top = `${y}px`;
+            gifContainer.classList.add('visible'); // Add class to trigger fade-in
         }
 
         // Call the function to position the GIF when the page loads
