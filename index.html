@@ -308,24 +308,57 @@
 </body>
 </html>
 
-<style>
-    .gif-container {
-        position: fixed;
-        bottom: 10px; /* Adjust as needed */
-        right: 10px; /* Adjust as needed */
-        z-index: 1000; /* Ensure it appears above other content */
-    }
-    .gif-container img {
-        width: 50px; /* Set the width to your desired icon size */
-        height: auto; /* Maintain aspect ratio */
-    }
-</style>
+_______________
+
+<head>
+    <style>
+        .gif-container {
+            position: fixed;
+            width: 50px; /* Set the width to your desired icon size */
+            height: auto; /* Maintain aspect ratio */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+        .shake {
+            animation: shake 0.5s; /* Duration of the shake */
+            animation-iteration-count: infinite; /* Repeat the shake */
+        }
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, 0); }
+            50% { transform: translate(5px, 0); }
+            75% { transform: translate(-5px, 0); }
+            100% { transform: translate(0, 0); }
+        }
+    </style>
 </head>
 <body>
     <!-- Your existing content -->
 
-    <div class="gif-container">
+    <div class="gif-container" id="gif">
         <img src="https://raw.githubusercontent.com/MarshMeadow/marshmeadow.netlify.app/refs/heads/main/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif?token=GHSAT0AAAAAADJRI66S2F3L2DT4OBHTZIKM2G5N7DA" alt="Car">
     </div>
+
+    <script>
+        // Function to randomly position the GIF
+        function positionGif() {
+            const gifContainer = document.getElementById('gif');
+            const x = Math.random() * (window.innerWidth - 50); // 50 is the width of the GIF
+            const y = Math.random() * (window.innerHeight - 50); // 50 is the height of the GIF
+            gifContainer.style.left = `${x}px`;
+            gifContainer.style.top = `${y}px`;
+        }
+
+        // Call the function to position the GIF when the page loads
+        window.onload = positionGif;
+
+        // Add click event to shake the GIF
+        const gif = document.getElementById('gif');
+        gif.addEventListener('click', () => {
+            gif.classList.add('shake');
+            setTimeout(() => {
+                gif.classList.remove('shake');
+            }, 500); // Remove shake class after 500ms
+        });
+    </script>
 </body>
 </html>
