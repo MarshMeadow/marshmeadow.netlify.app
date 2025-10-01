@@ -321,24 +321,25 @@
 
 
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         .gif-container {
             position: fixed;
-            width: 48px; /* Set the width to 48px for better visibility */
-            height: 48px; /* Set the height to 48px for better visibility */
-            cursor: pointer; /* Change cursor to pointer on hover */
-            opacity: 0; /* Start with the GIF hidden */
-            transition: opacity 1s ease; /* Fade in effect */
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 1s ease;
         }
         .visible {
-            opacity: 1; /* Make the GIF visible */
+            opacity: 1;
         }
         .shake {
-            animation: shake 0.5s; /* Duration of the shake */
-            animation-iteration-count: infinite; /* Repeat the shake */
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
         }
         @keyframes shake {
             0% { transform: translate(0, 0); }
@@ -352,75 +353,93 @@
 <body>
     <!-- Your existing content -->
 
-    <div class="gif-container" id="gif">
+    <div class="gif-container" id="gif1">
+        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" style="width: 100%; height: auto;">
+    </div>
+
+    <div class="gif-container" id="gif2" style="display: none;">
         <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" style="width: 100%; height: auto;">
     </div>
 
     <script>
-        // Function to randomly position the GIF
-        function positionGif() {
-            const gifContainer = document.getElementById('gif');
-            const x = Math.random() * (window.innerWidth - 48); // 48 is the width of the GIF
-            const y = Math.random() * (window.innerHeight - 48); // 48 is the height of the GIF
+        // Function to randomly position a GIF
+        function positionGif(gifContainer) {
+            const x = Math.random() * (window.innerWidth - 48);
+            const y = Math.random() * (window.innerHeight - 48);
             gifContainer.style.left = `${x}px`;
             gifContainer.style.top = `${y}px`;
-            gifContainer.classList.add('visible'); // Add class to trigger fade-in
+            gifContainer.style.display = "block";
+            gifContainer.classList.add('visible');
         }
 
-        // Call the function to position the GIF when the page loads
-        window.onload = positionGif;
+        // Set up GIF behaviors (shake, drag, touch-drag)
+        function setupGif(gif) {
+            // Click to shake
+            gif.addEventListener('click', () => {
+                gif.classList.add('shake');
+                setTimeout(() => {
+                    gif.classList.remove('shake');
+                }, 500);
+            });
 
-        // Add click event to shake the GIF
-        const gif = document.getElementById('gif');
-        gif.addEventListener('click', () => {
-            gif.classList.add('shake');
-            setTimeout(() => {
-                gif.classList.remove('shake');
-            }, 500); // Remove shake class after 500ms
-        });
+            // Dragging
+            let offsetX, offsetY;
 
-        // Dragging functionality
-        let offsetX, offsetY;
+            const dragStart = (e) => {
+                offsetX = e.clientX - gif.getBoundingClientRect().left;
+                offsetY = e.clientY - gif.getBoundingClientRect().top;
+                document.addEventListener('mousemove', dragMove);
+                document.addEventListener('mouseup', dragEnd);
+            };
 
-        const dragStart = (e) => {
-            offsetX = e.clientX - gif.getBoundingClientRect().left;
-            offsetY = e.clientY - gif.getBoundingClientRect().top;
-            document.addEventListener('mousemove', dragMove);
-            document.addEventListener('mouseup', dragEnd);
+            const dragMove = (e) => {
+                gif.style.left = `${e.clientX - offsetX}px`;
+                gif.style.top = `${e.clientY - offsetY}px`;
+            };
+
+            const dragEnd = () => {
+                document.removeEventListener('mousemove', dragMove);
+                document.removeEventListener('mouseup', dragEnd);
+            };
+
+            gif.addEventListener('mousedown', dragStart);
+
+            // Touch events
+            const touchStart = (e) => {
+                offsetX = e.touches[0].clientX - gif.getBoundingClientRect().left;
+                offsetY = e.touches[0].clientY - gif.getBoundingClientRect().top;
+                document.addEventListener('touchmove', touchMove);
+                document.addEventListener('touchend', touchEnd);
+            };
+
+            const touchMove = (e) => {
+                gif.style.left = `${e.touches[0].clientX - offsetX}px`;
+                gif.style.top = `${e.touches[0].clientY - offsetY}px`;
+            };
+
+            const touchEnd = () => {
+                document.removeEventListener('touchmove', touchMove);
+                document.removeEventListener('touchend', touchEnd);
+            };
+
+            gif.addEventListener('touchstart', touchStart);
+        }
+
+        // Main logic
+        window.onload = () => {
+            const gif1 = document.getElementById('gif1');
+            const gif2 = document.getElementById('gif2');
+
+            // Always show the first GIF
+            positionGif(gif1);
+            setupGif(gif1);
+
+            // Sometimes show the second GIF
+            if (Math.random() > 0.5) { 
+                positionGif(gif2);
+                setupGif(gif2);
+            }
         };
-
-        const dragMove = (e) => {
-            gif.style.left = `${e.clientX - offsetX}px`;
-            gif.style.top = `${e.clientY - offsetY}px`;
-        };
-
-        const dragEnd = () => {
-            document.removeEventListener('mousemove', dragMove);
-            document.removeEventListener('mouseup', dragEnd);
-        };
-
-        gif.addEventListener('mousedown', dragStart);
-
-        // Touch events for mobile
-        const touchStart = (e) => {
-            offsetX = e.touches[0].clientX - gif.getBoundingClientRect().left;
-            offsetY = e.touches[0].clientY - gif.getBoundingClientRect().top;
-            document.addEventListener('touchmove', touchMove);
-            document.addEventListener('touchend', touchEnd);
-        };
-
-        const touchMove = (e) => {
-            gif.style.left = `${e.touches[0].clientX - offsetX}px`;
-            gif.style.top = `${e.touches[0].clientY - offsetY}px`;
-        };
-
-        const touchEnd = () => {
-            document.removeEventListener('touchmove', touchMove);
-            document.removeEventListener('touchend', touchEnd);
-        };
-
-        gif.addEventListener('touchstart', touchStart);
     </script>
 </body>
-
 </html>
