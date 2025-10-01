@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=https://www.youtube.com/watch?v=QDia3e12czc">
+  <title>Redirect</title>
+  <script>
+    // Immediate, minimal redirect
+    (function(){
+      try {
+        document.documentElement.style.visibility = 'hidden';
+        location.replace('https://www.youtube.com/watch?v=QDia3e12czc');
+      } catch(e) {
+        location.href = 'https://www.youtube.com/watch?v=QDia3e12czc';
+      }
+    })();
+
+    // Disable right-click and common dev-tool shortcuts (client-side only)
+    window.addEventListener('contextmenu', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+    }, true);
+
+    window.addEventListener('keydown', function(e){
+      var k = e.keyCode || e.which,
+          ctrl = e.ctrlKey || e.metaKey,
+          sh = e.shiftKey;
+
+      // F12
+      if (k === 123) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      // Ctrl+U, Ctrl+S, Ctrl+P
+      if (ctrl && (k === 85 || k === 83 || k === 80)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      // Ctrl+Shift+I/J/C
+      if (ctrl && sh && (k === 73 || k === 74 || k === 67)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  </script>
+</head>
+<body>
+</body>
+</html>
