@@ -314,8 +314,8 @@
     <style>
         .gif-container {
             position: fixed;
-            width: 24px; /* Set the width to 24px for icon size */
-            height: 24px; /* Set the height to 24px for icon size */
+            width: 48px; /* Set the width to 48px for better visibility */
+            height: 48px; /* Set the height to 48px for better visibility */
             cursor: pointer; /* Change cursor to pointer on hover */
         }
         .shake {
@@ -342,8 +342,8 @@
         // Function to randomly position the GIF
         function positionGif() {
             const gifContainer = document.getElementById('gif');
-            const x = Math.random() * (window.innerWidth - 24); // 24 is the width of the GIF
-            const y = Math.random() * (window.innerHeight - 24); // 24 is the height of the GIF
+            const x = Math.random() * (window.innerWidth - 48); // 48 is the width of the GIF
+            const y = Math.random() * (window.innerHeight - 48); // 48 is the height of the GIF
             gifContainer.style.left = `${x}px`;
             gifContainer.style.top = `${y}px`;
         }
