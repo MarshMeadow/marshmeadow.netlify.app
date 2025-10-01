@@ -415,6 +415,36 @@
     </script>
 </body>
 
+  <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            background-color: #f0f0f0; /* Light background for contrast */
+        }
+        .credits-container {
+            margin: 20px; /* Space from the edges */
+        }
+        .credits-button {
+            background-color: #007BFF; /* Bootstrap primary color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-left: 10px; /* Space between buttons */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none; /* Remove underline from links */
+            font-family: Arial, sans-serif; /* Font style */
+        }
+        .credits-button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+    </style>
+</head>
 <body>
     <div class="credits-container">
         <button class="credits-button">
