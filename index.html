@@ -321,7 +321,6 @@
 
 
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -348,6 +347,10 @@
             75% { transform: translate(-5px, 0); }
             100% { transform: translate(0, 0); }
         }
+        /* Flip second GIF */
+        #gif2 img {
+            transform: scaleX(-1);
+        }
     </style>
 </head>
 <body>
@@ -362,7 +365,6 @@
     </div>
 
     <script>
-        // Function to randomly position a GIF
         function positionGif(gifContainer) {
             const x = Math.random() * (window.innerWidth - 48);
             const y = Math.random() * (window.innerHeight - 48);
@@ -372,9 +374,7 @@
             gifContainer.classList.add('visible');
         }
 
-        // Set up GIF behaviors (shake, drag, touch-drag)
         function setupGif(gif) {
-            // Click to shake
             gif.addEventListener('click', () => {
                 gif.classList.add('shake');
                 setTimeout(() => {
@@ -382,7 +382,6 @@
                 }, 500);
             });
 
-            // Dragging
             let offsetX, offsetY;
 
             const dragStart = (e) => {
@@ -404,7 +403,6 @@
 
             gif.addEventListener('mousedown', dragStart);
 
-            // Touch events
             const touchStart = (e) => {
                 offsetX = e.touches[0].clientX - gif.getBoundingClientRect().left;
                 offsetY = e.touches[0].clientY - gif.getBoundingClientRect().top;
@@ -425,17 +423,14 @@
             gif.addEventListener('touchstart', touchStart);
         }
 
-        // Main logic
         window.onload = () => {
             const gif1 = document.getElementById('gif1');
             const gif2 = document.getElementById('gif2');
 
-            // Always show the first GIF
             positionGif(gif1);
             setupGif(gif1);
 
-            // Sometimes show the second GIF
-            if (Math.random() > 0.5) { 
+            if (Math.random() > 0.5) {
                 positionGif(gif2);
                 setupGif(gif2);
             }
