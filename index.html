@@ -314,8 +314,8 @@
     <style>
         .gif-container {
             position: fixed;
-            width: 50px; /* Set the width to your desired icon size */
-            height: auto; /* Maintain aspect ratio */
+            width: 24px; /* Set the width to 24px for icon size */
+            height: 24px; /* Set the height to 24px for icon size */
             cursor: pointer; /* Change cursor to pointer on hover */
         }
         .shake {
@@ -335,15 +335,15 @@
     <!-- Your existing content -->
 
     <div class="gif-container" id="gif">
-        <img src="https://raw.githubusercontent.com/MarshMeadow/marshmeadow.netlify.app/refs/heads/main/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif?token=GHSAT0AAAAAADJRI66TZQFCKH2UAHD2CLV42G5OFTA" alt="Car">
+        <img src="https://raw.githubusercontent.com/MarshMeadow/marshmeadow.netlify.app/refs/heads/main/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif?token=GHSAT0AAAAAADJRI66TZQFCKH2UAHD2CLV42G5OFTA" alt="Car" style="width: 100%; height: auto;">
     </div>
 
     <script>
         // Function to randomly position the GIF
         function positionGif() {
             const gifContainer = document.getElementById('gif');
-            const x = Math.random() * (window.innerWidth - 50); // 50 is the width of the GIF
-            const y = Math.random() * (window.innerHeight - 50); // 50 is the height of the GIF
+            const x = Math.random() * (window.innerWidth - 24); // 24 is the width of the GIF
+            const y = Math.random() * (window.innerHeight - 24); // 24 is the height of the GIF
             gifContainer.style.left = `${x}px`;
             gifContainer.style.top = `${y}px`;
         }
@@ -361,4 +361,3 @@
         });
     </script>
 </body>
-</html>
