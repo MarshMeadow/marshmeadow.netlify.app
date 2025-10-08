@@ -440,15 +440,20 @@
 </html>
 
 
-<div id="arrow">➡️</div>
-<div id="viewCounter" style="display: none;">Views: <span id="viewCount">0</span></div>
+<button id="arrow" style="position: fixed; bottom: 20px; right: 80px; font-size: 30px;">➡️</button>
+<div id="viewCounter" style="position: fixed; bottom: 20px; right: 20px; background-color: #f8f8f8; border: 1px solid #ccc; padding: 10px; display: none;">
+    Views: <span id="viewCount">0</span>
+</div>
 
 <script>
-    let count = 0;
+    let count = localStorage.getItem('viewCount') ? parseInt(localStorage.getItem('viewCount')) : 0;
+    document.getElementById('viewCount').innerText = count;
 
     document.getElementById('arrow').addEventListener('click', function() {
-        count++;
-        document.getElementById('viewCount').innerText = count;
-        document.getElementById('viewCounter').style.display = 'block';
+        if (count === 0) {
+            count++;
+            localStorage.setItem('viewCount', count);
+            document.getElementById('viewCounter').style.display = 'block';
+        }
     });
 </script>
