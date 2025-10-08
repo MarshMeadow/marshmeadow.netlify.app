@@ -441,7 +441,7 @@
 
 
 <button id="arrow" style="position: fixed; bottom: 20px; right: 80px; background: none; border: none; cursor: pointer; padding: 0;">
-    <img src="https://marshmeadow.netlify.app/Images/arrow_icon.png" alt="Arrow" style="width: 30px; height: 30px;"> <!-- Adjust size here -->
+    <img src="https://marshmeadow.netlify.app/Images/arrow_icon.png" alt="Arrow" style="width: 30px; height: 30px;">
 </button>
 <div id="viewCounter" style="position: fixed; bottom: 20px; right: 20px; background-color: #1e1e1e; border: 1px solid #ccc; padding: 10px; display: none; opacity: 1; transition: opacity 1s; color: white;">
     Views: <span id="viewCount">0</span>
@@ -452,9 +452,9 @@
     document.getElementById('viewCount').innerText = count;
 
     document.getElementById('arrow').addEventListener('click', function() {
-        if (count === 0) {
+        if (count === 0) { // Increment only if count is zero
             count++;
-            localStorage.setItem('viewCount', count);
+            localStorage.setItem('viewCount', count); // Store in localStorage
             const counterDiv = document.getElementById('viewCounter');
             counterDiv.style.display = 'block';
            
@@ -463,7 +463,7 @@
                 setTimeout(() => {
                     counterDiv.style.display = 'none'; // Hide after fade
                 }, 1000); // Wait for fade to complete
-            }, 3000); // Wait 3 seconds before starting to fade
+            }, 3000); // Wait 3 seconds
         }
     });
 </script>
