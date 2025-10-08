@@ -440,8 +440,8 @@
 </html>
 
 
-<button id="arrow" style="position: fixed; bottom: 20px; right: 80px; font-size: 30px;">➡️</button>
-<div id="viewCounter" style="position: fixed; bottom: 20px; right: 20px; background-color: #f8f8f8; border: 1px solid #ccc; padding: 10px; display: none;">
+<button id="arrow" style="position: fixed; bottom: 20px; right: 80px; font-size: 30px; background: none; border: none; color: #007BFF; cursor: pointer;">➡️</button>
+<div id="viewCounter" style="position: fixed; bottom: 20px; right: 20px; background-color: #1e1e1e; border: 1px solid #ccc; padding: 10px; display: none; opacity: 1; transition: opacity 1s;">
     Views: <span id="viewCount">0</span>
 </div>
 
@@ -453,7 +453,15 @@
         if (count === 0) {
             count++;
             localStorage.setItem('viewCount', count);
-            document.getElementById('viewCounter').style.display = 'block';
+            const counterDiv = document.getElementById('viewCounter');
+            counterDiv.style.display = 'block';
+           
+            setTimeout(() => {
+                counterDiv.style.opacity = '0'; // Start fading
+                setTimeout(() => {
+                    counterDiv.style.display = 'none'; // Hide after fade
+                }, 1000); // Wait for fade to complete
+            }, 3000); // Wait 3 seconds before starting to fade
         }
     });
 </script>
