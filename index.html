@@ -438,3 +438,17 @@
     </script>
 </body>
 </html>
+
+
+<div id="arrow">➡️</div>
+<div id="viewCounter" style="display: none;">Views: <span id="viewCount">0</span></div>
+
+<script>
+    let count = 0;
+
+    document.getElementById('arrow').addEventListener('click', function() {
+        count++;
+        document.getElementById('viewCount').innerText = count;
+        document.getElementById('viewCounter').style.display = 'block';
+    });
+</script>
