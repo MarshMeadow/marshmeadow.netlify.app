@@ -6,8 +6,8 @@
     <title>Oops! Something Went Wrong</title>
     <style>
         body {
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #1b1b2e; /* Dark background */
+            color: #ffffff; /* White text */
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
@@ -21,27 +21,25 @@
         }
         .goofy {
             font-size: 36px;
-            color: #ffcc00;
-            text-shadow: 2px 2px #000000;
+            color: #a5d6e5; /* Soft blue */
         }
         .btn {
             display: inline-block;
             margin-top: 30px;
             padding: 10px 20px;
-            background-color: #ff5722;
+            background-color: #6a0572; /* Purple button */
             color: white;
             text-decoration: none;
             border-radius: 5px;
             transition: background 0.3s;
         }
         .btn:hover {
-            background-color: #e64a19;
+            background-color: #a05bc2; /* Lighter purple on hover */
         }
     </style>
     <script>
         setTimeout(function() {
-            window.history.back(); // Redirect to the previous page
-            // Alternatively, use window.location.href = 'home.html'; for home
+            window.location.href = 'https://marshmeadow.netlify.app/'; // Redirect to the specified URL
         }, 5000);
     </script>
 </head>
