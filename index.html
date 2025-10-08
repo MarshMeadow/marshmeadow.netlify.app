@@ -452,18 +452,21 @@
     document.getElementById('viewCount').innerText = count;
 
     document.getElementById('arrow').addEventListener('click', function() {
+        const counterDiv = document.getElementById('viewCounter');
         if (count === 0) { // Increment only if count is zero
             count++;
             localStorage.setItem('viewCount', count); // Store in localStorage
-            const counterDiv = document.getElementById('viewCounter');
-            counterDiv.style.display = 'block';
-           
-            setTimeout(() => {
-                counterDiv.style.opacity = '0'; // Start fading
-                setTimeout(() => {
-                    counterDiv.style.display = 'none'; // Hide after fade
-                }, 1000); // Wait for fade to complete
-            }, 3000); // Wait 3 seconds
         }
+
+        // Reset display and opacity
+        counterDiv.style.display = 'block';
+        counterDiv.style.opacity = '1'; // Ensure it is visible
+
+        setTimeout(() => {
+            counterDiv.style.opacity = '0'; // Start fading
+            setTimeout(() => {
+                counterDiv.style.display = 'none'; // Hide after fade
+            }, 1000); // Wait for fade to complete
+        }, 3000); // Wait 3 seconds
     });
 </script>
