@@ -11,6 +11,9 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
+            background-image: url('https://example.com/cat-pattern.png'); /* Subtle cat-themed pattern */
+            background-repeat: no-repeat;
+            background-size: cover; /* Full screen */
         }
         h1 {
             font-size: 48px;
@@ -36,6 +39,10 @@
         .btn:hover {
             background-color: #a05bc2; /* Lighter purple on hover */
         }
+        .cat-emoji {
+            font-size: 48px;
+            margin: 20px 0;
+        }
     </style>
     <script>
         setTimeout(function() {
@@ -45,6 +52,7 @@
 </head>
 <body>
     <h1>Oops! 404 Error!</h1>
+    <div class="cat-emoji">🐱</div> <!-- Cat emoji -->
     <p class="goofy">Looks like you've fallen into a black hole!</p>
     <p>Don’t worry, we’ll bring you back in a jiffy!</p>
     <a class="btn" href="#">Take Me Home!</a>
