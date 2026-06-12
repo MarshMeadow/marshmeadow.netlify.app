@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meadow</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+  body {
+            background-image: url('https://marshmeadow.netlify.app/Images/EDITED%20Retro%20Video%20Gaming%20Desktop%20Wallpaper2%20Not%20OG.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #c9d1d9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            overflow: auto;
+            padding: 10px;
+        }
+
+        .terminal {
+            background-color: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
+            text-align: left;
+            z-index: 1;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .terminal-header span {
+            display: block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+            color: #58a6ff;
+            text-align: center;
+        }
+
+        .about {
+            font-size: 1.1rem;
+            color: #c9d1d9;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .dropdown {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            background-color: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dropdown a:hover {
+            background-color: #58a6ff;
+            color: #0d1117;
+            transform: translateY(-5px);
+        }
+
+        .dropdown-content {
+            display: none;
+            background-color: #21262d;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+            max-height: 300px;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 1rem;
+            text-align: center;
+            color: #8b949e;
+        }
+
+        .footer-note {
+            font-size: 0.9rem;
+            color: #ff5f56;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .backup-link {
+            font-size: 1rem;
+            color: #58a6ff;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .backup-link a {
+            color: #58a6ff;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .backup-link a:hover {
+            color: #c9d1d9;
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: all; /* Allow interactions with the popup */
+        }
+
+        .popup {
+            background-color: #21262d;
+            color: #c9d1d9;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 300px;
+            z-index: 1000;
+            font-size: 1.5rem;
+        }
+
+        .popup button {
+            background-color: #27c93f;
+            color: #0d1117;
+            border: none;
+            padding: 15px 30px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .popup button:hover {
+            background-color: #58a6ff;
+        }
+    </style>
+</head>
+<body>
+    <!-- "Are you human?" popup -->
+    <div id="popup-overlay" class="popup-overlay" style="display: none;">
+        <div id="popup" class="popup">
+            <p>Are you human?</p>
+            <button onclick="acceptHuman()">Yes</button>
+        </div>
+    </div>
+
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="red"></span>
+            <span class="yellow"></span>
+            <span class="green"></span>
+        </div>
+        <h1>~/Welcome to Meadow's Links</h1>
+
+        <div class="about">
+            <p>Heyo, I am Meadow, gamer, dev/coder, artist, and more!</p>
+        </div>
+
+<div class="dropdown">
+    <a href="javascript:void(0)" onclick="toggleDropdown(this)">Gaming/Videos - Streams<span class="arrow">▼</span></a>
+    <div class="dropdown-content">
+        <a href="https://www.youtube.com/channel/UCEut9fHi6A1HbBdVnyEfU_w" target="_blank">Gaming YouTube</a>
+        <a href="https://www.youtube.com/channel/UCaPh_lbZLmn0ik3R50RS6vA" target="_blank">YouTube</a>
+        <a href="https://www.twitch.tv/marshmeadow_n3k0" target="_blank">Twitch</a>
+    </div>
+</div>
+
+<div class="dropdown">
+    <a href="javascript:void(0)" onclick="toggleDropdown(this)">My Socials<span class="arrow">▼</span></a>
+    <div class="dropdown-content">
+        <a href="https://marshmeadow.netlify.app/pronouns" target="_blank">Pronouns</a>
+        <a href="https://discord.com/users/1028088462508839035" target="_blank">Discord</a>
+        <a href="tg://resolve?domain=MarshMeadow" target="_blank">Telegram</a>
+        <a href="https://www.reddit.com/user/nekos404/submitted/" target="_blank">Reddit</a>
+    </div>
+</div>
+
+<div class="dropdown">
+    <a href="javascript:void(0)" onclick="toggleDropdown(this)">My Projects<span class="arrow">▼</span></a>
+    <div class="dropdown-content">
+        <a href="https://ko-fi.com/marshmeadow" target="_blank">Donate - Ko-Fi</a>
+        <a href="https://github.com/MarshMeadow" target="_blank">GitHub :: Meadow</a>
+        <a href="https://github.com/HDO-PRO" target="_blank">HDO PRO (Private)</a>
+        <a href="https://sites.google.com/view/fancyexplore/home" target="_blank">FPA Site</a>
+        <a href="https://github.com/itsmechinmoy/Dantotsu" target="_blank">Dantotsu App</a>
+    </div>
+</div>
+
+        <div class="dropdown">
+    <a href="javascript:void(0)" onclick="toggleDropdown(this)">Personal Contact Info<span class="arrow">▼</span></a>
+    <div class="dropdown-content">
+        <a href="https://discord.com/users/857008404496515114" target="_blank">Personal Discord (PRIVATE)</a>
+        <a href="tg://resolve?domain=MarshMeadow" target="_blank">Telegram</a>
+        <a href="https://www.instagram.com/marshmeadow.n3k0/" target="_blank">Personal Insta Acc (PRIVATE)</a>
+        <a href="https://www.instagram.com/lazy_neko404/" target="_blank">Private Insta Acc (PRIVATE)</a>
+        <a href="https://www.tiktok.com/@marshmeadow2772" target="_blank">TIKTOK</a>
+        <a href="" target="_blank">SNAP (Comging)</a>
+
+    </div>
+</div>
+
+
+<div class="dropdown">
+    <a href="javascript:void(0)" onclick="toggleDropdown(this)">Other Projects (Coming Soon!)<span class="arrow">▼</span></a>
+    <div class="dropdown-content">
+        <a href="https://example.com/project2" target="_blank">Project 2 (N/A)</a>
+    </div>
+</div>
+
+<script>
+    function toggleDropdown(element) {
+        const dropdownContent = element.nextElementSibling;
+        dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+        element.classList.toggle("open");
+    }
+</script>
+
+        <div class="footer-note">
+            <p>Please do not abuse or you will be reported</p>
+        </div>
+
+        <footer>
+            <p>&#169; 2024 Meadow | Linux Inspired | Made With HTML</p>
+        </footer>
+
+      <footer style="font-size: 0.8em;">
+    <p>Wallpaper credits:</p>
+    <p>
+        Image by <a href="https://wallpapersafari.com/user/johnpotter/" target="_blank">"John Potter"</a> on 
+        <a href="https://wallpapersafari.com/w/7CAsL4" target="_blank">Retro Video Gaming Desktop Wallpaper</a>. Please note that the one on this website is an edit.<a
+    </p>
+</footer>
+
+        <!-- Backup Link -->
+        <div class="backup-link">
+            <p>Back-Up: <a href="https://linktr.ee/MarshMeadow" target="_blank">Linktree</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Check if the user has passed the robot check
+        if (!localStorage.getItem('isHuman')) {
+            document.getElementById('popup-overlay').style.display = 'flex';
+            document.body.style.pointerEvents = 'none'; // Disable interactions with the body
+        }
+
+        function acceptHuman() {
+            localStorage.setItem('isHuman', 'true');
+            document.getElementById('popup-overlay').style.display = 'none';
+            document.body.style.pointerEvents = 'auto'; // Re-enable interactions with the body
+        }
+
+        // Bypass popup by pressing 'B'
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'b' || e.key === 'B') {
+                acceptHuman();
+            }
+        });
+
+        // Dropdown toggle
+        function toggleDropdown(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('active');
+        }
+
+        // Prevent right-click and text selection
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .gif-container {
+            position: fixed;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .visible {
+            opacity: 1;
+        }
+        .shake {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, 0); }
+            50% { transform: translate(5px, 0); }
+            75% { transform: translate(-5px, 0); }
+            100% { transform: translate(0, 0); }
+        }
+        /* Flip second GIF */
+        #gif2 img {
+            transform: scaleX(-1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Your existing content -->
+
+    <div class="gif-container" id="gif1">
+        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" style="width: 100%; height: auto;">
+    </div>
+
+    <div class="gif-container" id="gif2" style="display: none;">
+        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" style="width: 100%; height: auto;">
+    </div>
+
+    <script>
+        function positionGif(gifContainer) {
+            const x = Math.random() * (window.innerWidth - 48);
+            const y = Math.random() * (window.innerHeight - 48);
+            gifContainer.style.left = `${x}px`;
+            gifContainer.style.top = `${y}px`;
+            gifContainer.style.display = "block";
+            gifContainer.classList.add('visible');
+        }
+
+        function setupGif(gif) {
+            gif.addEventListener('click', () => {
+                gif.classList.add('shake');
+                setTimeout(() => {
+                    gif.classList.remove('shake');
+                }, 500);
+            });
+
+            let offsetX, offsetY;
+
+            const dragStart = (e) => {
+                offsetX = e.clientX - gif.getBoundingClientRect().left;
+                offsetY = e.clientY - gif.getBoundingClientRect().top;
+                document.addEventListener('mousemove', dragMove);
+                document.addEventListener('mouseup', dragEnd);
+            };
+
+            const dragMove = (e) => {
+                gif.style.left = `${e.clientX - offsetX}px`;
+                gif.style.top = `${e.clientY - offsetY}px`;
+            };
+
+            const dragEnd = () => {
+                document.removeEventListener('mousemove', dragMove);
+                document.removeEventListener('mouseup', dragEnd);
+            };
+
+            gif.addEventListener('mousedown', dragStart);
+
+            const touchStart = (e) => {
+                offsetX = e.touches[0].clientX - gif.getBoundingClientRect().left;
+                offsetY = e.touches[0].clientY - gif.getBoundingClientRect().top;
+                document.addEventListener('touchmove', touchMove);
+                document.addEventListener('touchend', touchEnd);
+            };
+
+            const touchMove = (e) => {
+                gif.style.left = `${e.touches[0].clientX - offsetX}px`;
+                gif.style.top = `${e.touches[0].clientY - offsetY}px`;
+            };
+
+            const touchEnd = () => {
+                document.removeEventListener('touchmove', touchMove);
+                document.removeEventListener('touchend', touchEnd);
+            };
+
+            gif.addEventListener('touchstart', touchStart);
+        }
+
+        window.onload = () => {
+            const gif1 = document.getElementById('gif1');
+            const gif2 = document.getElementById('gif2');
+
+            positionGif(gif1);
+            setupGif(gif1);
+
+            if (Math.random() > 0.5) {
+                positionGif(gif2);
+                setupGif(gif2);
+            }
+        };
+    </script>
+</body>
+</html>
+
+
+<button id="arrow" style="position: fixed; bottom: 20px; right: 80px; background: none; border: none; cursor: pointer; padding: 0;">
+    <img src="https://marshmeadow.netlify.app/Images/arrow_icon.png" alt="Arrow" style="width: 30px; height: 30px;">
+</button>
+<div id="viewCounter" style="position: fixed; bottom: 20px; right: 20px; background-color: #1e1e1e; border: 1px solid #ccc; padding: 10px; display: none; opacity: 1; transition: opacity 1s; color: white;">
+    Viewing: <span id="viewCount">0</span>
+</div>
+
+<script>
+    let count = localStorage.getItem('viewCount') ? parseInt(localStorage.getItem('viewCount')) : 0;
+    document.getElementById('viewCount').innerText = count;
+
+    document.getElementById('arrow').addEventListener('click', function() {
+        const counterDiv = document.getElementById('viewCounter');
+        if (count === 0) { // Increment only if count is zero
+            count++;
+            localStorage.setItem('viewCount', count); // Store in localStorage
+        }
+
+        // Reset display and opacity
+        counterDiv.style.display = 'block';
+        counterDiv.style.opacity = '1'; // Ensure it is visible
+
+        setTimeout(() => {
+            counterDiv.style.opacity = '0'; // Start fading
+            setTimeout(() => {
+                counterDiv.style.display = 'none'; // Hide after fade
+            }, 1000); // Wait for fade to complete
+        }, 3000); // Wait 3 seconds
+    });
+</script>
