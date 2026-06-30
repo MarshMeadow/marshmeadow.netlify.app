@@ -1,132 +1,112 @@
-# 🌐 MarshMeadow Website Index
+# 🌿 MarshMeadow Website
 
-> A complete index of pages, projects, and resources available through the MarshMeadow website.
+<p align="center">
+  <a href="https://marshmeadow.netlify.app">
+    <img src="https://img.shields.io/badge/Visit-Website-00C7B7?style=for-the-badge&logo=netlify&logoColor=white">
+  </a>
+  <a href="https://github.com/MarshMeadow">
+    <img src="https://img.shields.io/github/followers/MarshMeadow?style=for-the-badge">
+  </a>
+</p>
 
-## 📄 Pages
-
-| Page | Description |
-|--------|-------------|
-| `/` | Main homepage |
-| `/404.html` | Custom 404 error page |
-| `/pronouns.html` | Pronouns page |
-| `/web_beta_test.html` | Beta testing page |
-| `/web_beta_test2.html` | Secondary beta testing page |
-
----
-
-## 🎮 Gaming
-
-- Gaming YouTube
-- Main YouTube Channel
-- Twitch
+<p align="center">
+  My personal website featuring my projects, GitHub repositories, links, and other things I'm working on.
+</p>
 
 ---
 
-## 💬 Social
+## 🌐 Live Website
 
-- Pronouns
-- Discord
-- Telegram
-- Reddit
+👉 **https://marshmeadow.netlify.app**
 
----
+The website serves as my personal hub where you can find:
 
-## 🛠️ Personal Projects
-
-- GitHub :: Meadow
-- FPA Site
-- Dantotsu App
-- HDO PRO (Private)
-- Ko-Fi
+* 📂 GitHub Projects
+* 🛠️ Development Work
+* 📱 Android Projects
+* 🌐 Website Projects
+* 🔗 Useful Links
+* 📢 Updates
+* 💡 Experiments
 
 ---
 
-## 🚧 Other Projects
+## ✨ Features
 
-> Coming Soon
-
-- Project 1 (N/A)
-- Project 2 (N/A)
-- Project 3 (N/A)
-
----
-
-## 🖼️ Assets
-
-### Images Folder
-
-Contains:
-
-- Website wallpaper backgrounds
-- Animated GIF assets
-- Arrow icons
-- Website graphics
-- Favicon assets
-- Additional uploaded media
+* Responsive design
+* Fast loading
+* Mobile friendly
+* Simple navigation
+* Modern interface
+* Hosted on Netlify
+* Open source
 
 ---
 
-## ✨ Website Features
+## 📦 Tech Stack
 
-- Linux-inspired terminal design
-- Responsive layout
-- Dropdown navigation menus
-- Human verification popup
-- LocalStorage support
-- Floating draggable GIF easter eggs
-- View counter
-- Custom footer credits
-- Right-click protection
-- Developer-tools shortcut blocking
+* HTML5
+* CSS3
+* JavaScript
+* Netlify Hosting
+
+---
+
+## 🚀 Running Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/MarshMeadow/marshmeadow-website.git
+```
+
+Open `index.html` in your browser, or use a local web server.
+
+---
+
+## 🌎 Deployment
+
+This website is deployed using **Netlify** and updates automatically whenever new changes are pushed to the repository.
 
 ---
 
 ## 📁 Repository Structure
 
 ```text
-marshmeadow.netlify.app/
+.
 ├── index.html
-├── 404.html
-├── pronouns.html
-├── web_beta_test.html
-├── web_beta_test2.html
-├── README.md
-└── Images/
+├── css/
+├── js/
+├── images/
+├── assets/
+└── README.md
 ```
 
 ---
 
-## 🔗 External Services
+<details>
+<summary><b>📚 Future Plans (Click to Expand)</b></summary>
 
-- GitHub
-- Discord
-- Telegram
-- Reddit
-- Twitch
-- YouTube
-- Ko-Fi
-- Netlify
+* More project showcases
+* Better mobile experience
+* Dark mode improvements
+* Blog section
+* Downloads page
+* Portfolio updates
+* More animations
 
----
-
-## 📦 Repository Information
-
-**Repository:** `MarshMeadow/marshmeadow.netlify.app`
-
-**Status:** Private
-
-**Last Known Update:** 8 Months Ago
-
-### Files
-
-- `index.html`
-- `404.html`
-- `pronouns.html`
-- `web_beta_test.html`
-- `web_beta_test2.html`
-- `README.md`
-- `Images/`
+</details>
 
 ---
 
-© MarshMeadow • Personal Website & Project Hub
+## 📄 License
+
+This project is available under the MIT License unless stated otherwise.
+
+---
+
+<p align="center">
+Made with ❤️ by <b>MarshMeadow</b>
+<br><br>
+🌿 Thanks for stopping by!
+</p>
