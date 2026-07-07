@@ -33,9 +33,9 @@
             border: 2px solid #30363d;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            padding: 20px;
             width: 100%;
-            max-width: 800px;
+            max-width: 500px;
             text-align: left;
             z-index: 1;
         }
@@ -266,6 +266,76 @@
             transition: opacity 1s;
             color: white;
             z-index: 100;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+
+            .terminal {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .about {
+                font-size: 0.95rem;
+            }
+
+            .dropdown > a {
+                font-size: 1rem;
+                padding: 12px;
+            }
+
+            .dropdown-content a {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            footer {
+                font-size: 0.85rem;
+            }
+
+            .footer-note {
+                font-size: 0.8rem;
+            }
+
+            .backup-link {
+                font-size: 0.85rem;
+            }
+
+            #arrow {
+                right: 60px;
+                bottom: 15px;
+            }
+
+            #arrow img {
+                width: 25px;
+                height: 25px;
+            }
+
+            #viewCounter {
+                right: 10px;
+                bottom: 15px;
+                font-size: 0.85rem;
+                padding: 8px;
+            }
+
+            .popup {
+                width: 85%;
+                font-size: 1.2rem;
+                padding: 20px;
+            }
+
+            .popup button {
+                font-size: 1rem;
+                padding: 12px 24px;
+            }
         }
     </style>
 </head>
