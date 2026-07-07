@@ -3,482 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meadow</title>
+    <title>Meadow - Modern Bio</title>
     <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-  body {
-            background-image: url('https://marshmeadow.netlify.app/Images/EDITED%20Retro%20Video%20Gaming%20Desktop%20Wallpaper2%20Not%20OG.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #c9d1d9;
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-            overflow: auto;
-            padding: 10px;
+            padding: 20px;
         }
 
-        .terminal {
-            background-color: #161b22;
-            border: 2px solid #30363d;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            padding: 30px;
+        .bio-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
             width: 100%;
-            max-width: 800px;
-            text-align: left;
-            z-index: 1;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
-        .terminal-header {
-            display: flex;
-            justify-content: flex-start;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .terminal-header span {
-            display: block;
-            width: 15px;
-            height: 15px;
+        .avatar {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
         }
 
-        .red { background-color: #ff5f56; }
-        .yellow { background-color: #ffbd2e; }
-        .green { background-color: #27c93f; }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         h1 {
-            margin-bottom: 10px;
-            font-size: 2rem;
-            color: #58a6ff;
-            text-align: center;
+            font-size: 1.8rem;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
 
-        .about {
-            font-size: 1.1rem;
-            color: #c9d1d9;
-            margin-bottom: 20px;
-            text-align: center;
+        .bio {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 24px;
+            background: white;
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .link-btn svg {
+            width: 20px;
+            height: 20px;
         }
 
         .dropdown {
+            margin-bottom: 12px;
+        }
+
+        .dropdown-toggle {
+            width: 100%;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .dropdown a {
-            display: block;
-            padding: 15px;
-            text-align: center;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-decoration: none;
-            font-size: 1.2rem;
-            background-color: #21262d;
-            color: #c9d1d9;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease-in-out;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .dropdown a:hover {
-            background-color: #58a6ff;
-            color: #0d1117;
-            transform: translateY(-5px);
+        .dropdown-toggle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234,  0.4);
+        }
+
+        .dropdown-toggle .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-toggle .arrow {
+            transform: rotate(180deg);
         }
 
         .dropdown-content {
             display: none;
-            background-color: #21262d;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 8px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-in-out;
+            margin-top: 8px;
+            animation: slideDown 0.3s ease;
         }
 
         .dropdown.active .dropdown-content {
             display: block;
-            max-height: 300px;
         }
 
-        footer {
-            margin-top: 30px;
-            font-size: 1rem;
-            text-align: center;
-            color: #8b949e;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .footer-note {
-            font-size: 0.9rem;
-            color: #ff5f56;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .backup-link {
-            font-size: 1rem;
-            color: #58a6ff;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .backup-link a {
-            color: #58a6ff;
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a2e;
             text-decoration: none;
-            transition: all 0.3s ease-in-out;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border: 1px solid #e0e0e0;
         }
 
-        .backup-link a:hover {
-            color: #c9d1d9;
+        .dropdown-content a:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateX(5px);
         }
 
-        /* Popup Styles */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            pointer-events: all; /* Allow interactions with the popup */
+        .footer {
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.85rem;
         }
 
-        .popup {
-            background-color: #21262d;
-            color: #c9d1d9;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            width: 300px;
-            z-index: 1000;
-            font-size: 1.5rem;
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
         }
 
-        .popup button {
-            background-color: #27c93f;
-            color: #0d1117;
-            border: none;
-            padding: 15px 30px;
-            margin-top: 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2rem;
+        .footer a:hover {
+            text-decoration: underline;
         }
 
-        .popup button:hover {
-            background-color: #58a6ff;
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .bio-card {
+                padding: 30px 20px;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .bio {
+                font-size: 0.9rem;
+            }
+
+            .link-btn, .dropdown-toggle {
+                padding: 14px 20px;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- "Are you human?" popup -->
-    <div id="popup-overlay" class="popup-overlay" style="display: none;">
-        <div id="popup" class="popup">
-            <p>Are you human?</p>
-            <button onclick="acceptHuman()">Yes</button>
-        </div>
-    </div>
-
-    <div class="terminal">
-        <div class="terminal-header">
-            <span class="red"></span>
-            <span class="yellow"></span>
-            <span class="green"></span>
-        </div>
-        <h1>~/Welcome to Meadow's Links</h1>
-
-        <div class="about">
-            <p>Heyo, I am Meadow, gamer, dev/coder, artist, and more!</p>
+    <div class="bio-card">
+        <div class="avatar">
+            <img src="https://avatars.githubusercontent.com/u/88599122?v=4" alt="Meadow">
         </div>
 
-<div class="dropdown">
-    <a href="javascript:void(0)" onclick="toggleDropdown(this)">Gaming/Videos - Streams<span class="arrow">▼</span></a>
-    <div class="dropdown-content">
-        <a href="https://www.youtube.com/channel/UCEut9fHi6A1HbBdVnyEfU_w" target="_blank">Gaming YouTube</a>
-        <a href="https://www.youtube.com/channel/UCaPh_lbZLmn0ik3R50RS6vA" target="_blank">YouTube</a>
-        <a href="https://www.twitch.tv/marshmeadow_n3k0" target="_blank">Twitch</a>
-    </div>
-</div>
+        <h1>Meadow / N3K0</h1>
+        <p class="bio">Indie dev, coder, gamer, and more! Building cool stuff on the web.</p>
 
-<div class="dropdown">
-    <a href="javascript:void(0)" onclick="toggleDropdown(this)">My Socials<span class="arrow">▼</span></a>
-    <div class="dropdown-content">
-        <a href="https://marshmeadow.netlify.app/pronouns" target="_blank">Pronouns</a>
-        <a href="https://discord.com/users/1028088462508839035" target="_blank">Discord</a>
-        <a href="tg://resolve?domain=MarshMeadow" target="_blank">Telegram</a>
-        <a href="https://www.reddit.com/user/nekos404/submitted/" target="_blank">Reddit</a>
-    </div>
-</div>
+        <div class="links">
+            <a href="https://github.com/MarshMeadow" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
 
-<div class="dropdown">
-    <a href="javascript:void(0)" onclick="toggleDropdown(this)">My Projects<span class="arrow">▼</span></a>
-    <div class="dropdown-content">
-        <a href="https://ko-fi.com/marshmeadow" target="_blank">Donate - Ko-Fi</a>
-        <a href="https://github.com/MarshMeadow" target="_blank">GitHub :: Meadow</a>
-        <a href="https://github.com/HDO-PRO" target="_blank">HDO PRO (Private)</a>
-        <a href="https://sites.google.com/view/fancyexplore/home" target="_blank">FPA Site</a>
-        <a href="https://github.com/itsmechinmoy/Dantotsu" target="_blank">Dantotsu App</a>
-    </div>
-</div>
-
-        <div class="dropdown">
-    <a href="javascript:void(0)" onclick="toggleDropdown(this)">Personal Contact Info<span class="arrow">▼</span></a>
-    <div class="dropdown-content">
-        <a href="https://discord.com/users/857008404496515114" target="_blank">Personal Discord (PRIVATE)</a>
-        <a href="tg://resolve?domain=MarshMeadow" target="_blank">Telegram</a>
-        <a href="https://www.instagram.com/marshmeadow.n3k0/" target="_blank">Personal Insta Acc (PRIVATE)</a>
-        <a href="https://www.instagram.com/lazy_neko404/" target="_blank">Private Insta Acc (PRIVATE)</a>
-        <a href="https://www.tiktok.com/@marshmeadow2772" target="_blank">TIKTOK</a>
-        <a href="" target="_blank">SNAP (Comging)</a>
-
-    </div>
-</div>
-
-
-<div class="dropdown">
-    <a href="javascript:void(0)" onclick="toggleDropdown(this)">Other Projects (Coming Soon!)<span class="arrow">▼</span></a>
-    <div class="dropdown-content">
-        <a href="https://example.com/project2" target="_blank">Project 2 (N/A)</a>
-    </div>
-</div>
-
-<script>
-    function toggleDropdown(element) {
-        const dropdownContent = element.nextElementSibling;
-        dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
-        element.classList.toggle("open");
-    }
-</script>
-
-        <div class="footer-note">
-            <p>Please do not abuse or you will be reported</p>
-        </div>
-
-        <footer>
-            <p>&#169; 2024 Meadow | Linux Inspired | Made With HTML</p>
-        </footer>
-
-      <footer style="font-size: 0.8em;">
-    <p>Wallpaper credits:</p>
-    <p>
-        Image by <a href="https://wallpapersafari.com/user/johnpotter/" target="_blank">"John Potter"</a> on 
-        <a href="https://wallpapersafari.com/w/7CAsL4" target="_blank">Retro Video Gaming Desktop Wallpaper</a>. Please note that the one on this website is an edit.<a
-    </p>
-</footer>
-
-        <!-- Backup Link -->
-        <div class="backup-link">
-            <p>Back-Up: <a href="https://linktr.ee/MarshMeadow" target="_blank">Linktree</a></p>
-        </div>
-    </div>
-
-    <script>
-        // Check if the user has passed the robot check
-        if (!localStorage.getItem('isHuman')) {
-            document.getElementById('popup-overlay').style.display = 'flex';
-            document.body.style.pointerEvents = 'none'; // Disable interactions with the body
-        }
-
-        function acceptHuman() {
-            localStorage.setItem('isHuman', 'true');
-            document.getElementById('popup-overlay').style.display = 'none';
-            document.body.style.pointerEvents = 'auto'; // Re-enable interactions with the body
-        }
-
-        // Bypass popup by pressing 'B'
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'b' || e.key === 'B') {
-                acceptHuman();
-            }
-        });
-
-        // Dropdown toggle
-        function toggleDropdown(element) {
-            const parent = element.parentElement;
-            parent.classList.toggle('active');
-        }
-
-        // Prevent right-click and text selection
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        });
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-                e.preventDefault();
-            }
-        });
-    </script>
-</body>
-</html>
-
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .gif-container {
-            position: fixed;
-            width: 48px;
-            height: 48px;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-        .visible {
-            opacity: 1;
-        }
-        .shake {
-            animation: shake 0.5s;
-            animation-iteration-count: infinite;
-        }
-        @keyframes shake {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(-5px, 0); }
-            50% { transform: translate(5px, 0); }
-            75% { transform: translate(-5px, 0); }
-            100% { transform: translate(0, 0); }
-        }
-        /* Flip second GIF */
-        #gif2 img {
-            transform: scaleX(-1);
-        }
-    </style>
-</head>
-<body>
-    <!-- Your existing content -->
-
-    <div class="gif-container" id="gif1">
-        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" style="width: 100%; height: auto;">
-    </div>
-
-    <div class="gif-container" id="gif2" style="display: none;">
-        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" style="width: 100%; height: auto;">
-    </div>
-
-    <script>
-        function positionGif(gifContainer) {
-            const x = Math.random() * (window.innerWidth - 48);
-            const y = Math.random() * (window.innerHeight - 48);
-            gifContainer.style.left = `${x}px`;
-            gifContainer.style.top = `${y}px`;
-            gifContainer.style.display = "block";
-            gifContainer.classList.add('visible');
-        }
-
-        function setupGif(gif) {
-            gif.addEventListener('click', () => {
-                gif.classList.add('shake');
-                setTimeout(() => {
-                    gif.classList.remove('shake');
-                }, 500);
-            });
-
-            let offsetX, offsetY;
-
-            const dragStart = (e) => {
-                offsetX = e.clientX - gif.getBoundingClientRect().left;
-                offsetY = e.clientY - gif.getBoundingClientRect().top;
-                document.addEventListener('mousemove', dragMove);
-                document.addEventListener('mouseup', dragEnd);
-            };
-
-            const dragMove = (e) => {
-                gif.style.left = `${e.clientX - offsetX}px`;
-                gif.style.top = `${e.clientY - offsetY}px`;
-            };
-
-            const dragEnd = () => {
-                document.removeEventListener('mousemove', dragMove);
-                document.removeEventListener('mouseup', dragEnd);
-            };
-
-            gif.addEventListener('mousedown', dragStart);
-
-            const touchStart = (e) => {
-                offsetX = e.touches[0].clientX - gif.getBoundingClientRect().left;
-                offsetY = e.touches[0].clientY - gif.getBoundingClientRect().top;
-                document.addEventListener('touchmove', touchMove);
-                document.addEventListener('touchend', touchEnd);
-            };
-
-            const touchMove = (e) => {
-                gif.style.left = `${e.touches[0].clientX - offsetX}px`;
-                gif.style.top = `${e.touches[0].clientY - offsetY}px`;
-            };
-
-            const touchEnd = () => {
-                document.removeEventListener('touchmove', touchMove);
-                document.removeEventListener('touchend', touchEnd);
-            };
-
-            gif.addEventListener('touchstart', touchStart);
-        }
-
-        window.onload = () => {
-            const gif1 = document.getElementById('gif1');
-            const gif2 = document.getElementById('gif2');
-
-            positionGif(gif1);
-            setupGif(gif1);
-
-            if (Math.random() > 0.5) {
-                positionGif(gif2);
-                setupGif(gif2);
-            }
-        };
-    </script>
-</body>
-</html>
-
-
-<button id="arrow" style="position: fixed; bottom: 20px; right: 80px; background: none; border: none; cursor: pointer; padding: 0;">
-    <img src="https://marshmeadow.netlify.app/Images/arrow_icon.png" alt="Arrow" style="width: 30px; height: 30px;">
-</button>
-<div id="viewCounter" style="position: fixed; bottom: 20px; right: 20px; background-color: #1e1e1e; border: 1px solid #ccc; padding: 10px; display: none; opacity: 1; transition: opacity 1s; color: white;">
-    Viewing: <span id="viewCount">0</span>
-</div>
-
-<script>
-    let count = localStorage.getItem('viewCount') ? parseInt(localStorage.getItem('viewCount')) : 0;
-    document.getElementById('viewCount').innerText = count;
-
-    document.getElementById('arrow').addEventListener('click', function() {
-        const counterDiv = document.getElementById('viewCounter');
-        if (count === 0) { // Increment only if count is zero
-            count++;
-            localStorage.setItem('viewCount', count); // Store in localStorage
-        }
-
-        // Reset display and opacity
-        counterDiv.style.display = 'block';
-        counterDiv.style.opacity = '1'; // Ensure it is visible
-
-        setTimeout(() => {
-            counterDiv.style.opacity = '0'; // Start fading
-            setTimeout(() => {
-                counterDiv.style.display = 'none'; // Hide after fade
-            }, 1000); // Wait for fade to complete
-        }, 3000); // Wait 3 seconds
-    });
-</script>
+            <a href="https://ko-fi.com/marshmeadow" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H7.045l-.02.003c-.155.013-.313.026-.473.037-.822.052-1.686.106-2.542.161-.78.05-1.554.101-2.307.152-.75.05-1.48.1-2.174.148-.685.047-1.33.092-1.918.134-.569.04-1.08.078-1.525.109-.423.03-.795.056-1.1.077-.276.019-.504.035-.676.047-.139.01-.237.017-.285.02-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v.003c-.011.001-.017.001-.017.001v. Projects
