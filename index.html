@@ -3,163 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meadow</title>
+    <title>Meadow - Modern Bio</title>
     <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background-image: url('https://marshmeadow.netlify.app/Images/EDITED%20Retro%20Video%20Gaming%20Desktop%20Wallpaper2%20Not%20OG.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #c9d1d9;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-            overflow: auto;
-            padding: 10px;
-        }
-
-        .terminal {
-            background-color: #161b22;
-            border: 2px solid #30363d;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
             padding: 20px;
+        }
+
+        .bio-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
             width: 100%;
-            max-width: 500px;
-            text-align: left;
-            z-index: 1;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
-        .terminal-header {
-            display: flex;
-            justify-content: flex-start;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .terminal-header span {
-            display: block;
-            width: 15px;
-            height: 15px;
+        .avatar {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
         }
 
-        .red { background-color: #ff5f56; }
-        .yellow { background-color: #ffbd2e; }
-        .green { background-color: #27c93f; }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         h1 {
-            margin-bottom: 10px;
-            font-size: 2rem;
-            color: #58a6ff;
-            text-align: center;
+            font-size: 1.8rem;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
 
-        .about {
-            font-size: 1.1rem;
-            color: #c9d1d9;
-            margin-bottom: 20px;
-            text-align: center;
+        .bio {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 24px;
+            background: white;
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .link-btn svg {
+            width: 20px;
+            height: 20px;
         }
 
         .dropdown {
+            margin-bottom: 12px;
+        }
+
+        .dropdown-toggle {
+            width: 100%;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .dropdown > a {
-            display: block;
-            padding: 15px;
-            text-align: center;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-decoration: none;
-            font-size: 1.2rem;
-            background-color: #21262d;
-            color: #c9d1d9;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease-in-out;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .dropdown > a:hover {
-            background-color: #58a6ff;
-            color: #0d1117;
-            transform: translateY(-5px);
+        .dropdown-toggle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234,  0.4);
+        }
+
+        .dropdown-toggle .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-toggle .arrow {
+            transform: rotate(180deg);
         }
 
         .dropdown-content {
             display: none;
-            background-color: #21262d;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 8px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-in-out;
+            margin-top: 8px;
+            animation: slideDown 0.3s ease;
         }
 
         .dropdown.active .dropdown-content {
             display: block;
-            max-height: 300px;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .dropdown-content a {
             display: block;
-            padding: 10px;
-            text-align: center;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a2e;
             text-decoration: none;
-            font-size: 1rem;
-            color: #c9d1d9;
-            border-radius: 6px;
-            transition: all 0.2s ease-in-out;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border: 1px solid #e0e0e0;
         }
 
         .dropdown-content a:hover {
-            background-color: #30363d;
-            color: #58a6ff;
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateX(5px);
         }
 
-        footer {
+        .footer {
             margin-top: 30px;
-            font-size: 1rem;
-            text-align: center;
-            color: #8b949e;
+            color: #888;
+            font-size: 0.85rem;
         }
 
-        .footer-note {
-            font-size: 0.9rem;
-            color: #ff5f56;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .backup-link {
-            font-size: 1rem;
-            color: #58a6ff;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .backup-link a {
-            color: #58a6ff;
+        .footer a {
+            color: #667eea;
             text-decoration: none;
-            transition: all 0.3s ease-in-out;
         }
 
-        .backup-link a:hover {
-            color: #c9d1d9;
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* GIF Container Styles */
+        .gif-container {
+            position: fixed;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 1s ease;
+            z-index: 100;
+        }
+
+        .gif-container.visible {
+            opacity: 1;
+        }
+
+        .gif-container.shake {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, 0); }
+            50% { transform: translate(5px, 0); }
+            75% { transform: translate(-5px, 0); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .gif-container.spin {
+            animation: spin 1s ease-in-out;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .gif-container.bounce {
+            animation: bounce 0.5s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .gif-container.pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+
+        .gif-container.follow-cursor {
+            transition: left 0.1s ease-out, top 0.1s ease-out;
+        }
+
+        .gif-container.flip {
+            animation: flip 0.5s ease-in-out;
+        }
+
+        @keyframes flip {
+            0% { transform: scaleX(1); }
+            50% { transform: scaleX(-1); }
+            100% { transform: scaleX(1); }
+        }
+
+        .gif-container.jump {
+            animation: jump 0.5s ease-in-out;
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+        }
+
+        .gif-container.color-filter {
+            filter: hue-rotate(180deg) saturate(2);
+        }
+
+        .gif-container.rotate-continuous {
+            animation: rotateContinuous 2s linear infinite;
+        }
+
+        @keyframes rotateContinuous {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .gif-container.grow {
+            transform: scale(1.5);
+            transition: transform 0.3s ease;
+        }
+
+        .gif-container.shrink {
+            transform: scale(0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .gif-container.hidden {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        /* Flip second GIF */
+        #gif2 img {
+            transform: scaleX(-1);
+        }
+
+        /* View Counter Styles */
+        #arrow {
+            position: fixed;
+            bottom: 20px;
+            right: 80px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 100;
+        }
+
+        #arrow img {
+            width: 30px;
+            height: 30px;
+        }
+
+        #viewCounter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e1e1e;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: none;
+            opacity: 1;
+            transition: opacity 1s;
+            color: white;
+            z-index: 100;
+            border-radius: 8px;
         }
 
         /* Popup Styles */
@@ -204,78 +377,10 @@
             background-color: #58a6ff;
         }
 
-        /* GIF Container Styles */
-        .gif-container {
-            position: fixed;
-            width: 48px;
-            height: 48px;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 1s ease;
-            z-index: 100;
-        }
-
-        .gif-container.visible {
-            opacity: 1;
-        }
-
-        .gif-container.shake {
-            animation: shake 0.5s;
-            animation-iteration-count: infinite;
-        }
-
-        @keyframes shake {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(-5px, 0); }
-            50% { transform: translate(5px, 0); }
-            75% { transform: translate(-5px, 0); }
-            100% { transform: translate(0, 0); }
-        }
-
-        /* Flip second GIF */
-        #gif2 img {
-            transform: scaleX(-1);
-        }
-
-        /* View Counter Styles */
-        #arrow {
-            position: fixed;
-            bottom: 20px;
-            right: 80px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 100;
-        }
-
-        #arrow img {
-            width: 30px;
-            height: 30px;
-        }
-
-        #viewCounter {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #1e1e1e;
-            border: 1px solid #ccc;
-            padding: 10px;
-            display: none;
-            opacity: 1;
-            transition: opacity 1s;
-            color: white;
-            z-index: 100;
-        }
-
         /* Mobile Responsive */
-        @media (max-width: 600px) {
-            body {
-                padding: 5px;
-            }
-
-            .terminal {
-                padding: 15px;
+        @media (max-width: 480px) {
+            .bio-card {
+                padding: 30px 20px;
                 max-width: 100%;
             }
 
@@ -283,30 +388,13 @@
                 font-size: 1.5rem;
             }
 
-            .about {
-                font-size: 0.95rem;
-            }
-
-            .dropdown > a {
-                font-size: 1rem;
-                padding: 12px;
-            }
-
-            .dropdown-content a {
+            .bio {
                 font-size: 0.9rem;
-                padding: 8px;
             }
 
-            footer {
-                font-size: 0.85rem;
-            }
-
-            .footer-note {
-                font-size: 0.8rem;
-            }
-
-            .backup-link {
-                font-size: 0.85rem;
+            .link-btn, .dropdown-toggle {
+                padding: 14px 20px;
+                font-size: 0.95rem;
             }
 
             #arrow {
@@ -357,92 +445,87 @@
         <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" style="width: 100%; height: auto;">
     </div>
 
-    <div class="terminal">
-        <div class="terminal-header">
-            <span class="red"></span>
-            <span class="yellow"></span>
-            <span class="green"></span>
-        </div>
-        <h1>~/Welcome to Meadow's Links</h1>
-
-        <div class="about">
-            <p>Heyo, I am Meadow/N3K0, Inde dev, coder, like websites and apps and a gamer and more!</p>
-            <p style="color: #58a6ff; margin-top: 10px; font-size: 0.95rem;">🚀 Working on a more modern version of my page! Check out the beta: <a href="/beta-test-page.html" target="_blank" style="color: #58a6ff; text-decoration: underline;">/beta-test-page.html</a></p>
+    <div class="bio-card">
+        <div class="avatar">
+            <img src="https://avatars.githubusercontent.com/u/88599122?v=4" alt="Meadow">
         </div>
 
-        <div class="dropdown">
-            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Gaming/Videos - Streams<span class="arrow">▼</span></a>
-            <div class="dropdown-content">
-                <a href="https://www.youtube.com/channel/UCEut9fHi6A1HbBdVnyEfU_w" target="_blank">Gaming YouTube</a>
-                <a href="https://www.youtube.com/channel/UCaPh_lbZLmn0ik3R50RS6vA" target="_blank">YouTube - (OUT OF DATE)</a>
-                <a href="https://www.twitch.tv/marshmeadow_n3k0" target="_blank">Twitch (18+)</a>
+        <h1>Meadow / N3K0</h1>
+        <p class="bio">Indie dev, coder, gamer, and more! Building cool stuff on the web.</p>
+
+        <div class="links">
+            <div class="dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    Gaming/Streams
+                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://www.youtube.com/channel/UCEut9fHi6A1HbBdVnyEfU_w" target="_blank">Gaming YouTube</a>
+                    <a href="https://www.youtube.com/channel/UCaPh_lbZLmn0ik3R50RS6vA" target="_blank">YouTube (Out of Date)</a>
+                    <a href="https://www.twitch.tv/marshmeadow_n3k0" target="_blank">Twitch (18+)</a>
+                </div>
             </div>
-        </div>
 
-        <div class="dropdown">
-            <a href="javascript:void(0)" onclick="toggleDropdown(this)">My Socials<span class="arrow">▼</span></a>
-            <div class="dropdown-content">
-                <a href="https://marshmeadow.netlify.app/pronouns" target="_blank">Pronouns</a>
-                <a href="https://discord.com/users/nekos404" target="_blank">Discord (nekos404)</a>
-                <a href="https://discord.com/users/Marshmeadow2772" target="_blank">Discord (Marshmeadow2772)</a>
-                <a href="tg://resolve?domain=marshmeadow_n3k0" target="_blank">Telegram</a>
-                <a href="https://www.reddit.com/user/nekos404/submitted/" target="_blank">Reddit (nekos404)</a>
-                <a href="https://www.reddit.com/user/marshmeadows2772/submitted/" target="_blank">Reddit (marshmeadows2772)</a>
+            <div class="dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    Socials
+                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://marshmeadow.netlify.app/pronouns" target="_blank">Pronouns</a>
+                    <a href="https://discord.com/users/nekos404" target="_blank">Discord (nekos404)</a>
+                    <a href="https://discord.com/users/Marshmeadow2772" target="_blank">Discord (Marshmeadow2772)</a>
+                    <a href="tg://resolve?domain=marshmeadow_n3k0" target="_blank">Telegram</a>
+                    <a href="https://www.reddit.com/user/nekos404/submitted/" target="_blank">Reddit (nekos404)</a>
+                    <a href="https://www.reddit.com/user/marshmeadows2772/submitted/" target="_blank">Reddit (marshmeadows2772)</a>
+                </div>
             </div>
-        </div>
 
-        <div class="dropdown">
-            <a href="javascript:void(0)" onclick="toggleDropdown(this)">My Projects<span class="arrow">▼</span></a>
-            <div class="dropdown-content">
-                <a href="https://marshmeadow.netlify.app/repos" target="_blank">All Repositories</a>
-                <a href="https://ko-fi.com/marshmeadow" target="_blank">Donate - Ko-Fi</a>
-                <a href="https://github.com/MarshMeadow" target="_blank">GitHub :: Meadow</a>
-                <a href="https://github.com/HDO-PRO" target="_blank">HDO PRO (Private)</a>
-                <a href="https://sites.google.com/view/fancyexplore/home" target="_blank">FPA Site</a>
-                <a href="https://github.com/itsmechinmoy/Dantotsu" target="_blank">Dantotsu App (Web Dev)</a>
-                <a href="https://github.com/KamyRoll/KamyRoll" target="_blank">KamyRoll (Made & Worked on KamyRoll TV)</a>
+            <div class="dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    Projects
+                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://marshmeadow.netlify.app/repos" target="_blank">All Repositories</a>
+                    <a href="https://ko-fi.com/marshmeadow" target="_blank">Donate - Ko-Fi</a>
+                    <a href="https://github.com/MarshMeadow" target="_blank">GitHub :: Meadow</a>
+                    <a href="https://github.com/HDO-PRO" target="_blank">HDO PRO (Private)</a>
+                    <a href="https://sites.google.com/view/fancyexplore/home" target="_blank">FPA Site</a>
+                    <a href="https://github.com/itsmechinmoy/Dantotsu" target="_blank">Dantotsu App (Web Dev)</a>
+                    <a href="https://github.com/KamyRoll/KamyRoll" target="_blank">KamyRoll (Made & Worked on KamyRoll TV)</a>
+                </div>
             </div>
-        </div>
 
-        <div class="dropdown">
-            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Personal Contact Info<span class="arrow">▼</span></a>
-            <div class="dropdown-content">
-                <a href="https://discord.com/users/Marshmeadow2772" target="_blank">Personal Discord (PRIVATE)</a>
-                <a href="tg://resolve?domain=marshmeadow_n3k0" target="_blank">Telegram</a>
-                <a href="https://www.instagram.com/marshmeadow.n3k0/" target="_blank">Personal Insta Acc (PRIVATE)</a>
-                <a href="https://www.instagram.com/lazy_neko404/" target="_blank">Private Insta Acc (PRIVATE)</a>
-                <a href="https://www.tiktok.com/@Marshmeadow2772" target="_blank">TIKTOK</a>
-                <a href="https://wa.me/lazy_neko404" target="_blank">WhatsApp</a>
+            <div class="dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    Personal Contact
+                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://discord.com/users/Marshmeadow2772" target="_blank">Personal Discord (PRIVATE)</a>
+                    <a href="tg://resolve?domain=marshmeadow_n3k0" target="_blank">Telegram</a>
+                    <a href="https://www.instagram.com/marshmeadow.n3k0/" target="_blank">Instagram (marshmeadow.n3k0)</a>
+                    <a href="https://www.instagram.com/lazy_neko404/" target="_blank">Instagram (lazy_neko404)</a>
+                    <a href="https://www.tiktok.com/@Marshmeadow2772" target="_blank">TikTok</a>
+                    <a href="https://wa.me/lazy_neko404" target="_blank">WhatsApp</a>
+                </div>
             </div>
+
+            <a href="https://github.com/MarshMeadow" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+
+            <a href="https://ko-fi.com/marshmeadow" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                Ko-Fi
+            </a>
         </div>
 
-        <div class="dropdown">
-            <a href="javascript:void(0)" onclick="toggleDropdown(this)">Other Projects (Coming Soon!)<span class="arrow">▼</span></a>
-            <div class="dropdown-content">
-                <a href="https://example.com/project2" target="_blank">Project 2 (N/A)</a>
-            </div>
-        </div>
-
-        <div class="footer-note">
-            <p>Please do not abuse or you will be reported</p>
-        </div>
-
-        <footer>
-            <p>&#169; 2024 Meadow | Linux Inspired | Made With HTML</p>
-        </footer>
-
-        <footer style="font-size: 0.8em;">
-            <p>Wallpaper credits:</p>
-            <p>
-                Image by <a href="https://wallpapersafari.com/user/johnpotter/" target="_blank">"John Potter"</a> on 
-                <a href="https://wallpapersafari.com/w/7CAsL4" target="_blank">Retro Video Gaming Desktop Wallpaper</a>. Please note that the one on this website is an edit.
-            </p>
-        </footer>
-
-        <!-- Backup Link -->
-        <div class="backup-link">
-            <p>Back-Up: <a href="https://linktr.ee/MarshMeadow" target="_blank">Linktree</a></p>
-            <p>Website Source: <a href="https://github.com/MarshMeadow/marshmeadow.netlify.app" target="_blank">GitHub</a></p>
+        <div class="footer">
+            <p>© 2024 Meadow</p>
+            <p><a href="https://marshmeadow.netlify.app/" target="_blank">Back to Main Page</a></p>
         </div>
     </div>
 
@@ -455,6 +538,11 @@
     </div>
 
     <script>
+        function toggleDropdown(button) {
+            const dropdown = button.parentElement;
+            dropdown.classList.toggle('active');
+        }
+
         // ==================== HUMAN CHECK POPUP ====================
         function acceptHuman() {
             localStorage.setItem('isHuman', 'true');
@@ -475,12 +563,6 @@
             }
         });
 
-        // ==================== DROPDOWN FUNCTIONALITY ====================
-        function toggleDropdown(element) {
-            const parent = element.parentElement;
-            parent.classList.toggle('active');
-        }
-
         // ==================== GIF FUNCTIONALITY ====================
         function positionGif(gifContainer) {
             const x = Math.random() * (window.innerWidth - 48);
@@ -492,16 +574,208 @@
         }
 
         function setupGif(gif) {
-            gif.addEventListener('click', () => {
-                gif.classList.add('shake');
-                setTimeout(() => {
-                    gif.classList.remove('shake');
-                }, 500);
+            let clickCount = 0;
+            let lastClickTime = 0;
+            let isFollowing = false;
+            let randomMoveInterval = null;
+            let rightClickCount = 0;
+            let lastRightClickTime = 0;
+            let isRotating = false;
+            let isGrown = false;
+            let currentScale = 1;
+
+            // Single click - shake, double click - spin, triple click - flip
+            gif.addEventListener('click', (e) => {
+                const currentTime = new Date().getTime();
+                const timeDiff = currentTime - lastClickTime;
+
+                if (timeDiff < 300) {
+                    clickCount++;
+                    if (clickCount >= 3) {
+                        // Triple click - flip
+                        gif.classList.add('flip');
+                        setTimeout(() => {
+                            gif.classList.remove('flip');
+                        }, 500);
+                        clickCount = 0;
+                    } else if (clickCount === 2) {
+                        // Double click - spin
+                        gif.classList.add('spin');
+                        setTimeout(() => {
+                            gif.classList.remove('spin');
+                        }, 1000);
+                    }
+                } else {
+                    // Single click - shake
+                    gif.classList.add('shake');
+                    setTimeout(() => {
+                        gif.classList.remove('shake');
+                    }, 500);
+                    clickCount = 1;
+                }
+
+                lastClickTime = currentTime;
             });
 
+            // Right click - bounce, double right-click - disappear/reappear
+            gif.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                const currentTime = new Date().getTime();
+                const timeDiff = currentTime - lastRightClickTime;
+
+                if (timeDiff < 300) {
+                    // Double right-click - toggle visibility
+                    gif.classList.toggle('hidden');
+                    rightClickCount = 0;
+                } else {
+                    // Single right-click - bounce
+                    gif.classList.add('bounce');
+                    setTimeout(() => {
+                        gif.classList.remove('bounce');
+                    }, 500);
+                    rightClickCount = 1;
+                }
+
+                lastRightClickTime = currentTime;
+            });
+
+            // Middle click - pulse
+            gif.addEventListener('mousedown', (e) => {
+                if (e.button === 1) {
+                    e.preventDefault();
+                    gif.classList.add('pulse');
+                    setTimeout(() => {
+                        gif.classList.remove('pulse');
+                    }, 500);
+                }
+
+                // Shift + click - color filter
+                if (e.button === 0 && e.shiftKey) {
+                    e.preventDefault();
+                    gif.classList.toggle('color-filter');
+                }
+
+                // Alt + click - continuous rotation
+                if (e.button === 0 && e.altKey) {
+                    e.preventDefault();
+                    isRotating = !isRotating;
+                    if (isRotating) {
+                        gif.classList.add('rotate-continuous');
+                    } else {
+                        gif.classList.remove('rotate-continuous');
+                    }
+                }
+            });
+
+            // Scroll wheel - scale up/down
+            gif.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                currentScale = Math.max(0.3, Math.min(3, currentScale + delta));
+                gif.style.transform = `scale(${currentScale})`;
+            });
+
+            // Hold to follow cursor
+            let holdTimeout;
+            gif.addEventListener('mousedown', (e) => {
+                if (e.button === 0) {
+                    holdTimeout = setTimeout(() => {
+                        isFollowing = true;
+                        gif.classList.add('follow-cursor');
+                    }, 500);
+                }
+            });
+
+            gif.addEventListener('mouseup', () => {
+                clearTimeout(holdTimeout);
+                if (isFollowing) {
+                    isFollowing = false;
+                    gif.classList.remove('follow-cursor');
+                }
+            });
+
+            gif.addEventListener('mouseleave', () => {
+                clearTimeout(holdTimeout);
+                if (isFollowing) {
+                    isFollowing = false;
+                    gif.classList.remove('follow-cursor');
+                }
+            });
+
+            // Follow cursor movement
+            document.addEventListener('mousemove', (e) => {
+                if (isFollowing) {
+                    gif.style.left = `${e.clientX - 24}px`;
+                    gif.style.top = `${e.clientY - 24}px`;
+                }
+            });
+
+            // Random movement mode (press 'R' while hovering)
+            gif.addEventListener('mouseenter', () => {
+                document.addEventListener('keydown', handleRandomMove);
+            });
+
+            gif.addEventListener('mouseleave', () => {
+                document.removeEventListener('keydown', handleRandomMove);
+                if (randomMoveInterval) {
+                    clearInterval(randomMoveInterval);
+                    randomMoveInterval = null;
+                }
+            });
+
+            function handleRandomMove(e) {
+                if ((e.key === 'r' || e.key === 'R') && !randomMoveInterval) {
+                    randomMoveInterval = setInterval(() => {
+                        const x = Math.random() * (window.innerWidth - 48);
+                        const y = Math.random() * (window.innerHeight - 48);
+                        gif.style.left = `${x}px`;
+                        gif.style.top = `${y}px`;
+                    }, 1000);
+                }
+                if ((e.key === 's' || e.key === 'S') && randomMoveInterval) {
+                    clearInterval(randomMoveInterval);
+                    randomMoveInterval = null;
+                }
+
+                // Space key - jump
+                if (e.key === ' ' || e.key === 'Space') {
+                    e.preventDefault();
+                    gif.classList.add('jump');
+                    setTimeout(() => {
+                        gif.classList.remove('jump');
+                    }, 500);
+                }
+
+                // F key - flip horizontally
+                if (e.key === 'f' || e.key === 'F') {
+                    e.preventDefault();
+                    gif.classList.add('flip');
+                    setTimeout(() => {
+                        gif.classList.remove('flip');
+                    }, 500);
+                }
+
+                // G key - grow/shrink toggle
+                if (e.key === 'g' || e.key === 'G') {
+                    e.preventDefault();
+                    isGrown = !isGrown;
+                    if (isGrown) {
+                        gif.classList.add('grow');
+                        gif.classList.remove('shrink');
+                    } else {
+                        gif.classList.remove('grow');
+                        gif.classList.add('shrink');
+                    }
+                }
+            }
+
+            // Drag functionality
             let offsetX, offsetY;
+            let isDragging = false;
 
             const dragStart = (e) => {
+                if (e.button !== 0) return;
+                isDragging = true;
                 offsetX = e.clientX - gif.getBoundingClientRect().left;
                 offsetY = e.clientY - gif.getBoundingClientRect().top;
                 document.addEventListener('mousemove', dragMove);
@@ -509,18 +783,22 @@
             };
 
             const dragMove = (e) => {
+                if (!isDragging) return;
                 gif.style.left = `${e.clientX - offsetX}px`;
                 gif.style.top = `${e.clientY - offsetY}px`;
             };
 
             const dragEnd = () => {
+                isDragging = false;
                 document.removeEventListener('mousemove', dragMove);
                 document.removeEventListener('mouseup', dragEnd);
             };
 
             gif.addEventListener('mousedown', dragStart);
 
+            // Touch drag
             const touchStart = (e) => {
+                isDragging = true;
                 offsetX = e.touches[0].clientX - gif.getBoundingClientRect().left;
                 offsetY = e.touches[0].clientY - gif.getBoundingClientRect().top;
                 document.addEventListener('touchmove', touchMove);
@@ -528,11 +806,13 @@
             };
 
             const touchMove = (e) => {
+                if (!isDragging) return;
                 gif.style.left = `${e.touches[0].clientX - offsetX}px`;
                 gif.style.top = `${e.touches[0].clientY - offsetY}px`;
             };
 
             const touchEnd = () => {
+                isDragging = false;
                 document.removeEventListener('touchmove', touchMove);
                 document.removeEventListener('touchend', touchEnd);
             };
