@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meadow - Modern Bio</title>
+    <meta name="description" content="Heyo, I am Meadow/N3K0, Indie dev, coder, like websites and apps and a gamer and more! Check out my projects, gaming streams, and social links.">
     <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Meadow / N3K0 - Indie Developer & Gamer">
+    <meta property="og:description" content="Heyo, I am Meadow/N3K0, Indie dev, coder, like websites and apps and a gamer and more!">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/88599122?v=4">
+    <meta property="og:url" content="https://marshmeadow.netlify.app/">
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Meadow's Bio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Meadow / N3K0 - Indie Developer & Gamer">
+    <meta name="twitter:description" content="Heyo, I am Meadow/N3K0, Indie dev, coder, like websites and apps and a gamer and more!">
+    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/88599122?v=4">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -287,6 +302,70 @@
             display: block;
         }
 
+        /* Entrance Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bio-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Check Out Section */
+        .checkout-section {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid var(--link-border);
+        }
+
+        .checkout-section h2 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .checkout-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .checkout-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--link-bg);
+            color: var(--link-text);
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--link-border);
+            transition: all 0.2s ease;
+        }
+
+        .checkout-tag:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .checkout-tag svg {
+            width: 14px;
+            height: 14px;
+        }
+
         /* GIF Container Styles */
         .gif-container {
             position: fixed;
@@ -554,11 +633,11 @@
 
     <!-- GIF Containers -->
     <div class="gif-container" id="gif1">
-        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" style="width: 100%; height: auto;">
+        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" loading="lazy" style="width: 100%; height: auto;">
     </div>
 
     <div class="gif-container" id="gif2" style="display: none;">
-        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" style="width: 100%; height: auto;">
+        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" loading="lazy" style="width: 100%; height: auto;">
     </div>
 
     <div class="bio-card">
@@ -703,6 +782,36 @@
                 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 Ko-Fi
             </a>
+        </div>
+
+        <div class="checkout-section">
+            <h2>Things to Check Out</h2>
+            <div class="checkout-links">
+                <a href="https://marshmeadow.netlify.app/repos" target="_blank" class="checkout-tag">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    All Repos
+                </a>
+                <a href="https://github.com/MarshMeadow" target="_blank" class="checkout-tag">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub :: Meadow
+                </a>
+                <a href="https://github.com/HDO-PRO" target="_blank" class="checkout-tag">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    HDO PRO
+                </a>
+                <a href="https://github.com/itsmechinmoy/Dantotsu" target="_blank" class="checkout-tag">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Dantotsu
+                </a>
+                <a href="https://github.com/KamyRoll/KamyRoll" target="_blank" class="checkout-tag">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    KamyRoll
+                </a>
+                <a href="https://ko-fi.com/marshmeadow" target="_blank" class="checkout-tag">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    Donate
+                </a>
+            </div>
         </div>
 
         <div class="footer">
