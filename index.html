@@ -857,14 +857,116 @@
         });
 
         // ==================== PREVENT RIGHT-CLICK AND DEV TOOLS ====================
+        // Prevent right-click context menu
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
         });
 
+        // Prevent dev tools shortcuts
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+            // F12 - Dev Tools
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I - Dev Tools
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+J - Console
+            if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+C - Element Inspector
+            if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U - View Source
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+C - Copy (prevent on non-input elements)
+            if (e.ctrlKey && (e.key === 'C' || e.key === 'c')) {
+                const target = e.target;
+                if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            // Ctrl+V - Paste (prevent on non-input elements)
+            if (e.ctrlKey && (e.key === 'V' || e.key === 'v')) {
+                const target = e.target;
+                if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            // Ctrl+X - Cut (prevent on non-input elements)
+            if (e.ctrlKey && (e.key === 'X' || e.key === 'x')) {
+                const target = e.target;
+                if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            // Ctrl+A - Select All (prevent on non-input elements)
+            if (e.ctrlKey && (e.key === 'A' || e.key === 'a')) {
+                const target = e.target;
+                if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            // Ctrl+S - Save
+            if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+P - Print
+            if (e.ctrlKey && (e.key === 'P' || e.key === 'p')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent text selection
+        document.addEventListener('selectstart', function (e) {
+            const target = e.target;
+            if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
                 e.preventDefault();
             }
+        });
+
+        // Prevent drag
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        // Prevent copy on all elements except inputs
+        document.addEventListener('copy', function (e) {
+            const target = e.target;
+            if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                e.preventDefault();
+            }
+        });
+
+        // Prevent cut on all elements except inputs
+        document.addEventListener('cut', function (e) {
+            const target = e.target;
+            if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                e.preventDefault();
+            }
+        });
+
+        // Allow links and buttons to work normally
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('click', function (e) {
+                // Let clicks pass through naturally
+            });
         });
     </script>
 </body>
