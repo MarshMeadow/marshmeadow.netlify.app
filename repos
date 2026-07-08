@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meadow's Repositories</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-image: url('https://marshmeadow.netlify.app/Images/EDITED%20Retro%20Video%20Gaming%20Desktop%20Wallpaper2%20Not%20OG.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #c9d1d9;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #58a6ff;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #8b949e;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #21262d;
+            color: #58a6ff;
+            text-decoration: none;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-link:hover {
+            background-color: #58a6ff;
+            color: #0d1117;
+        }
+
+        .search-container {
+            background-color: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            color: #c9d1d9;
+            font-size: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #58a6ff;
+        }
+
+        .search-box::placeholder {
+            color: #8b949e;
+        }
+
+        .repos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .repo-card {
+            background-color: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-5px);
+            border-color: #58a6ff;
+            box-shadow: 0 8px 20px rgba(88, 166, 255, 0.2);
+        }
+
+        .repo-name {
+            color: #58a6ff;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+
+        .repo-description {
+            color: #8b949e;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            min-height: 40px;
+        }
+
+        .repo-stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #8b949e;
+            font-size: 0.85rem;
+        }
+
+        .stat svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .repo-language {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #8b949e;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .language-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #8b949e;
+            font-size: 1.2rem;
+        }
+
+        .error {
+            background-color: #161b22;
+            border: 2px solid #ff5f56;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            color: #ff5f56;
+            margin-bottom: 30px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            color: #8b949e;
+            font-size: 1.2rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 10px 20px;
+            background-color: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background-color: #58a6ff;
+            color: #0d1117;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination button.active {
+            background-color: #58a6ff;
+            color: #0d1117;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .repos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-container {
+                padding: 15px;
+            }
+
+            .repo-card {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.2rem;
+            }
+
+            .repo-name {
+                font-size: 1rem;
+            }
+
+            .repo-description {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-link">← Back to Links</a>
+            <h1>~/Meadow's Repositories</h1>
+            <p>Explore my GitHub projects and contributions</p>
+        </div>
+
+        <div class="search-container">
+            <input 
+                type="text" 
+                class="search-box" 
+                id="searchInput" 
+                placeholder="Search repositories..."
+                autocomplete="off"
+            >
+        </div>
+
+        <div id="loading" class="loading">
+            Loading repositories...
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="reposGrid" class="repos-grid"></div>
+
+        <div id="noResults" class="no-results" style="display: none;">
+            No repositories found matching your search.
+        </div>
+
+        <div id="pagination" class="pagination" style="display: none;"></div>
+    </div>
+
+    <script>
+        const USERNAME = 'MarshMeadow';
+        const REPOS_PER_PAGE = 9;
+        let allRepos = [];
+        let filteredRepos = [];
+        let currentPage = 1;
+
+        // Language colors
+        const languageColors = {
+            'JavaScript': '#f1e05a',
+            'TypeScript': '#3178c6',
+            'Python': '#3572A5',
+            'Java': '#b07219',
+            'C++': '#f34b7d',
+            'C': '#555555',
+            'C#': '#239120',
+            'Ruby': '#701516',
+            'Go': '#00ADD8',
+            'Rust': '#dea584',
+            'PHP': '#4F5D95',
+            'Swift': '#F05138',
+            'Kotlin': '#A97BFF',
+            'Dart': '#00B4AB',
+            'HTML': '#e34c26',
+            'CSS': '#563d7c',
+            'Shell': '#89e051',
+            'Vue': '#41b883',
+            'React': '#61dafb',
+            'null': '#8b949e'
+        };
+
+        async function fetchRepos() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const reposGrid = document.getElementById('reposGrid');
+
+            try {
+                let page = 1;
+                let repos = [];
+                let hasMore = true;
+
+                while (hasMore) {
+                    const response = await fetch(`https://api.github.com/users/${USERNAME}/repos?page=${page}&per_page=100&sort=updated`);
+                    
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch repositories');
+                    }
+
+                    const data = await response.json();
+                    
+                    if (data.length === 0) {
+                        hasMore = false;
+                    } else {
+                        repos = repos.concat(data);
+                        page++;
+                    }
+
+                    if (repos.length >= 300) {
+                        hasMore = false;
+                    }
+                }
+
+                allRepos = repos;
+                filteredRepos = repos;
+                loading.style.display = 'none';
+                displayRepos();
+            } catch (err) {
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                error.textContent = `Error: ${err.message}. Please try again later.`;
+            }
+        }
+
+        function displayRepos() {
+            const reposGrid = document.getElementById('reposGrid');
+            const noResults = document.getElementById('noResults');
+            const pagination = document.getElementById('pagination');
+
+            reposGrid.innerHTML = '';
+
+            if (filteredRepos.length === 0) {
+                noResults.style.display = 'block';
+                pagination.style.display = 'none';
+                return;
+            }
+
+            noResults.style.display = 'none';
+
+            const startIndex = (currentPage - 1) * REPOS_PER_PAGE;
+            const endIndex = startIndex + REPOS_PER_PAGE;
+            const reposToShow = filteredRepos.slice(startIndex, endIndex);
+
+            reposToShow.forEach(repo => {
+                const card = createRepoCard(repo);
+                reposGrid.appendChild(card);
+            });
+
+            if (filteredRepos.length > REPOS_PER_PAGE) {
+                displayPagination();
+            } else {
+                pagination.style.display = 'none';
+            }
+        }
+
+        function createRepoCard(repo) {
+            const card = document.createElement('div');
+            card.className = 'repo-card';
+            card.onclick = () => window.open(repo.html_url, '_blank');
+
+            const languageColor = languageColors[repo.language] || languageColors['null'];
+
+            card.innerHTML = `
+                <div class="repo-name">${repo.name}</div>
+                <div class="repo-description">${repo.description || 'No description available'}</div>
+                <div class="repo-stats">
+                    <div class="stat">
+                        <svg fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/>
+                        </svg>
+                        ${repo.stargazers_count}
+                    </div>
+                    <div class="stat">
+                        <svg fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"/>
+                        </svg>
+                        ${repo.forks_count}
+                    </div>
+                </div>
+                <div class="repo-language">
+                    <div class="language-dot" style="background-color: ${languageColor};"></div>
+                    ${repo.language || 'Unknown'}
+                </div>
+            `;
+
+            return card;
+        }
+
+        function displayPagination() {
+            const pagination = document.getElementById('pagination');
+            const totalPages = Math.ceil(filteredRepos.length / REPOS_PER_PAGE);
+
+            pagination.innerHTML = '';
+            pagination.style.display = 'flex';
+
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '←';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayRepos();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+            pagination.appendChild(prevBtn);
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.className = currentPage === i ? 'active' : '';
+                pageBtn.onclick = () => {
+                    currentPage = i;
+                    displayRepos();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+                pagination.appendChild(pageBtn);
+            }
+
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = '→';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayRepos();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+            pagination.appendChild(nextBtn);
+        }
+
+        function searchRepos(query) {
+            const searchTerm = query.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredRepos = allRepos;
+            } else {
+                filteredRepos = allRepos.filter(repo => {
+                    return (
+                        repo.name.toLowerCase().includes(searchTerm) ||
+                        (repo.description && repo.description.toLowerCase().includes(searchTerm)) ||
+                        (repo.language && repo.language.toLowerCase().includes(searchTerm))
+                    );
+                });
+            }
+
+            currentPage = 1;
+            displayRepos();
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchRepos(e.target.value);
+        });
+
+        // Initialize
+        fetchRepos();
+    </script>
+</body>
+</html>
