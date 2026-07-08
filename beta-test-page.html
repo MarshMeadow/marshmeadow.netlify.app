@@ -1,308 +1,71 @@
-<!DOCTYPE html>
+```html
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meadow - Modern Bio</title>
-    <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page Unavailable</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --card: #0f172a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2a44;
+      --shadow: rgba(0,0,0,.35);
+      --btn: #2563eb;
+    }
 
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .bio-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 4px solid white;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            color: #1a1a2e;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .bio {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .link-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 16px 24px;
-            background: white;
-            color: #1a1a2e;
-            text-decoration: none;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 1rem;
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .link-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            border-color: #667eea;
-            color: #667eea;
-        }
-
-        .link-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .dropdown {
-            margin-bottom: 12px;
-        }
-
-        .dropdown-toggle {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-toggle:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234,  0.4);
-        }
-
-        .dropdown-toggle .arrow {
-            transition: transform 0.3s ease;
-        }
-
-        .dropdown.active .dropdown-toggle .arrow {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-content {
-            display: none;
-            margin-top: 8px;
-            animation: slideDown 0.3s ease;
-        }
-
-        .dropdown.active .dropdown-content {
-            display: block;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .dropdown-content a {
-            display: block;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #1a1a2e;
-            text-decoration: none;
-            border-radius: 12px;
-            margin-bottom: 8px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            border: 1px solid #e0e0e0;
-        }
-
-        .dropdown-content a:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-            transform: translateX(5px);
-        }
-
-        .footer {
-            margin-top: 30px;
-            color: #888;
-            font-size: 0.85rem;
-        }
-
-        .footer a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 480px) {
-            .bio-card {
-                padding: 30px 20px;
-                max-width: 100%;
-            }
-
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            .bio {
-                font-size: 0.9rem;
-            }
-
-            .link-btn, .dropdown-toggle {
-                padding: 14px 20px;
-                font-size: 0.95rem;
-            }
-        }
-    </style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--text);
+      text-align: center;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 22px;
+      max-width: 560px;
+      width: 100%;
+      box-shadow: 0 10px 28px var(--shadow);
+    }
+    h1 { margin: 0 0 10px; font-size: 1.5rem; }
+    p { margin: 0 0 18px; color: var(--muted); line-height: 1.5; }
+    .btn {
+      display: inline-block;
+      background: var(--btn);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, .25);
+    }
+    .hint { margin-top: 14px; color: #94a3b8; font-size: 0.95rem; }
+    /* In case the browser has a light theme preference, keep ours dark */
+    @media (prefers-color-scheme: light) {
+      body, .card { background: var(--bg); color: var(--text); }
+    }
+  </style>
+  <script>
+    const target = "https://marshmeadow.netlify.app/";
+    setTimeout(() => { window.location.href = target; }, 30000);
+  </script>
 </head>
 <body>
-    <div class="bio-card">
-        <div class="avatar">
-            <img src="https://avatars.githubusercontent.com/u/88599122?v=4" alt="Meadow">
-        </div>
-
-        <h1>Meadow / N3K0</h1>
-        <p class="bio">Indie dev, coder, gamer, and more! Building cool stuff on the web.</p>
-
-        <div class="links">
-            <div class="dropdown">
-                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
-                    Gaming/Streams
-                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
-                </button>
-                <div class="dropdown-content">
-                    <a href="https://www.youtube.com/channel/UCEut9fHi6A1HbBdVnyEfU_w" target="_blank">Gaming YouTube</a>
-                    <a href="https://www.youtube.com/channel/UCaPh_lbZLmn0ik3R50RS6vA" target="_blank">YouTube (Out of Date)</a>
-                    <a href="https://www.twitch.tv/marshmeadow_n3k0" target="_blank">Twitch (18+)</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
-                    Socials
-                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
-                </button>
-                <div class="dropdown-content">
-                    <a href="https://marshmeadow.netlify.app/pronouns" target="_blank">Pronouns</a>
-                    <a href="https://discord.com/users/nekos404" target="_blank">Discord (nekos404)</a>
-                    <a href="https://discord.com/users/Marshmeadow2772" target="_blank">Discord (Marshmeadow2772)</a>
-                    <a href="tg://resolve?domain=marshmeadow_n3k0" target="_blank">Telegram</a>
-                    <a href="https://www.reddit.com/user/nekos404/submitted/" target="_blank">Reddit (nekos404)</a>
-                    <a href="https://www.reddit.com/user/marshmeadows2772/submitted/" target="_blank">Reddit (marshmeadows2772)</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
-                    Projects
-                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
-                </button>
-                <div class="dropdown-content">
-                    <a href="https://marshmeadow.netlify.app/repos" target="_blank">All Repositories</a>
-                    <a href="https://ko-fi.com/marshmeadow" target="_blank">Donate - Ko-Fi</a>
-                    <a href="https://github.com/MarshMeadow" target="_blank">GitHub :: Meadow</a>
-                    <a href="https://github.com/HDO-PRO" target="_blank">HDO PRO (Private)</a>
-                    <a href="https://sites.google.com/view/fancyexplore/home" target="_blank">FPA Site</a>
-                    <a href="https://github.com/itsmechinmoy/Dantotsu" target="_blank">Dantotsu App (Web Dev)</a>
-                    <a href="https://github.com/KamyRoll/KamyRoll" target="_blank">KamyRoll (Made & Worked on KamyRoll TV)</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
-                    Personal Contact
-                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
-                </button>
-                <div class="dropdown-content">
-                    <a href="https://discord.com/users/Marshmeadow2772" target="_blank">Personal Discord (PRIVATE)</a>
-                    <a href="tg://resolve?domain=marshmeadow_n3k0" target="_blank">Telegram</a>
-                    <a href="https://www.instagram.com/marshmeadow.n3k0/" target="_blank">Instagram (marshmeadow.n3k0)</a>
-                    <a href="https://www.instagram.com/lazy_neko404/" target="_blank">Instagram (lazy_neko404)</a>
-                    <a href="https://www.tiktok.com/@Marshmeadow2772" target="_blank">TikTok</a>
-                    <a href="https://wa.me/lazy_neko404" target="_blank">WhatsApp</a>
-                </div>
-            </div>
-
-            <a href="https://github.com/MarshMeadow" target="_blank" class="link-btn">
-                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-            </a>
-
-            <a href="https://ko-fi.com/marshmeadow" target="_blank" class="link-btn">
-                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                Ko-Fi
-            </a>
-        </div>
-
-        <div class="footer">
-            <p>© 2024 Meadow</p>
-            <p><a href="https://marshmeadow.netlify.app/" target="_blank">Back to Main Page</a></p>
-        </div>
-    </div>
-
-    <script>
-        function toggleDropdown(button) {
-            const dropdown = button.parentElement;
-            dropdown.classList.toggle('active');
-        }
-    </script>
+  <div class="card">
+    <h1>This page is no longer available</h1>
+    <p>You’ll be redirected in 30 seconds. Or you can go now using the button below.</p>
+    <a class="btn" href="https://marshmeadow.netlify.app/" rel="noopener">Go to marshmeadow</a>
+    <div class="hint">Redirecting automatically…</div>
+  </div>
 </body>
 </html>
+```
