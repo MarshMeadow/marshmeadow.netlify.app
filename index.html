@@ -73,12 +73,20 @@
 
         body {
             background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             transition: background 0.3s ease;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .bio-card {
@@ -102,6 +110,12 @@
             box-shadow: 0 8px 24px var(--avatar-shadow);
             overflow: hidden;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .avatar img {
@@ -231,6 +245,26 @@
             font-size: 0.95rem;
             transition: all 0.2s ease;
             border: 1px solid var(--link-border);
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .dropdown.active .dropdown-content a {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+
+        .dropdown.active .dropdown-content a:nth-child(1) { animation-delay: 0.05s; }
+        .dropdown.active .dropdown-content a:nth-child(2) { animation-delay: 0.1s; }
+        .dropdown.active .dropdown-content a:nth-child(3) { animation-delay: 0.15s; }
+        .dropdown.active .dropdown-content a:nth-child(4) { animation-delay: 0.2s; }
+        .dropdown.active .dropdown-content a:nth-child(5) { animation-delay: 0.25s; }
+        .dropdown.active .dropdown-content a:nth-child(6) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .dropdown-content a:hover {
@@ -277,6 +311,7 @@
         .theme-toggle:hover {
             transform: scale(1.1);
             border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
         }
 
         .theme-toggle svg {
@@ -317,6 +352,26 @@
         .bio-card {
             animation: fadeInUp 0.6s ease-out;
         }
+
+        /* Staggered Link Animations */
+        .links > *,
+        .dropdown {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .links > *:nth-child(1),
+        .dropdown:nth-child(1) { animation-delay: 0.1s; }
+        .links > *:nth-child(2),
+        .dropdown:nth-child(2) { animation-delay: 0.2s; }
+        .links > *:nth-child(3),
+        .dropdown:nth-child(3) { animation-delay: 0.3s; }
+        .links > *:nth-child(4),
+        .dropdown:nth-child(4) { animation-delay: 0.4s; }
+        .links > *:nth-child(5),
+        .dropdown:nth-child(5) { animation-delay: 0.5s; }
+        .links > *:nth-child(6),
+        .dropdown:nth-child(6) { animation-delay: 0.6s; }
 
         /* Check Out Section */
         .checkout-section {
