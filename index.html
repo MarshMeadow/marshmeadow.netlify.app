@@ -20,7 +20,7 @@
     <meta name="twitter:title" content="Meadow / N3K0 - Indie Developer & Gamer">
     <meta name="twitter:description" content="Heyo, I am Meadow/N3K0, Indie dev, coder, like websites and apps and a gamer and more!">
     <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/88599122?v=4">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -130,14 +130,54 @@
             margin-bottom: 8px;
             font-weight: 700;
             transition: color 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .bio {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             line-height: 1.6;
             transition: color 0.3s ease;
+        }
+
+        .bio-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .bio-tag {
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            background: var(--link-bg);
+            border: 1px solid var(--link-border);
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.2s ease;
+        }
+
+        .bio-tag:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .bio-quote {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            border-left: 3px solid #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 0 8px 8px 0;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .links {
@@ -677,8 +717,15 @@
             <img src="https://avatars.githubusercontent.com/u/88599122?v=4" alt="Meadow">
         </div>
 
-        <h1>Meadow / N3K0</h1>
-        <p class="bio">Heyo, I am Meadow/N3K0, Indie dev, coder, like websites and apps and a gamer and more!</p>
+        <h1>𝕸𝖊𝖆𝖉𝖔𝖜 𝕳. / N3K0</h1>
+        <p class="bio">Heyo, I'm Meadow/N3K0 — an indie developer, coder, and entrepreneur passionate about building websites, apps, and digital experiences. I'm also a gamer who loves exploring new worlds and pushing boundaries in everything I create.</p>
+
+        <div class="bio-details">
+            <p class="bio-tag">Entrep / Indie Dev 💻</p>
+            <p class="bio-tag">Private Person ♡</p>
+            <p class="bio-tag">DMs can open and close at any time</p>
+            <p class="bio-quote">"The only way to do great work is to love what you do." — Stay true to your path</p>
+        </div>
 
         <div class="checkout-section">
             <h2>Things to Check Out</h2>
