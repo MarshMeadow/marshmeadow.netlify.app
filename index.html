@@ -559,38 +559,6 @@
             transform: scaleX(-1);
         }
 
-        /* View Counter Styles */
-        #arrow {
-            position: fixed;
-            bottom: 20px;
-            right: 80px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 100;
-        }
-
-        #arrow img {
-            width: 30px;
-            height: 30px;
-        }
-
-        #viewCounter {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #1e1e1e;
-            border: 1px solid #ccc;
-            padding: 10px;
-            display: none;
-            opacity: 1;
-            transition: opacity 1s;
-            color: white;
-            z-index: 100;
-            border-radius: 8px;
-        }
-
         /* Popup Styles */
         .popup-overlay {
             position: fixed;
@@ -664,23 +632,6 @@
             .theme-toggle svg {
                 width: 20px;
                 height: 20px;
-            }
-
-            #arrow {
-                right: 60px;
-                bottom: 15px;
-            }
-
-            #arrow img {
-                width: 25px;
-                height: 25px;
-            }
-
-            #viewCounter {
-                right: 10px;
-                bottom: 15px;
-                font-size: 0.85rem;
-                padding: 8px;
             }
 
             .popup {
@@ -927,14 +878,6 @@
             <p>© 2024 Meadow</p>
             <p style="margin-top: 10px;">Back-Up: <a href="https://linktr.ee/MarshMeadow" target="_blank" style="color: #667eea; text-decoration: none;">Linktree</a></p>
         </div>
-    </div>
-
-    <!-- Arrow Button and View Counter -->
-    <button id="arrow">
-        <img src="https://marshmeadow.netlify.app/Images/arrow_icon.png" alt="Arrow">
-    </button>
-    <div id="viewCounter">
-        Viewing: <span id="viewCount">0</span>
     </div>
 
     <script>
