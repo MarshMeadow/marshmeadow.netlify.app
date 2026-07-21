@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meadow - Gallery</title>
+    <meta name="description" content="Gallery of Meadow/N3K0's work and creations.">
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Meadow / N3K0 - Gallery">
+    <meta property="og:description" content="Gallery of Meadow/N3K0's work and creations.">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/88599122?v=4">
+    <meta property="og:url" content="https://marshmeadow.netlify.app/gallery">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Meadow's Gallery">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Meadow / N3K0 - Gallery">
+    <meta name="twitter:description" content="Gallery of Meadow/N3K0's work and creations.">
+    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/88599122?v=4">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --card-bg: rgba(30, 30, 40, 0.95);
+            --avatar-border: #2a2a3e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --text-footer: #888;
+            --link-bg: rgba(40, 40, 55, 0.9);
+            --link-text: #e0e0e0;
+            --link-border: #3a3a4e;
+            --link-hover-bg: #667eea;
+            --link-hover-text: white;
+            --dropdown-bg: rgba(40, 40, 55, 0.9);
+            --dropdown-text: #e0e0e0;
+            --dropdown-hover-bg: #667eea;
+            --dropdown-hover-text: white;
+            --footer-link: #667eea;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --avatar-shadow: rgba(0, 0, 0, 0.4);
+            --modal-bg: rgba(20, 20, 30, 0.98);
+        }
+
+        body.light-mode {
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --avatar-border: white;
+            --text-primary: #1a1a2e;
+            --text-secondary: #666;
+            --text-footer: #888;
+            --link-bg: white;
+            --link-text: #1a1a2e;
+            --link-border: #e0e0e0;
+            --link-hover-bg: #667eea;
+            --link-hover-text: #667eea;
+            --dropdown-bg: rgba(255, 255, 255, 0.9);
+            --dropdown-text: #1a1a2e;
+            --dropdown-hover-bg: #667eea;
+            --dropdown-hover-text: white;
+            --footer-link: #667eea;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --avatar-shadow: rgba(0, 0, 0, 0.2);
+            --modal-bg: rgba(255, 255, 255, 0.98);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid var(--avatar-border);
+            box-shadow: 0 8px 24px var(--avatar-shadow);
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--link-bg);
+            color: var(--link-text);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            border: 1px solid var(--link-border);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            border-color: #667eea;
+            color: var(--link-hover-text);
+        }
+
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            padding: 20px 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid var(--link-border);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 32px var(--shadow-color);
+            border-color: #667eea;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+        .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+        .gallery-item:nth-child(9) { animation-delay: 0.9s; }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gallery-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+        }
+
+        /* Placeholder styling */
+        .placeholder {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--modal-bg);
+            z-index: 1000;
+            padding: 40px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 16px;
+            overflow: hidden;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-info {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-primary);
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .modal-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--link-bg);
+            border: 1px solid var(--link-border);
+            color: var(--link-text);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .modal-close:hover {
+            background: #667eea;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--link-bg);
+            border: 1px solid var(--link-border);
+            color: var(--link-text);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .modal-nav:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--link-border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-primary);
+            transition: fill 0.3s ease;
+        }
+
+        .theme-toggle .sun-icon {
+            display: none;
+        }
+
+        .theme-toggle .moon-icon {
+            display: block;
+        }
+
+        body.light-mode .theme-toggle .sun-icon {
+            display: block;
+        }
+
+        body.light-mode .theme-toggle .moon-icon {
+            display: none;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 20px;
+            color: var(--text-footer);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--link-border);
+        }
+
+        .footer a {
+            color: var(--footer-link);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 16px;
+            }
+
+            .gallery-image {
+                height: 200px;
+            }
+
+            .placeholder {
+                height: 200px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .modal {
+                padding: 20px;
+            }
+
+            .modal-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .modal-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+    </button>
+
+    <div class="gallery-container">
+        <div class="header">
+            <div class="avatar">
+                <img src="https://avatars.githubusercontent.com/u/88599122?v=4" alt="Meadow">
+            </div>
+            <h1>𝕸𝖊𝖆𝖉𝖔𝖜 𝕳. / N3K0</h1>
+            <p class="subtitle">Gallery of my work and creations</p>
+            <a href="index.html" class="back-link">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                Back to Bio
+            </a>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- Gallery Item 1 -->
+            <div class="gallery-item" onclick="openModal(this)" data-title="Project 1" data-description="Description of your first project or image.">
+                <div class="placeholder">Image 1<br><small>Replace with your image</small></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Project 1</div>
+                    <div class="gallery-description">Click to view</div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="gallery-item" onclick="openModal(this)" data-title="Project 2" data-description="Description of your second project or image.">
+                <div class="placeholder">Image 2<br><small>Replace with your image</small></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Project 2</div>
+                    <div class="gallery-description">Click to view</div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="gallery-item" onclick="openModal(this)" data-title="Project 3" data-description="Description of your third project or image.">
+                <div class="placeholder">Image 3<br><small>Replace with your image</small></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Project 3</div>
+                    <div class="gallery-description">Click to view</div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 4 -->
+            <div class="gallery-item" onclick="openModal(this)" data-title="Project 4" data-description="Description of your fourth project or image.">
+                <div class="placeholder">Image 4<br><small>Replace with your image</small></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Project 4</div>
+                    <div class="gallery-description">Click to view</div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 5 -->
+            <div class="gallery-item" onclick="openModal(this)" data-title="Project 5" data-description="Description of your fifth project or image.">
+                <div class="placeholder">Image 5<br><small>Replace with your image</small></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Project 5</div>
+                    <div class="gallery-description">Click to view</div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 6 -->
+            <div class="gallery-item" onclick="openModal(this)" data-title="Project 6" data-description="Description of your sixth project or image.">
+                <div class="placeholder">Image 6<br><small>Replace with your image</small></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Project 6</div>
+                    <div class="gallery-description">Click to view</div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 7 -->
+            <div class="gallery-item" onclick="openModal(this)" data-title="Project 7" data-description="Description of your seventh project or image.">
+                <div class="placeholder">Image 7<br><small>Replace with your image</small></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Project 7</div>
+                    <div class="gallery-description">Click to view</div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 8 -->
+            <div class="gallery-item" onclick="openModal(this)" data-title="Project 8" data-description="Description of your eighth project or image.">
+                <div class="placeholder">Image 8<br><small>Replace with your image</small></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Project 8</div>
+                    <div class="gallery-description">Click to view</div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 9 -->
+            <div class="gallery-item" onclick="openModal(this)" data-title="Project 9" data-description="Description of your ninth project or image.">
+                <div class="placeholder">Image 9<br><small>Replace with your image</small></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Project 9</div>
+                    <div class="gallery-description">Click to view</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 Meadow</p>
+            <p style="margin-top: 10px;">Back to: <a href="index.html">Bio</a></p>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <button class="modal-nav modal-prev" onclick="navigateModal(-1)">‹</button>
+        <button class="modal-nav modal-next" onclick="navigateModal(1)">›</button>
+        <div class="modal-content">
+            <img class="modal-image" id="modal-image" src="" alt="">
+        </div>
+        <div class="modal-info">
+            <div class="modal-title" id="modal-title"></div>
+            <div class="modal-description" id="modal-description"></div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLightMode = document.body.classList.contains('light-mode');
+            localStorage.setItem('galleryTheme', isLightMode ? 'light' : 'dark');
+        }
+
+        // Check for saved theme preference
+        if (localStorage.getItem('galleryTheme') === 'light') {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+        }
+
+        // Modal functionality
+        let currentModalIndex = 0;
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+
+        function openModal(element) {
+            const index = Array.from(galleryItems).indexOf(element);
+            currentModalIndex = index;
+            updateModalContent();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateModalContent() {
+            const item = galleryItems[currentModalIndex];
+            const title = item.dataset.title;
+            const description = item.dataset.description;
+            const placeholder = item.querySelector('.placeholder');
+            
+            // If there's an img element, use it; otherwise use placeholder
+            const img = item.querySelector('img');
+            if (img) {
+                modalImage.src = img.src;
+            } else {
+                // Create a canvas with the placeholder content
+                const canvas = document.createElement('canvas');
+                canvas.width = 800;
+                canvas.height = 600;
+                const ctx = canvas.getContext('2d');
+                const gradient = ctx.createLinearGradient(0, 0, 800, 600);
+                gradient.addColorStop(0, '#667eea');
+                gradient.addColorStop(1, '#764ba2');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 800, 600);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 48px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(title, 400, 280);
+                ctx.font = '24px Inter';
+                ctx.fillText('Replace with your image', 400, 340);
+                modalImage.src = canvas.toDataURL();
+            }
+            
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+        }
+
+        function navigateModal(direction) {
+            currentModalIndex += direction;
+            if (currentModalIndex < 0) {
+                currentModalIndex = galleryItems.length - 1;
+            } else if (currentModalIndex >= galleryItems.length) {
+                currentModalIndex = 0;
+            }
+            updateModalContent();
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+            if (e.key === 'ArrowLeft') {
+                navigateModal(-1);
+            }
+            if (e.key === 'ArrowRight') {
+                navigateModal(1);
+            }
+        });
+
+        // Close modal on background click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Instructions for adding images
+        console.log('To add your own images:');
+        console.log('1. Replace the <div class="placeholder"> elements with <img> tags');
+        console.log('2. Example: <img src="your-image.jpg" alt="Project 1" class="gallery-image">');
+        console.log('3. Update the data-title and data-description attributes');
+    </script>
+</body>
+</html>
