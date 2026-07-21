@@ -642,6 +642,122 @@
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
 
+        /* Puzzle Modal */
+        .puzzle-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .puzzle-modal.active {
+            display: flex;
+        }
+
+        .puzzle-content {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .puzzle-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .puzzle-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .puzzle-tile {
+            aspect-ratio: 1;
+            background: var(--link-bg);
+            border: 2px solid var(--link-border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .puzzle-tile:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .puzzle-tile.empty {
+            background: transparent;
+            border: 2px dashed var(--border-color);
+            cursor: default;
+        }
+
+        .puzzle-tile.empty:hover {
+            transform: none;
+            border-color: var(--border-color);
+        }
+
+        .puzzle-tile.correct {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+            color: white;
+        }
+
+        .puzzle-message {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            min-height: 20px;
+        }
+
+        .puzzle-message.success {
+            color: #4caf50;
+        }
+
+        .puzzle-message.error {
+            color: #ff5f56;
+        }
+
+        .puzzle-close {
+            background: var(--link-bg);
+            border: 2px solid var(--link-border);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .puzzle-close:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
         /* Tablet Responsive */
         @media (min-width: 481px) and (max-width: 768px) {
             .bio-card {
@@ -726,6 +842,17 @@
             <p style="margin-bottom: 15px;">Are you human?</p>
             <p style="font-size: 0.9rem; margin-bottom: 20px; color: #8b949e;">By continuing, you agree to not abuse any content on this page.</p>
             <button onclick="acceptHuman()">I Agree</button>
+        </div>
+    </div>
+
+    <!-- Puzzle Verification Modal -->
+    <div id="puzzle-modal" class="puzzle-modal">
+        <div class="puzzle-content">
+            <h3>🔐 Verify to Contact</h3>
+            <p>Click the tiles in order: 1, 2, 3</p>
+            <div class="puzzle-grid" id="puzzle-grid"></div>
+            <div class="puzzle-message" id="puzzle-message"></div>
+            <button class="puzzle-close" onclick="closePuzzle()">Cancel</button>
         </div>
     </div>
 
@@ -1013,12 +1140,17 @@
                 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                 Gallery
             </a>
+
+            <a href="https://marshmeadow.netlify.app/repos" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                All Repos
+            </a>
         </div>
 
         <div class="footer">
             <p style="color: #ff5f56; font-size: 0.85rem; margin-top: 20px;">⚠️ Please do not abuse any content on this page. You agreed to this upon entering.</p>
             <p>© 2024 Meadow</p>
-            <p style="margin-top: 10px;">Back-Up: <a href="https://linktr.ee/MarshMeadow" target="_blank" style="color: #667eea; text-decoration: none;">Linktree</a></p>
+            <p style="margin-top: 10px;"><a href="https://marshmeadow.netlify.app/repos" target="_blank" style="color: #667eea; text-decoration: none;">All Repos</a> | <a href="https://marshmeadow.netlify.app/gallery" target="_blank" style="color: #667eea; text-decoration: none;">Gallery</a> | <a href="https://linktr.ee/MarshMeadow" target="_blank" style="color: #667eea; text-decoration: none;">Linktree</a></p>
         </div>
     </div>
 
@@ -1059,6 +1191,112 @@
                 acceptHuman();
             }
         });
+
+        // ==================== PUZZLE VERIFICATION ====================
+        let puzzleTargetUrl = null;
+        let puzzleSequence = [];
+        let puzzleIndex = 0;
+
+        function initPuzzle() {
+            const grid = document.getElementById('puzzle-grid');
+            grid.innerHTML = '';
+            puzzleSequence = [];
+            puzzleIndex = 0;
+
+            // Create shuffled tiles with numbers 1-8 and one empty
+            const tiles = [1, 2, 3, 4, 5, 6, 7, 8, null];
+            shuffleArray(tiles);
+
+            tiles.forEach((num, index) => {
+                const tile = document.createElement('div');
+                tile.className = num === null ? 'puzzle-tile empty' : 'puzzle-tile';
+                tile.textContent = num || '';
+                tile.dataset.number = num;
+                
+                if (num !== null) {
+                    tile.onclick = () => handlePuzzleClick(tile, num);
+                }
+                
+                grid.appendChild(tile);
+            });
+
+            // Store the correct sequence
+            puzzleSequence = [1, 2, 3];
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function handlePuzzleClick(tile, number) {
+            const message = document.getElementById('puzzle-message');
+            
+            if (number === puzzleSequence[puzzleIndex]) {
+                // Correct click
+                tile.classList.add('correct');
+                puzzleIndex++;
+                
+                if (puzzleIndex === puzzleSequence.length) {
+                    // Puzzle solved
+                    message.textContent = '✓ Verified! Redirecting...';
+                    message.className = 'puzzle-message success';
+                    
+                    setTimeout(() => {
+                        closePuzzle();
+                        if (puzzleTargetUrl) {
+                            window.open(puzzleTargetUrl, '_blank');
+                            puzzleTargetUrl = null;
+                        }
+                    }, 1000);
+                } else {
+                    message.textContent = `Click ${puzzleSequence[puzzleIndex]} next`;
+                    message.className = 'puzzle-message';
+                }
+            } else {
+                // Wrong click
+                message.textContent = '✗ Wrong! Start over.';
+                message.className = 'puzzle-message error';
+                
+                // Reset after delay
+                setTimeout(() => {
+                    initPuzzle();
+                    message.textContent = 'Click the tiles in order: 1, 2, 3';
+                    message.className = 'puzzle-message';
+                }, 1500);
+            }
+        }
+
+        function showPuzzle(url) {
+            puzzleTargetUrl = url;
+            initPuzzle();
+            document.getElementById('puzzle-message').textContent = 'Click the tiles in order: 1, 2, 3';
+            document.getElementById('puzzle-message').className = 'puzzle-message';
+            document.getElementById('puzzle-modal').classList.add('active');
+        }
+
+        function closePuzzle() {
+            document.getElementById('puzzle-modal').classList.remove('active');
+            puzzleTargetUrl = null;
+            puzzleIndex = 0;
+        }
+
+        // Intercept personal contact link clicks
+        function setupContactVerification() {
+            const personalContactLinks = document.querySelectorAll('.dropdown-content a');
+            
+            personalContactLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPuzzle(this.href);
+                });
+            });
+        }
+
+        // Initialize puzzle verification on load
+        setupContactVerification();
 
         // ==================== GIF FUNCTIONALITY ====================
         function positionGif(gifContainer) {

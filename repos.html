@@ -170,6 +170,164 @@
             color: var(--text-muted);
         }
 
+        .org-filter {
+            background: var(--search-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out 0.3s backwards;
+        }
+
+        .org-filter h3 {
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .org-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .filter-select {
+            padding: 8px 12px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .org-btn {
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .org-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .org-btn.active {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+            border-color: transparent;
+            color: white;
+        }
+
+        .org-btn img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .popular-section {
+            background: var(--search-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out 0.4s backwards;
+        }
+
+        .popular-section h3 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .popular-section h3 svg {
+            color: #ffd700;
+            width: 24px;
+            height: 24px;
+        }
+
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .popular-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .popular-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px var(--shadow-color), 0 0 20px var(--glow-color);
+        }
+
+        .popular-card .repo-name {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .popular-card .repo-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .popular-card .repo-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
         .repos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -294,6 +452,28 @@
         .repo-card:hover .repo-language {
             background: rgba(102, 126, 234, 0.2);
             color: var(--text-primary);
+        }
+
+        .repo-owner {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            padding: 6px 10px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 6px;
+        }
+
+        .repo-owner img {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        .repo-owner span {
+            font-weight: 500;
         }
 
         .language-dot {
@@ -567,6 +747,36 @@
             >
         </div>
 
+        <div id="orgFilter" class="org-filter" style="display: none;">
+            <h3>Filter by Owner</h3>
+            <div class="org-buttons" id="orgButtons"></div>
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label>Sort by:</label>
+                    <select class="filter-select" id="sortSelect" onchange="sortRepos()">
+                        <option value="updated">Recently Updated</option>
+                        <option value="stars">Most Stars</option>
+                        <option value="forks">Most Forks</option>
+                        <option value="name">Name (A-Z)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Language:</label>
+                    <select class="filter-select" id="langSelect" onchange="filterByLanguage()">
+                        <option value="all">All Languages</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="popularSection" class="popular-section" style="display: none;">
+            <h3>
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                Popular Repositories
+            </h3>
+            <div id="popularGrid" class="popular-grid"></div>
+        </div>
+
         <div id="loading" class="loading">
             <div class="loading-spinner"></div>
             <p>Loading repositories...</p>
@@ -607,6 +817,8 @@
         let allRepos = [];
         let filteredRepos = [];
         let currentPage = 1;
+        let organizations = [];
+        let selectedOrg = null;
 
         // Language colors
         const languageColors = {
@@ -638,10 +850,11 @@
             const reposGrid = document.getElementById('reposGrid');
 
             try {
-                let page = 1;
                 let repos = [];
+                
+                // Fetch user's personal repos
+                let page = 1;
                 let hasMore = true;
-
                 while (hasMore) {
                     const response = await fetch(`https://api.github.com/users/${USERNAME}/repos?page=${page}&per_page=100&sort=updated`);
                     
@@ -654,7 +867,7 @@
                     if (data.length === 0) {
                         hasMore = false;
                     } else {
-                        repos = repos.concat(data);
+                        repos = repos.concat(data.map(repo => ({...repo, owner_type: 'user', owner_name: USERNAME})));
                         page++;
                     }
 
@@ -663,15 +876,191 @@
                     }
                 }
 
+                // Fetch user's organizations
+                const orgsResponse = await fetch(`https://api.github.com/users/${USERNAME}/orgs`);
+                if (orgsResponse.ok) {
+                    const orgsData = await orgsResponse.json();
+                    organizations = orgsData;
+                    
+                    // Fetch repos from each organization
+                    for (const org of orgsData) {
+                        let orgPage = 1;
+                        let orgHasMore = true;
+                        while (orgHasMore) {
+                            const orgReposResponse = await fetch(`https://api.github.com/orgs/${org.login}/repos?page=${orgPage}&per_page=100&sort=updated`);
+                            
+                            if (orgReposResponse.ok) {
+                                const orgReposData = await orgReposResponse.json();
+                                
+                                if (orgReposData.length === 0) {
+                                    orgHasMore = false;
+                                } else {
+                                    repos = repos.concat(orgReposData.map(repo => ({...repo, owner_type: 'organization', owner_name: org.login, org_avatar: org.avatar_url})));
+                                    orgPage++;
+                                }
+
+                                if (repos.length >= 500) {
+                                    orgHasMore = false;
+                                }
+                            } else {
+                                orgHasMore = false;
+                            }
+                        }
+                    }
+                }
+
                 allRepos = repos;
                 filteredRepos = repos;
                 loading.style.display = 'none';
+                displayOrgFilter();
+                displayPopularRepos();
                 displayRepos();
             } catch (err) {
                 loading.style.display = 'none';
                 error.style.display = 'block';
                 error.textContent = `Error: ${err.message}. Please try again later.`;
             }
+        }
+
+        function displayOrgFilter() {
+            const orgFilter = document.getElementById('orgFilter');
+            const orgButtons = document.getElementById('orgButtons');
+            const langSelect = document.getElementById('langSelect');
+            
+            if (organizations.length === 0) {
+                orgFilter.style.display = 'none';
+                return;
+            }
+
+            orgFilter.style.display = 'block';
+            orgButtons.innerHTML = '';
+
+            // Add "All" button
+            const allBtn = document.createElement('button');
+            allBtn.className = 'org-btn active';
+            allBtn.textContent = 'All Repos';
+            allBtn.onclick = () => filterByOrg(null);
+            orgButtons.appendChild(allBtn);
+
+            // Add user's personal repos button
+            const userBtn = document.createElement('button');
+            userBtn.className = 'org-btn';
+            userBtn.innerHTML = `<img src="https://avatars.githubusercontent.com/u/88599122?v=4" alt="${USERNAME}"> ${USERNAME}`;
+            userBtn.onclick = () => filterByOrg(USERNAME);
+            orgButtons.appendChild(userBtn);
+
+            // Add organization buttons
+            organizations.forEach(org => {
+                const orgBtn = document.createElement('button');
+                orgBtn.className = 'org-btn';
+                orgBtn.innerHTML = `<img src="${org.avatar_url}" alt="${org.login}"> ${org.login}`;
+                orgBtn.onclick = () => filterByOrg(org.login);
+                orgButtons.appendChild(orgBtn);
+            });
+
+            // Populate language filter
+            const languages = [...new Set(allRepos.map(repo => repo.language).filter(Boolean))];
+            languages.sort().forEach(lang => {
+                const option = document.createElement('option');
+                option.value = lang;
+                option.textContent = lang;
+                langSelect.appendChild(option);
+            });
+        }
+
+        function filterByOrg(orgName) {
+            selectedOrg = orgName;
+            
+            // Update button states
+            const buttons = document.querySelectorAll('.org-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (orgName === null) {
+                buttons[0].classList.add('active');
+                filteredRepos = allRepos;
+            } else {
+                const targetBtn = Array.from(buttons).find(btn => btn.textContent.includes(orgName));
+                if (targetBtn) targetBtn.classList.add('active');
+                filteredRepos = allRepos.filter(repo => repo.owner_name === orgName);
+            }
+
+            applyFilters();
+        }
+
+        function filterByLanguage() {
+            applyFilters();
+        }
+
+        function sortRepos() {
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const langSelect = document.getElementById('langSelect');
+            const sortSelect = document.getElementById('sortSelect');
+            const selectedLang = langSelect.value;
+            const sortBy = sortSelect.value;
+
+            // Start with organization filter
+            let repos = selectedOrg === null ? allRepos : allRepos.filter(repo => repo.owner_name === selectedOrg);
+
+            // Apply language filter
+            if (selectedLang !== 'all') {
+                repos = repos.filter(repo => repo.language === selectedLang);
+            }
+
+            // Apply sorting
+            switch (sortBy) {
+                case 'stars':
+                    repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+                    break;
+                case 'forks':
+                    repos.sort((a, b) => b.forks_count - a.forks_count);
+                    break;
+                case 'name':
+                    repos.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                default:
+                    repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+            }
+
+            filteredRepos = repos;
+            currentPage = 1;
+            displayRepos();
+        }
+
+        function displayPopularRepos() {
+            const popularSection = document.getElementById('popularSection');
+            const popularGrid = document.getElementById('popularGrid');
+            
+            // Get top repos by stars
+            const popularRepos = [...allRepos].sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 6);
+            
+            if (popularRepos.length === 0) {
+                popularSection.style.display = 'none';
+                return;
+            }
+
+            popularSection.style.display = 'block';
+            popularGrid.innerHTML = '';
+
+            popularRepos.forEach((repo, index) => {
+                const card = document.createElement('div');
+                card.className = 'popular-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.onclick = () => window.open(repo.html_url, '_blank');
+
+                card.innerHTML = `
+                    <div class="repo-name">${repo.name}</div>
+                    <div class="repo-description">${repo.description || 'No description available'}</div>
+                    <div class="repo-stats">
+                        <span>★ ${repo.stargazers_count}</span>
+                        <span>⑂ ${repo.forks_count}</span>
+                    </div>
+                `;
+
+                popularGrid.appendChild(card);
+            });
         }
 
         function displayRepos() {
@@ -712,8 +1101,13 @@
             card.onclick = () => window.open(repo.html_url, '_blank');
 
             const languageColor = languageColors[repo.language] || languageColors['null'];
+            const ownerAvatar = repo.org_avatar || `https://avatars.githubusercontent.com/u/88599122?v=4`;
 
             card.innerHTML = `
+                <div class="repo-owner">
+                    <img src="${ownerAvatar}" alt="${repo.owner_name}">
+                    <span>${repo.owner_name}</span>
+                </div>
                 <div class="repo-name">${repo.name}</div>
                 <div class="repo-description">${repo.description || 'No description available'}</div>
                 <div class="repo-stats">
@@ -789,16 +1183,44 @@
         function searchRepos(query) {
             const searchTerm = query.toLowerCase().trim();
             
+            // Start with current filtered repos (from org/lang filters)
+            let baseRepos = selectedOrg === null ? allRepos : allRepos.filter(repo => repo.owner_name === selectedOrg);
+            
+            // Apply language filter if selected
+            const langSelect = document.getElementById('langSelect');
+            if (langSelect && langSelect.value !== 'all') {
+                baseRepos = baseRepos.filter(repo => repo.language === langSelect.value);
+            }
+            
+            // Apply search
             if (searchTerm === '') {
-                filteredRepos = allRepos;
+                filteredRepos = baseRepos;
             } else {
-                filteredRepos = allRepos.filter(repo => {
+                filteredRepos = baseRepos.filter(repo => {
                     return (
                         repo.name.toLowerCase().includes(searchTerm) ||
                         (repo.description && repo.description.toLowerCase().includes(searchTerm)) ||
                         (repo.language && repo.language.toLowerCase().includes(searchTerm))
                     );
                 });
+            }
+
+            // Apply sorting
+            const sortSelect = document.getElementById('sortSelect');
+            if (sortSelect) {
+                switch (sortSelect.value) {
+                    case 'stars':
+                        filteredRepos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+                        break;
+                    case 'forks':
+                        filteredRepos.sort((a, b) => b.forks_count - a.forks_count);
+                        break;
+                    case 'name':
+                        filteredRepos.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                    default:
+                        filteredRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+                }
             }
 
             currentPage = 1;
