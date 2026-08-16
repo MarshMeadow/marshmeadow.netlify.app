@@ -3,58 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oops! Something Went Wrong</title>
+    <title>404 - Page Not Found</title>
+    <meta name="description" content="404 - Page not found on Meadow's website">
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --card-bg: rgba(30, 30, 40, 0.95);
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-color: #667eea;
+            --accent-hover: #764ba2;
+            --border-color: #3a3a4e;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-color: rgba(102, 126, 234, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
         body {
-            background-color: #1b1b2e; /* Dark background */
-            color: #ffffff; /* White text */
-            font-family: Arial, sans-serif;
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .error-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 60px 40px;
             text-align: center;
-            padding: 50px;
-            background-image: url('https://example.com/cat-pattern.png'); /* Subtle cat-themed pattern */
-            background-repeat: no-repeat;
-            background-size: cover; /* Full screen */
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px var(--shadow-color);
+            animation: fadeInUp 0.6s ease-out;
         }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cat-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
         h1 {
-            font-size: 48px;
+            color: var(--text-primary);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
         }
+
+        .error-code {
+            color: var(--accent-color);
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px var(--glow-color);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
         p {
-            font-size: 24px;
-            margin: 20px 0;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
-        .goofy {
-            font-size: 36px;
-            color: #a5d6e5; /* Soft blue */
-        }
-        .btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #6a0572; /* Purple button */
+
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
-        .btn:hover {
-            background-color: #a05bc2; /* Lighter purple on hover */
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--glow-color);
         }
-        .cat-emoji {
-            font-size: 48px;
-            margin: 20px 0;
+
+        .countdown {
+            margin-top: 25px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .countdown span {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 40px 25px;
+            }
+
+            .error-code {
+                font-size: 4rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .cat-emoji {
+                font-size: 60px;
+            }
         }
     </style>
-    <script>
-        setTimeout(function() {
-            window.location.href = 'https://marshmeadow.netlify.app/'; // Redirect to the specified URL
-        }, 5000);
-    </script>
 </head>
 <body>
-    <h1>Oops! 404 Error!</h1>
-    <div class="cat-emoji">🐱</div> <!-- Cat emoji -->
-    <p class="goofy">Looks like you've fallen into a black hole!</p>
-    <p>Don’t worry, we’ll bring you back in a jiffy!</p>
-    <a class="btn" href="#">Take Me Home!</a>
+    <div class="error-container">
+        <div class="cat-emoji">🐱</div>
+        <div class="error-code">404</div>
+        <h1>Oops! Page Not Found</h1>
+        <p>Looks like you've stumbled into a digital black hole! Don't worry, we'll get you back to safety in a moment.</p>
+        <a href="https://marshmeadow.netlify.app/" class="home-btn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            Take Me Home
+        </a>
+        <div class="countdown">Redirecting in <span id="countdown">5</span> seconds...</div>
+    </div>
+
+    <script>
+        let seconds = 5;
+        const countdownEl = document.getElementById('countdown');
+        
+        const interval = setInterval(() => {
+            seconds--;
+            countdownEl.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(interval);
+                window.location.href = 'https://marshmeadow.netlify.app/';
+            }
+        }, 1000);
+    </script>
 </body>
 </html>

@@ -638,180 +638,33 @@
         }
 
         .popup button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transform: scale(1.05);
         }
 
-        /* PIN Modal */
-        .pin-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .pin-modal.active {
-            display: flex;
-        }
-
-        .pin-content {
-            background: var(--card-bg);
-            border: 2px solid var(--link-border);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            animation: slideUp 0.4s ease-out;
-            box-shadow: 0 20px 60px var(--shadow-color);
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.9);
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-50%);
+                }
             }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
 
-        .pin-content h3 {
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .pin-content p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .pin-input {
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--link-bg);
-            border: 2px solid var(--link-border);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            text-align: center;
-            letter-spacing: 8px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            animation: pulseBorder 2s ease-in-out infinite;
-        }
-
-        @keyframes pulseBorder {
-            0%, 100% {
-                border-color: var(--link-border);
-            }
-            50% {
-                border-color: #667eea;
-            }
-        }
-
-        .pin-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-            animation: none;
-        }
-
-        .pin-message {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            min-height: 20px;
-        }
-
-        .pin-message.success {
-            color: #4caf50;
-        }
-
-        .pin-message.error {
-            color: #ff5f56;
-        }
-
-        .pin-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .pin-cancel {
-            background: var(--link-bg);
-            border: 2px solid var(--link-border);
-            color: var(--text-primary);
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .pin-cancel:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .pin-submit {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .pin-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .pin-submit:active {
-            transform: translateY(0);
-        }
-
-        /* Loading spinner for PIN verification */
-        .pin-submit.loading {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .pin-submit.loading::after {
-            content: '...';
-            animation: dots 1.5s steps(4, end) infinite;
-        }
-
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        /* Status Indicator */
-        .status-indicator {
-            display: inline-flex;
-            align-items: center;
+            .checkout-tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 8px 16px;
+                background: var(--link-bg);
+                color: var(--link-text);
+                text-decoration: none;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 500;
+                border: 1px solid var(--link-border);
+                transition: all 0.2s ease;
+                white-space: nowrap;
+                flex-shrink: 0;
             gap: 6px;
             padding: 6px 12px;
             background: rgba(76, 175, 80, 0.1);
@@ -906,6 +759,59 @@
             opacity: 1;
         }
 
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--border-color);
+            padding: 15px 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: var(--link-bg);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px var(--glow-color);
+        }
+
+        /* Adjust bio card for nav menu */
+        .bio-card {
+            margin-top: 100px;
+        }
+
         /* Tablet Responsive */
         @media (min-width: 481px) and (max-width: 768px) {
             .bio-card {
@@ -993,20 +899,6 @@
         </div>
     </div>
 
-    <!-- PIN Verification Modal -->
-    <div id="pin-modal" class="pin-modal">
-        <div class="pin-content">
-            <h3>🔐 Enter PIN</h3>
-            <p>Enter the PIN to access private socials</p>
-            <input type="password" id="pin-input" class="pin-input" placeholder="Enter PIN" maxlength="4">
-            <div class="pin-message" id="pin-message"></div>
-            <div class="pin-buttons">
-                <button class="pin-cancel" onclick="closePinModal()">Cancel</button>
-                <button class="pin-submit" onclick="submitPin()">Submit</button>
-            </div>
-        </div>
-    </div>
-
     <!-- GIF Containers -->
     <div class="gif-container" id="gif1">
         <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" loading="lazy" style="width: 100%; height: auto;">
@@ -1015,6 +907,17 @@
     <div class="gif-container" id="gif2" style="display: none;">
         <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" loading="lazy" style="width: 100%; height: auto;">
     </div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link active">Bio</a>
+            <a href="repos.html" class="nav-link">Repos</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="skills.html" class="nav-link">Skills</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </nav>
 
     <div class="bio-card">
         <div class="avatar">
@@ -1367,85 +1270,6 @@
                 acceptHuman();
             }
         });
-
-        // ==================== PIN VERIFICATION ====================
-        let pinTargetUrl = null;
-        const CORRECT_PIN = '1234';
-
-        function showPinModal(url) {
-            pinTargetUrl = url;
-            document.getElementById('pin-input').value = '';
-            document.getElementById('pin-message').textContent = '';
-            document.getElementById('pin-message').className = 'pin-message';
-            document.getElementById('pin-modal').classList.add('active');
-            document.getElementById('pin-input').focus();
-        }
-
-        function closePinModal() {
-            document.getElementById('pin-modal').classList.remove('active');
-            document.getElementById('pin-input').value = '';
-            document.getElementById('pin-message').textContent = '';
-            pinTargetUrl = null;
-        }
-
-        function submitPin() {
-            const pinInput = document.getElementById('pin-input');
-            const message = document.getElementById('pin-message');
-            const submitBtn = document.querySelector('.pin-submit');
-            const enteredPin = pinInput.value;
-
-            if (enteredPin === CORRECT_PIN) {
-                // Correct PIN
-                message.textContent = '✓ Correct! Redirecting...';
-                message.className = 'pin-message success';
-                submitBtn.classList.add('loading');
-                submitBtn.disabled = true;
-                
-                setTimeout(() => {
-                    closePinModal();
-                    if (pinTargetUrl) {
-                        window.open(pinTargetUrl, '_blank');
-                        pinTargetUrl = null;
-                    }
-                    submitBtn.classList.remove('loading');
-                    submitBtn.disabled = false;
-                }, 1000);
-            } else {
-                // Wrong PIN - shake animation
-                message.textContent = '✗ Incorrect PIN. Try again.';
-                message.className = 'pin-message error';
-                pinInput.value = '';
-                pinInput.focus();
-                
-                // Add shake animation to input
-                pinInput.style.animation = 'shake 0.5s ease-in-out';
-                setTimeout(() => {
-                    pinInput.style.animation = 'pulseBorder 2s ease-in-out infinite';
-                }, 500);
-            }
-        }
-
-        // Allow Enter key to submit PIN
-        document.getElementById('pin-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                submitPin();
-            }
-        });
-
-        // Intercept private socials link clicks
-        function setupPrivateSocialsVerification() {
-            const privateSocialsLinks = document.querySelectorAll('.dropdown-content a');
-            
-            privateSocialsLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    showPinModal(this.href);
-                });
-            });
-        }
-
-        // Initialize PIN verification on load
-        setupPrivateSocialsVerification();
 
         // ==================== GIF FUNCTIONALITY ====================
         function positionGif(gifContainer) {
