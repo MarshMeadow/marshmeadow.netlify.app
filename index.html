@@ -642,8 +642,8 @@
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
 
-        /* Puzzle Modal */
-        .puzzle-modal {
+        /* PIN Modal */
+        .pin-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -657,13 +657,13 @@
             justify-content: center;
         }
 
-        .puzzle-modal.active {
+        .pin-modal.active {
             display: flex;
         }
 
-        .puzzle-content {
+        .pin-content {
             background: var(--card-bg);
-            border: 2px solid var(--border-color);
+            border: 2px solid var(--link-border);
             border-radius: 20px;
             padding: 30px;
             max-width: 400px;
@@ -672,77 +672,60 @@
             animation: fadeIn 0.3s ease-out;
         }
 
-        .puzzle-content h3 {
+        .pin-content h3 {
             color: var(--text-primary);
             margin-bottom: 15px;
             font-size: 1.3rem;
         }
 
-        .puzzle-content p {
+        .pin-content p {
             color: var(--text-secondary);
             margin-bottom: 20px;
             font-size: 0.95rem;
         }
 
-        .puzzle-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .puzzle-tile {
-            aspect-ratio: 1;
+        .pin-input {
+            width: 100%;
+            padding: 12px 16px;
             background: var(--link-bg);
             border: 2px solid var(--link-border);
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            text-align: center;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
         }
 
-        .puzzle-tile:hover {
-            border-color: var(--accent-color);
-            transform: scale(1.05);
+        .pin-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
         }
 
-        .puzzle-tile.empty {
-            background: transparent;
-            border: 2px dashed var(--border-color);
-            cursor: default;
-        }
-
-        .puzzle-tile.empty:hover {
-            transform: none;
-            border-color: var(--border-color);
-        }
-
-        .puzzle-tile.correct {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-color: transparent;
-            color: white;
-        }
-
-        .puzzle-message {
+        .pin-message {
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin-bottom: 15px;
             min-height: 20px;
         }
 
-        .puzzle-message.success {
+        .pin-message.success {
             color: #4caf50;
         }
 
-        .puzzle-message.error {
+        .pin-message.error {
             color: #ff5f56;
         }
 
-        .puzzle-close {
+        .pin-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .pin-cancel {
             background: var(--link-bg);
             border: 2px solid var(--link-border);
             color: var(--text-primary);
@@ -753,9 +736,25 @@
             transition: all 0.3s ease;
         }
 
-        .puzzle-close:hover {
+        .pin-cancel:hover {
             border-color: var(--accent-color);
             color: var(--accent-color);
+        }
+
+        .pin-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .pin-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
 
         /* Tablet Responsive */
@@ -845,14 +844,17 @@
         </div>
     </div>
 
-    <!-- Puzzle Verification Modal -->
-    <div id="puzzle-modal" class="puzzle-modal">
-        <div class="puzzle-content">
-            <h3>🔐 Verify to Contact</h3>
-            <p>Click the tiles in order: 1, 2, 3</p>
-            <div class="puzzle-grid" id="puzzle-grid"></div>
-            <div class="puzzle-message" id="puzzle-message"></div>
-            <button class="puzzle-close" onclick="closePuzzle()">Cancel</button>
+    <!-- PIN Verification Modal -->
+    <div id="pin-modal" class="pin-modal">
+        <div class="pin-content">
+            <h3>🔐 Enter PIN</h3>
+            <p>Enter the PIN to access private socials</p>
+            <input type="password" id="pin-input" class="pin-input" placeholder="Enter PIN" maxlength="4">
+            <div class="pin-message" id="pin-message"></div>
+            <div class="pin-buttons">
+                <button class="pin-cancel" onclick="closePinModal()">Cancel</button>
+                <button class="pin-submit" onclick="submitPin()">Submit</button>
+            </div>
         </div>
     </div>
 
@@ -1192,111 +1194,73 @@
             }
         });
 
-        // ==================== PUZZLE VERIFICATION ====================
-        let puzzleTargetUrl = null;
-        let puzzleSequence = [];
-        let puzzleIndex = 0;
+        // ==================== PIN VERIFICATION ====================
+        let pinTargetUrl = null;
+        const CORRECT_PIN = '1234';
 
-        function initPuzzle() {
-            const grid = document.getElementById('puzzle-grid');
-            grid.innerHTML = '';
-            puzzleSequence = [];
-            puzzleIndex = 0;
-
-            // Create shuffled tiles with numbers 1-8 and one empty
-            const tiles = [1, 2, 3, 4, 5, 6, 7, 8, null];
-            shuffleArray(tiles);
-
-            tiles.forEach((num, index) => {
-                const tile = document.createElement('div');
-                tile.className = num === null ? 'puzzle-tile empty' : 'puzzle-tile';
-                tile.textContent = num || '';
-                tile.dataset.number = num;
-                
-                if (num !== null) {
-                    tile.onclick = () => handlePuzzleClick(tile, num);
-                }
-                
-                grid.appendChild(tile);
-            });
-
-            // Store the correct sequence
-            puzzleSequence = [1, 2, 3];
+        function showPinModal(url) {
+            pinTargetUrl = url;
+            document.getElementById('pin-input').value = '';
+            document.getElementById('pin-message').textContent = '';
+            document.getElementById('pin-message').className = 'pin-message';
+            document.getElementById('pin-modal').classList.add('active');
+            document.getElementById('pin-input').focus();
         }
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
+        function closePinModal() {
+            document.getElementById('pin-modal').classList.remove('active');
+            document.getElementById('pin-input').value = '';
+            document.getElementById('pin-message').textContent = '';
+            pinTargetUrl = null;
         }
 
-        function handlePuzzleClick(tile, number) {
-            const message = document.getElementById('puzzle-message');
-            
-            if (number === puzzleSequence[puzzleIndex]) {
-                // Correct click
-                tile.classList.add('correct');
-                puzzleIndex++;
+        function submitPin() {
+            const pinInput = document.getElementById('pin-input');
+            const message = document.getElementById('pin-message');
+            const enteredPin = pinInput.value;
+
+            if (enteredPin === CORRECT_PIN) {
+                // Correct PIN
+                message.textContent = '✓ Correct! Redirecting...';
+                message.className = 'pin-message success';
                 
-                if (puzzleIndex === puzzleSequence.length) {
-                    // Puzzle solved
-                    message.textContent = '✓ Verified! Redirecting...';
-                    message.className = 'puzzle-message success';
-                    
-                    setTimeout(() => {
-                        closePuzzle();
-                        if (puzzleTargetUrl) {
-                            window.open(puzzleTargetUrl, '_blank');
-                            puzzleTargetUrl = null;
-                        }
-                    }, 1000);
-                } else {
-                    message.textContent = `Click ${puzzleSequence[puzzleIndex]} next`;
-                    message.className = 'puzzle-message';
-                }
-            } else {
-                // Wrong click
-                message.textContent = '✗ Wrong! Start over.';
-                message.className = 'puzzle-message error';
-                
-                // Reset after delay
                 setTimeout(() => {
-                    initPuzzle();
-                    message.textContent = 'Click the tiles in order: 1, 2, 3';
-                    message.className = 'puzzle-message';
-                }, 1500);
+                    closePinModal();
+                    if (pinTargetUrl) {
+                        window.open(pinTargetUrl, '_blank');
+                        pinTargetUrl = null;
+                    }
+                }, 1000);
+            } else {
+                // Wrong PIN
+                message.textContent = '✗ Incorrect PIN. Try again.';
+                message.className = 'pin-message error';
+                pinInput.value = '';
+                pinInput.focus();
             }
         }
 
-        function showPuzzle(url) {
-            puzzleTargetUrl = url;
-            initPuzzle();
-            document.getElementById('puzzle-message').textContent = 'Click the tiles in order: 1, 2, 3';
-            document.getElementById('puzzle-message').className = 'puzzle-message';
-            document.getElementById('puzzle-modal').classList.add('active');
-        }
+        // Allow Enter key to submit PIN
+        document.getElementById('pin-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitPin();
+            }
+        });
 
-        function closePuzzle() {
-            document.getElementById('puzzle-modal').classList.remove('active');
-            puzzleTargetUrl = null;
-            puzzleIndex = 0;
-        }
-
-        // Intercept personal contact link clicks
-        function setupContactVerification() {
-            const personalContactLinks = document.querySelectorAll('.dropdown-content a');
+        // Intercept private socials link clicks
+        function setupPrivateSocialsVerification() {
+            const privateSocialsLinks = document.querySelectorAll('.dropdown-content a');
             
-            personalContactLinks.forEach(link => {
+            privateSocialsLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    showPuzzle(this.href);
+                    showPinModal(this.href);
                 });
             });
         }
 
-        // Initialize puzzle verification on load
-        setupContactVerification();
+        // Initialize PIN verification on load
+        setupPrivateSocialsVerification();
 
         // ==================== GIF FUNCTIONALITY ====================
         function positionGif(gifContainer) {
