@@ -1,0 +1,13 @@
+# Netlify redirects for clean URLs
+# This file enables URLs without .html extensions
+
+# Redirect /page to /page.html
+/repos /repos.html 200
+/gallery /gallery.html 200
+/skills /skills.html 200
+/contact /contact.html 200
+/pronouns /pronouns.html 200
+/beta-test-page /beta-test-page.html 200
+
+# Fallback for SPA-like behavior (optional)
+/* /index.html 200
