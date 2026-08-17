@@ -594,10 +594,10 @@
             pointer-events: none;
         }
 
-        /* Flip second GIF */
-        #gif2 img {
+        /* Flip second GIF - disabled since we're using the same sleeping cat */
+        /* #gif2 img {
             transform: scaleX(-1);
-        }
+        } */
 
         /* Popup Styles */
         .popup-overlay {
@@ -901,11 +901,11 @@
 
     <!-- GIF Containers -->
     <div class="gif-container" id="gif1">
-        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" loading="lazy" style="width: 100%; height: auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sleeping-cat.gif" alt="Sleeping Cat" loading="lazy" style="width: 100%; height: auto;">
     </div>
 
     <div class="gif-container" id="gif2" style="display: none;">
-        <img src="https://marshmeadow.netlify.app/Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Car" loading="lazy" style="width: 100%; height: auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sleeping-cat.gif" alt="Sleeping Cat" loading="lazy" style="width: 100%; height: auto;">
     </div>
 
     <!-- Navigation Menu -->
@@ -915,7 +915,7 @@
             <a href="repos.html" class="nav-link">Repos</a>
             <a href="gallery.html" class="nav-link">Gallery</a>
             <a href="skills.html" class="nav-link">Skills</a>
-            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="contact.html" class="nav-link" style="opacity: 0.6;">Contact</a>
         </div>
     </nav>
 
@@ -1209,10 +1209,10 @@
                 Skills
             </a>
 
-            <a href="https://marshmeadow.netlify.app/contact" target="_blank" class="link-btn">
+            <span class="link-btn" style="opacity: 0.6; cursor: not-allowed; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 24px; background: var(--link-bg); color: var(--link-text); border-radius: 16px; font-weight: 600; font-size: 1rem; border: 2px solid var(--link-border);">
                 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                Contact
-            </a>
+                Contact <span style="font-size: 0.7rem;">(Soon)</span>
+            </span>
         </div>
 
         <div class="footer">
@@ -1223,7 +1223,8 @@
                 <a href="/repos" target="_blank" style="color: #667eea; text-decoration: none;">All Repos</a> | 
                 <a href="/gallery" target="_blank" style="color: #667eea; text-decoration: none;">Gallery</a> | 
                 <a href="https://linktr.ee/MarshMeadow" target="_blank" style="color: #667eea; text-decoration: none;">Linktree</a> |
-                <a href="https://github.com/MarshMeadow/marshmeadow.netlify.app" target="_blank" style="color: #667eea; text-decoration: none;">Source</a>
+                <a href="https://github.com/MarshMeadow/marshmeadow.netlify.app" target="_blank" style="color: #667eea; text-decoration: none;">Source</a> |
+                <span style="opacity: 0.5;">Contact (Coming Soon)</span>
             </p>
         </div>
 
@@ -1246,8 +1247,8 @@
             localStorage.setItem('darkMode', isDarkMode);
         }
 
-        // Check for saved theme preference or default to light mode
-        if (localStorage.getItem('darkMode') === 'true') {
+        // Check for saved theme preference or default to dark mode
+        if (localStorage.getItem('darkMode') !== 'false') {
             document.body.classList.add('dark-mode');
         }
 

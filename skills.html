@@ -419,7 +419,7 @@
             <a href="repos.html" class="nav-link">Repos</a>
             <a href="gallery.html" class="nav-link">Gallery</a>
             <a href="skills.html" class="nav-link active">Skills</a>
-            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="contact.html" class="nav-link" style="opacity: 0.6;">Contact</a>
         </div>
     </nav>
 
@@ -575,7 +575,7 @@
 
         <div class="footer">
             <p>© 2024 Meadow</p>
-            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">All Repos</a> | <a href="gallery.html">Gallery</a></p>
+            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">All Repos</a> | <a href="gallery.html">Gallery</a> | <span style="opacity: 0.5;">Contact (Coming Soon)</span></p>
         </div>
     </div>
 
@@ -586,8 +586,11 @@
             localStorage.setItem('skillsTheme', isLightMode ? 'light' : 'dark');
         }
 
+        // Default to dark mode, only switch to light if explicitly saved
         if (localStorage.getItem('skillsTheme') === 'light') {
             document.body.classList.add('light-mode');
+        } else {
+            // Default to dark mode (no class needed as dark is default)
         }
     </script>
 </body>
