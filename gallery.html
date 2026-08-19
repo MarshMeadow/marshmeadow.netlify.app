@@ -401,11 +401,15 @@
             right: 20px;
         }
 
-        /* Theme Toggle */
-        .theme-toggle {
+        /* Settings Container */
+        .settings-container {
             position: fixed;
             top: 20px;
             right: 20px;
+            z-index: 1000;
+        }
+
+        .settings-toggle {
             background: var(--card-bg);
             border: 2px solid var(--link-border);
             border-radius: 50%;
@@ -415,38 +419,129 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 100;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px var(--shadow-color);
         }
 
-        .theme-toggle:hover {
+        .settings-toggle:hover {
             transform: scale(1.1);
             border-color: #667eea;
             box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
         }
 
-        .theme-toggle svg {
+        .settings-toggle svg {
             width: 24px;
             height: 24px;
             fill: var(--text-primary);
             transition: fill 0.3s ease;
         }
 
-        .theme-toggle .sun-icon {
+        .settings-menu {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: var(--card-bg);
+            border: 2px solid var(--link-border);
+            border-radius: 16px;
+            padding: 20px;
+            min-width: 250px;
+            box-shadow: 0 8px 24px var(--shadow-color);
             display: none;
+            animation: fadeIn 0.3s ease;
         }
 
-        .theme-toggle .moon-icon {
+        .settings-menu.active {
             display: block;
         }
 
-        body.light-mode .theme-toggle .sun-icon {
-            display: block;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        body.light-mode .theme-toggle .moon-icon {
-            display: none;
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--link-border);
+        }
+
+        .settings-header h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close-settings {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-settings:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--text-primary);
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .setting-item span {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .theme-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .theme-btn {
+            background: var(--link-bg);
+            border: 2px solid var(--link-border);
+            border-radius: 10px;
+            padding: 8px 16px;
+            color: var(--link-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .theme-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .theme-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .theme-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
         }
 
         /* Navigation Menu */
@@ -497,7 +592,7 @@
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
-        /* Adjust header for nav menu */
+        /* Adjust header for settings menu */
         .header {
             margin-top: 80px;
         }
@@ -555,6 +650,18 @@
                 height: 40px;
                 font-size: 1.2rem;
             }
+
+            .settings-toggle {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .settings-toggle svg {
+                width: 20px;
+                height: 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -574,11 +681,33 @@
     </style>
 </head>
 <body>
-    <!-- Theme Toggle -->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
-        <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
-    </button>
+    <!-- Settings Menu -->
+    <div class="settings-container">
+        <button class="settings-toggle" onclick="toggleSettings()" aria-label="Settings">
+            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        </button>
+        <div class="settings-menu" id="settingsMenu">
+            <div class="settings-header">
+                <h3>Settings</h3>
+                <button class="close-settings" onclick="toggleSettings()">×</button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <span>Theme</span>
+                    <div class="theme-options">
+                        <button class="theme-btn" onclick="setTheme('dark')" aria-label="Dark mode">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+                            Dark
+                        </button>
+                        <button class="theme-btn" onclick="setTheme('light')" aria-label="Light mode">
+                            <svg viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
+                            Light
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation Menu -->
     <nav class="nav-menu">
@@ -689,7 +818,7 @@
 
         <div class="footer">
             <p>© 2024 Meadow</p>
-            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">Repos</a> | <a href="skills.html">Skills</a> | <span style="opacity: 0.5;">Contact (Coming Soon)</span></p>
+            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">Repos</a> | <a href="skills.html">Skills</a> | <span style="color: var(--accent-color); font-weight: 600;">Contact (Coming Soon)</span></p>
         </div>
     </div>
 
@@ -708,21 +837,58 @@
     </div>
 
     <script>
+        // ==================== SETTINGS MENU ====================
+        function toggleSettings() {
+            const settingsMenu = document.getElementById('settingsMenu');
+            settingsMenu.classList.toggle('active');
+            updateThemeButtons();
+        }
+
+        function setTheme(theme) {
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+            } else {
+                document.body.classList.remove('light-mode');
+            }
+            localStorage.setItem('meadowTheme', theme);
+            updateThemeButtons();
+        }
+
+        function updateThemeButtons() {
+            const currentTheme = localStorage.getItem('meadowTheme') || 'dark';
+            const buttons = document.querySelectorAll('.theme-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(currentTheme)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Close settings menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const settingsContainer = document.querySelector('.settings-container');
+            if (!settingsContainer.contains(e.target)) {
+                document.getElementById('settingsMenu').classList.remove('active');
+            }
+        });
+
         // Theme Toggle
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             const isLightMode = document.body.classList.contains('light-mode');
-            localStorage.setItem('galleryTheme', isLightMode ? 'light' : 'dark');
+            localStorage.setItem('meadowTheme', isLightMode ? 'light' : 'dark');
+            updateThemeButtons();
         }
 
         // Check for saved theme preference, default to dark mode
-        if (localStorage.getItem('galleryTheme') === 'light') {
+        const savedTheme = localStorage.getItem('meadowTheme');
+        if (savedTheme === 'light') {
             document.body.classList.add('light-mode');
-            document.body.classList.remove('dark-mode');
         } else {
-            // Default to dark mode
-            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
         }
+        updateThemeButtons();
 
         // Modal functionality
         let currentModalIndex = 0;
