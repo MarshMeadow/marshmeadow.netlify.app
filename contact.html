@@ -537,7 +537,7 @@
 
         /* Adjust header for settings menu */
         .header {
-            margin-top: 80px;
+            margin-top: 100px;
         }
 
         /* Footer */
@@ -592,6 +592,15 @@
                 width: 20px;
                 height: 20px;
             }
+
+            .nav-container {
+                gap: 5px;
+            }
+
+            .nav-link {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
@@ -629,9 +638,9 @@
         <div class="nav-container">
             <a href="index.html" class="nav-link">Bio</a>
             <a href="repos.html" class="nav-link">Repos</a>
-            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="gallery.html" class="nav-link" style="font-weight: 600;">Gallery (Coming Soon)</a>
             <a href="skills.html" class="nav-link">Skills</a>
-            <a href="contact.html" class="nav-link active" style="color: var(--accent-color); font-weight: 600;">Contact (Coming Soon)</a>
+            <a href="contact.html" class="nav-link active" style="font-weight: 600;">Contact (Coming Soon)</a>
         </div>
     </nav>
 
@@ -688,7 +697,7 @@
 
         <div class="footer">
             <p>© 2024 Meadow</p>
-            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">All Repos</a> | <a href="gallery.html">Gallery</a></p>
+            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">All Repos</a> | <span style="font-weight: 600;">Gallery (Coming Soon)</span></p>
         </div>
     </div>
 

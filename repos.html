@@ -136,7 +136,13 @@
             border-radius: 16px;
             padding: 25px;
             margin-bottom: 30px;
-            animation: fadeIn 0.8s ease-out 0.2s backwards;
+            animation: slideInUp 0.6s ease-out 0.2s backwards;
+            transition: all 0.3s ease;
+        }
+
+        .search-container:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px var(--glow-color);
         }
 
         @keyframes fadeIn {
@@ -145,6 +151,35 @@
             }
             to {
                 opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px var(--glow-color);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--glow-color), 0 0 30px var(--glow-color);
             }
         }
 
@@ -360,8 +395,25 @@
             transition: transform 0.3s ease;
         }
 
+        .repo-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
         .repo-card:hover::before {
             transform: scaleX(1);
+        }
+
+        .repo-card:hover::after {
+            opacity: 1;
         }
 
         @keyframes fadeInUp {
@@ -376,9 +428,9 @@
         }
 
         .repo-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-12px) scale(1.03);
             border-color: var(--accent-color);
-            box-shadow: 0 20px 40px var(--shadow-color), 0 0 30px var(--glow-color);
+            box-shadow: 0 25px 50px var(--shadow-color), 0 0 40px var(--glow-color);
         }
 
         .repo-name {
@@ -432,7 +484,16 @@
         }
 
         .repo-card:hover .stat svg {
-            transform: scale(1.2);
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .stat-value {
+            transition: all 0.3s ease;
+        }
+
+        .repo-card:hover .stat-value {
+            color: var(--accent-color);
+            font-weight: 600;
         }
 
         .repo-language {
@@ -447,11 +508,29 @@
             border-radius: 8px;
             width: fit-content;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .repo-language::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .repo-card:hover .repo-language::before {
+            left: 100%;
         }
 
         .repo-card:hover .repo-language {
             background: rgba(102, 126, 234, 0.2);
             color: var(--text-primary);
+            transform: scale(1.05);
         }
 
         .repo-owner {
@@ -790,7 +869,7 @@
 
         /* Adjust header for settings menu */
         .header {
-            margin-top: 80px;
+            margin-top: 100px;
         }
 
         /* Footer */
@@ -872,6 +951,15 @@
                 padding: 10px 18px;
                 font-size: 0.9rem;
             }
+
+            .nav-container {
+                gap: 5px;
+            }
+
+            .nav-link {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
@@ -909,9 +997,9 @@
         <div class="nav-container">
             <a href="index.html" class="nav-link">Bio</a>
             <a href="repos.html" class="nav-link active">Repos</a>
-            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="gallery.html" class="nav-link" style="font-weight: 600;">Gallery (Coming Soon)</a>
             <a href="skills.html" class="nav-link">Skills</a>
-            <a href="contact.html" class="nav-link" style="opacity: 0.6;">Contact</a>
+            <a href="contact.html" class="nav-link" style="font-weight: 600;">Contact (Coming Soon)</a>
         </div>
     </nav>
 
@@ -981,7 +1069,7 @@
 
         <div class="footer">
             <p>© 2024 Meadow</p>
-            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="gallery.html">Gallery</a> | <a href="skills.html">Skills</a> | <span style="color: var(--accent-color); font-weight: 600;">Contact (Coming Soon)</span></p>
+            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <span style="font-weight: 600;">Gallery (Coming Soon)</span> | <a href="skills.html">Skills</a> | <span style="font-weight: 600;">Contact (Coming Soon)</span></p>
         </div>
     </div>
 
