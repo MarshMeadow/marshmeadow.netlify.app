@@ -334,7 +334,7 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 1000;
+            z-index: 1001;
         }
 
         .settings-toggle {
@@ -862,9 +862,9 @@
             right: 0;
             background: var(--card-bg);
             backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--link-border);
             padding: 15px 20px;
-            z-index: 1000;
+            z-index: 999;
             box-shadow: 0 4px 20px var(--shadow-color);
         }
 
@@ -890,21 +890,21 @@
 
         .nav-link:hover {
             background: var(--link-bg);
-            border-color: var(--accent-color);
-            color: var(--accent-color);
+            border-color: #667eea;
+            color: #667eea;
             transform: translateY(-2px);
         }
 
         .nav-link.active {
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-color: transparent;
-            box-shadow: 0 4px 15px var(--glow-color);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
-        /* Adjust bio card for settings menu */
+        /* Adjust bio card for nav menu */
         .bio-card {
-            margin-top: 20px;
+            margin-top: 100px;
         }
 
         /* Tablet Responsive */
@@ -963,6 +963,15 @@
             .settings-toggle svg {
                 width: 20px;
                 height: 20px;
+            }
+
+            .nav-container {
+                gap: 5px;
+            }
+
+            .nav-link {
+                padding: 8px 12px;
+                font-size: 0.85rem;
             }
 
             .popup {
@@ -1024,6 +1033,17 @@
     <div class="gif-container" id="gif2" style="display: none;">
         <img src="Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Sleeping Cat" loading="lazy" style="width: 100%; height: auto;">
     </div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link active">Bio</a>
+            <a href="repos.html" class="nav-link">Repos</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="skills.html" class="nav-link">Skills</a>
+            <a href="contact.html" class="nav-link" style="color: var(--accent-color); font-weight: 600;">Contact (Coming Soon)</a>
+        </div>
+    </nav>
 
 
 
