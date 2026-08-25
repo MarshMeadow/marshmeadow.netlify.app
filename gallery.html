@@ -22,6 +22,56 @@
     <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/88599122?v=4">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Security Script -->
+    <script>
+        // Disable right-click and common dev-tool shortcuts
+        document.addEventListener('contextmenu', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, true);
+
+        document.addEventListener('keydown', function(e){
+            var k = e.keyCode || e.which,
+                ctrl = e.ctrlKey || e.metaKey,
+                sh = e.shiftKey;
+
+            // F12
+            if (k === 123) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+C, Ctrl+A, Ctrl+F
+            if (ctrl && (k === 85 || k === 83 || k === 80 || k === 67 || k === 65 || k === 70)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Ctrl+Shift+I/J/C
+            if (ctrl && sh && (k === 73 || k === 74 || k === 67)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+
+        // Disable copy functionality
+        document.addEventListener('copy', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, true);
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, true);
+
+        // Disable text selection
+        document.addEventListener('selectstart', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, true);
+    </script>
+    
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -616,6 +666,196 @@
             text-decoration: underline;
         }
 
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: all;
+        }
+
+        .popup {
+            background-color: #21262d;
+            color: #c9d1d9;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 300px;
+            z-index: 10000;
+            font-size: 1.5rem;
+        }
+
+        .popup button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .popup button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: all 0.3s ease;
+            z-index: 998;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .fab.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .fab svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-primary);
+            color: var(--card-bg);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            margin-bottom: 8px;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+
+        /* Coming Soon Overlay */
+        .coming-soon-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .coming-soon-content {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            max-width: 500px;
+        }
+
+        .coming-soon-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .coming-soon-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .coming-soon-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .coming-soon-description {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .coming-soon-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .coming-soon-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .gallery-content {
+            filter: blur(5px);
+            pointer-events: none;
+            user-select: none;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .gallery-grid {
@@ -690,6 +930,31 @@
     </style>
 </head>
 <body>
+    <!-- Coming Soon Overlay -->
+    <div class="coming-soon-overlay">
+        <div class="coming-soon-content">
+            <div class="coming-soon-icon">🚧</div>
+            <div class="coming-soon-title">Coming Soon</div>
+            <div class="coming-soon-subtitle">Gallery Page Under Construction</div>
+            <div class="coming-soon-description">
+                I'm working on creating an amazing gallery to showcase my projects and creations. Check back soon for updates!
+            </div>
+            <a href="index.html" class="coming-soon-link">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h-7L8 7l7 7v-8h-5z"/></svg>
+                Back to Bio
+            </a>
+        </div>
+    </div>
+
+    <!-- "Are you human?" popup -->
+    <div id="popup-overlay" class="popup-overlay" style="display: none;">
+        <div id="popup" class="popup">
+            <p style="margin-bottom: 15px;">Are you human?</p>
+            <p style="font-size: 0.9rem; margin-bottom: 20px; color: #8b949e;">By continuing, you agree to not abuse any content on this page.</p>
+            <button onclick="acceptHuman()">I Agree</button>
+        </div>
+    </div>
+
     <!-- Settings Menu -->
     <div class="settings-container">
         <button class="settings-toggle" onclick="toggleSettings()" aria-label="Settings">
@@ -729,6 +994,7 @@
         </div>
     </nav>
 
+    <div class="gallery-content">
     <div class="gallery-container">
         <div class="header">
             <div class="avatar">
@@ -824,12 +1090,19 @@
                 </div>
             </div>
         </div>
-
-        <div class="footer">
-            <p>© 2024 Meadow</p>
-            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">Repos</a> | <a href="skills.html">Skills</a> | <span style="font-weight: 600;">Contact (Coming Soon)</span></p>
-        </div>
     </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 Meadow</p>
+        <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">Repos</a> | <a href="skills.html">Skills</a> | <span style="opacity: 0.5;">Contact (Coming Soon)</span></p>
+    </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab tooltip visible" data-tooltip="Scroll to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+    </button>
 
     <!-- Modal -->
     <div class="modal" id="modal">
@@ -989,6 +1262,26 @@
         console.log('1. Replace the <div class="placeholder"> elements with <img> tags');
         console.log('2. Example: <img src="your-image.jpg" alt="Project 1" class="gallery-image">');
         console.log('3. Update the data-title and data-description attributes');
+
+        // ==================== HUMAN CHECK POPUP ====================
+        function acceptHuman() {
+            localStorage.setItem('isHuman', 'true');
+            document.getElementById('popup-overlay').style.display = 'none';
+            document.body.style.pointerEvents = 'auto';
+        }
+
+        // Check if the user has passed the robot check
+        if (!localStorage.getItem('isHuman')) {
+            document.getElementById('popup-overlay').style.display = 'flex';
+            document.body.style.pointerEvents = 'none';
+        }
+
+        // Bypass popup by pressing 'B'
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'b' || e.key === 'B') {
+                acceptHuman();
+            }
+        });
     </script>
 </body>
 </html>

@@ -3,8 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meadow</title>
+    <title>Meadow - Old Version</title>
     <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
+    
+    <!-- Security Script -->
+    <script>
+        // Disable right-click and common dev-tool shortcuts
+        document.addEventListener('contextmenu', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, true);
+
+        document.addEventListener('keydown', function(e){
+            var k = e.keyCode || e.which,
+                ctrl = e.ctrlKey || e.metaKey,
+                sh = e.shiftKey;
+
+            // F12
+            if (k === 123) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+C, Ctrl+A, Ctrl+F
+            if (ctrl && (k === 85 || k === 83 || k === 80 || k === 67 || k === 65 || k === 70)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Ctrl+Shift+I/J/C
+            if (ctrl && sh && (k === 73 || k === 74 || k === 67)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+
+        // Disable copy functionality
+        document.addEventListener('copy', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, true);
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, true);
+
+        // Disable text selection
+        document.addEventListener('selectstart', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }, true);
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -204,6 +254,84 @@
             background-color: #58a6ff;
         }
 
+        /* Old Version Notification Banner */
+        .old-version-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #ff5f56 0%, #ffbd2e 100%);
+            color: #0d1117;
+            padding: 15px 20px;
+            text-align: center;
+            z-index: 2000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+        }
+
+        .old-version-banner a {
+            color: #0d1117;
+            text-decoration: underline;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        .old-version-banner a:hover {
+            color: #ffffff;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: #161b22;
+            border-bottom: 2px solid #30363d;
+            padding: 15px 20px;
+            z-index: 1999;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #c9d1d9;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .nav-link:hover {
+            background: #21262d;
+            border-color: #58a6ff;
+            color: #58a6ff;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Adjust body for banners */
+        body {
+            padding-top: 120px;
+        }
+
         /* GIF Container Styles */
         .gif-container {
             position: fixed;
@@ -272,6 +400,26 @@
         @media (max-width: 600px) {
             body {
                 padding: 5px;
+                padding-top: 140px;
+            }
+
+            .old-version-banner {
+                font-size: 0.85rem;
+                padding: 12px 15px;
+            }
+
+            .nav-bar {
+                top: 55px;
+                padding: 10px 15px;
+            }
+
+            .nav-container {
+                gap: 5px;
+            }
+
+            .nav-link {
+                padding: 8px 10px;
+                font-size: 0.75rem;
             }
 
             .terminal {
@@ -340,6 +488,22 @@
     </style>
 </head>
 <body>
+    <!-- Old Version Notification Banner -->
+    <div class="old-version-banner">
+        ⚠️ You are viewing an older version of my bio site. Visit the <a href="index.html">New Version</a> for the latest features!
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">Bio (New)</a>
+            <a href="repos.html" class="nav-link">Repos</a>
+            <span class="nav-link disabled">Gallery (Coming Soon)</span>
+            <a href="skills.html" class="nav-link">Skills</a>
+            <span class="nav-link disabled">Contact (Coming Soon)</span>
+        </div>
+    </nav>
+
     <!-- "Are you human?" popup -->
     <div id="popup-overlay" class="popup-overlay" style="display: none;">
         <div id="popup" class="popup">

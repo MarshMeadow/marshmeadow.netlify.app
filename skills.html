@@ -564,6 +564,69 @@
             transform: scale(1.05);
         }
 
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: all 0.3s ease;
+            z-index: 998;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .fab.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .fab svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-primary);
+            color: var(--card-bg);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            margin-bottom: 8px;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             body {
@@ -649,9 +712,9 @@
         <div class="nav-container">
             <a href="index.html" class="nav-link">Bio</a>
             <a href="repos.html" class="nav-link">Repos</a>
-            <a href="gallery.html" class="nav-link" style="font-weight: 600;">Gallery (Coming Soon)</a>
+            <span class="nav-link" style="opacity: 0.5; cursor: not-allowed;">Gallery (Coming Soon)</span>
             <a href="skills.html" class="nav-link active">Skills</a>
-            <a href="contact.html" class="nav-link" style="font-weight: 600;">Contact (Coming Soon)</a>
+            <span class="nav-link" style="opacity: 0.5; cursor: not-allowed;">Contact (Coming Soon)</span>
         </div>
     </nav>
 
@@ -830,9 +893,14 @@
 
         <div class="footer">
             <p>© 2024 Meadow</p>
-            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">All Repos</a> | <span style="font-weight: 600;">Gallery (Coming Soon)</span> | <span style="font-weight: 600;">Contact (Coming Soon)</span></p>
+            <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <a href="repos.html">All Repos</a> | <span style="opacity: 0.5;">Gallery (Coming Soon)</span> | <span style="opacity: 0.5;">Contact (Coming Soon)</span></p>
         </div>
     </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab tooltip visible" data-tooltip="Scroll to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+    </button>
 
     <script>
         // ==================== SETTINGS MENU ====================
