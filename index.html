@@ -605,6 +605,11 @@
             display: block;
         }
 
+        body[data-button-position="bottom"] .settings-menu {
+            top: auto;
+            bottom: 60px;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1070,6 +1075,10 @@
             .fab svg {
                 width: 18px;
                 height: 18px;
+            }
+
+            body[data-button-position="bottom"] .fab {
+                right: 130px;
             }
         }
 

@@ -1210,6 +1210,11 @@
             display: block;
         }
 
+        body[data-button-position="bottom"] .settings-menu {
+            top: auto;
+            bottom: 60px;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1546,6 +1551,17 @@
             .settings-toggle svg {
                 width: 20px;
                 height: 20px;
+            }
+
+            .fab {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            body[data-button-position="bottom"] .fab {
+                right: 120px;
             }
         }
 
