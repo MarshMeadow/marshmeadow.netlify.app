@@ -80,9 +80,9 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            padding: 20px;
+            padding: 10px 20px 20px;
             transition: background 0.3s ease;
             font-size: 16px;
         }
@@ -106,7 +106,12 @@
             box-shadow: 0 20px 60px var(--shadow-color);
             text-align: center;
             align-self: center;
+            margin-top: 70px;
             transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body[data-button-position="bottom"] .bio-card {
+            margin-top: 20px;
         }
 
         .avatar {
@@ -1813,7 +1818,7 @@
         }
 
         function updateSizeButtons() {
-            const currentSize = localStorage.getItem('meadowSize') || 'small';
+            const currentSize = localStorage.getItem('meadowSize') || 'normal';
             const buttons = document.querySelectorAll('.size-btn');
             const sizeMap = { 'small': 'small', 'normal': 'normal', 'large': 'large' };
             buttons.forEach(btn => {
@@ -1836,7 +1841,7 @@
             reducedMotion: false
         };
 
-        let bioWidth = 'compact';
+        let bioWidth = 'normal';
 
         function updateViewButtons() {
             document.getElementById('toggleGifsBtn').textContent = viewToggles.showGifs ? 'Hide GIFs' : 'Show GIFs';
@@ -1936,7 +1941,7 @@
             viewToggles.showFab = localStorage.getItem('meadowShowFab') !== 'false';
             viewToggles.showStatus = localStorage.getItem('meadowShowStatus') !== 'false';
             viewToggles.reducedMotion = localStorage.getItem('meadowReducedMotion') === 'true';
-            bioWidth = localStorage.getItem('meadowBioWidth') || 'compact';
+            bioWidth = localStorage.getItem('meadowBioWidth') || 'normal';
             updateViewButtons();
         }
 
@@ -1964,7 +1969,7 @@
         updateThemeButtons();
 
         // Check for saved size preference
-        const savedSize = localStorage.getItem('meadowSize') || 'small';
+        const savedSize = localStorage.getItem('meadowSize') || 'normal';
         document.body.setAttribute('data-size', savedSize);
         updateSizeButtons();
         loadViewToggles();
