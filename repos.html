@@ -51,7 +51,11 @@
             min-height: 100vh;
             padding: 20px;
             transition: background 0.3s ease;
+            font-size: 16px;
         }
+
+        body[data-size="small"] { font-size: 14px; }
+        body[data-size="large"] { font-size: 18px; }
 
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
@@ -99,6 +103,112 @@
             color: var(--text-secondary);
             margin-bottom: 25px;
             font-size: 1rem;
+        }
+
+        .links-section {
+            margin: 25px auto 0;
+            max-width: 900px;
+        }
+
+        .links-section h2 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            text-align: left;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 18px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-color);
+            box-shadow: 0 16px 40px var(--shadow-color);
+        }
+
+        .link-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .link-card-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: var(--link-bg);
+            color: var(--text-primary);
+            flex-shrink: 0;
+        }
+
+        .link-card-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .link-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            overflow: hidden;
+        }
+
+        .link-card-title {
+            font-weight: 600;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .link-card-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .loading-small {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            text-align: center;
+            padding: 20px;
         }
 
         .back-link {
@@ -436,6 +546,50 @@
             transform: translateY(-12px) scale(1.03);
             border-color: var(--accent-color);
             box-shadow: 0 25px 50px var(--shadow-color), 0 0 40px var(--glow-color);
+        }
+
+        .compact-mode .repo-card {
+            padding: 16px;
+            font-size: 0.9rem;
+        }
+
+        .compact-mode .repo-name {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .compact-mode .repo-description {
+            font-size: 0.85rem;
+            -webkit-line-clamp: 2;
+        }
+
+        .compact-mode .repos-grid {
+            gap: 16px;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .size-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .size-btn:hover,
+        .size-btn.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
         }
 
         .repo-name {
@@ -1098,6 +1252,23 @@
                         </button>
                     </div>
                 </div>
+
+                <div class="setting-item">
+                    <span>Size</span>
+                    <div class="size-options">
+                        <button class="size-btn" onclick="setSize('small')" aria-label="Small size">Small</button>
+                        <button class="size-btn" onclick="setSize('normal')" aria-label="Normal size">Normal</button>
+                        <button class="size-btn" onclick="setSize('large')" aria-label="Large size">Large</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>View</span>
+                    <div class="size-options" style="flex-direction: column; align-items: stretch; width: 100%;">
+                        <button class="size-btn" id="toggleCompactBtn" onclick="toggleCompact()" aria-label="Toggle compact view" style="width: 100%;">Compact</button>
+                        <button class="size-btn" id="toggleForksBtn" onclick="toggleShowForks()" aria-label="Toggle forked repos" style="width: 100%;">Hide Forks</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1118,25 +1289,8 @@
             <a href="https://marshmeadow.netlify.app/" class="back-link">← Back to Bio</a>
             <h1>~/Meadow's Repositories</h1>
             <p style="max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">Indie developer, coder, and gamer. Below are my personal GitHub, the organizations I work with, and the project sites I've built.</p>
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px;">
-                <p style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
-                    <strong style="color: var(--text-primary);">Main:</strong>
-                    <a href="https://github.com/MarshMeadow" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">MarshMeadow on GitHub</a>
-                </p>
-                <p style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
-                    <strong style="color: var(--text-primary);">Orgs:</strong>
-                    <a href="https://github.com/HDO-PRO" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">HDO PRO</a> •
-                    <a href="https://github.com/Neko-s-Index" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">Neko-s Index</a> •
-                    <a href="https://github.com/Nekomo-App" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">Nekomo App</a> •
-                    <a href="https://github.com/ReSpotF-ck" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">ReSpotF-ck</a>
-                </p>
-                <p style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
-                    <strong style="color: var(--text-primary);">Sites:</strong>
-                    <a href="https://nekomoapp.netlify.app/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">Nekomo</a> •
-                    <a href="https://hdopro.netlify.app/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">HDO PRO</a> •
-                    <a href="https://n3k0s-index.netlify.app/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">N3K0s Index</a> •
-                    <a href="https://respotfck.netlify.app/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">ReSpotF-ck</a>
-                </p>
+            <div id="linksSection" class="links-section">
+                <p class="loading-small">Loading profiles & sites...</p>
             </div>
 
             <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-secondary);">
@@ -1218,6 +1372,9 @@
             const settingsMenu = document.getElementById('settingsMenu');
             settingsMenu.classList.toggle('active');
             updateThemeButtons();
+            updateSizeButtons();
+            updateCompactButton();
+            updateShowForksButton();
         }
 
         function setTheme(theme) {
@@ -1239,6 +1396,65 @@
                     btn.classList.add('active');
                 }
             });
+        }
+
+        let showForks = localStorage.getItem('meadowShowForks') !== 'false';
+
+        function setSize(size) {
+            document.body.setAttribute('data-size', size);
+            localStorage.setItem('meadowSize', size);
+            updateSizeButtons();
+        }
+
+        function updateSizeButtons() {
+            const currentSize = localStorage.getItem('meadowSize') || 'normal';
+            const buttons = document.querySelectorAll('.size-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.trim().toLowerCase() === currentSize) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function toggleCompact() {
+            const compact = document.body.classList.toggle('compact-mode');
+            localStorage.setItem('meadowCompact', compact);
+            updateCompactButton();
+        }
+
+        function updateCompactButton() {
+            const btn = document.getElementById('toggleCompactBtn');
+            if (!btn) return;
+            const compact = document.body.classList.contains('compact-mode');
+            btn.textContent = compact ? 'Comfortable' : 'Compact';
+            btn.classList.toggle('active', compact);
+        }
+
+        function toggleShowForks() {
+            showForks = !showForks;
+            localStorage.setItem('meadowShowForks', showForks);
+            updateShowForksButton();
+            applyFilters();
+        }
+
+        function updateShowForksButton() {
+            const btn = document.getElementById('toggleForksBtn');
+            if (!btn) return;
+            btn.textContent = showForks ? 'Hide Forks' : 'Show Forks';
+            btn.classList.toggle('active', showForks);
+        }
+
+        function loadRepoSettings() {
+            const savedSize = localStorage.getItem('meadowSize') || 'normal';
+            document.body.setAttribute('data-size', savedSize);
+
+            const compact = localStorage.getItem('meadowCompact') === 'true';
+            if (compact) document.body.classList.add('compact-mode');
+
+            updateSizeButtons();
+            updateCompactButton();
+            updateShowForksButton();
         }
 
         // Close settings menu when clicking outside
@@ -1265,6 +1481,7 @@
             document.body.classList.remove('light-mode');
         }
         updateThemeButtons();
+        loadRepoSettings();
 
         const USERNAME = 'MarshMeadow';
         const REPOS_PER_PAGE = 9;
@@ -1273,6 +1490,65 @@
         let currentPage = 1;
         let organizations = [];
         let selectedOrg = null;
+        let descriptionsData = null;
+
+        function getRepoDescription(repo) {
+            if (repo.description) return repo.description;
+            if (descriptionsData && descriptionsData.repos) {
+                return descriptionsData.repos[repo.name] || null;
+            }
+            return null;
+        }
+
+        function renderLinksSection(data) {
+            const container = document.getElementById('linksSection');
+            if (!container || !data) return;
+
+            const orgCards = (data.orgs || []).map(org => `
+                <a href="${org.url}" target="_blank" class="link-card" data-protected="true" aria-label="${org.name}">
+                    <div class="link-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                    </div>
+                    <div class="link-card-content">
+                        <span class="link-card-title">${org.name}</span>
+                        <span class="link-card-desc">${org.description}</span>
+                    </div>
+                </a>
+            `).join('');
+
+            const siteCards = (data.sites || []).map(site => `
+                <a href="${site.url}" target="_blank" class="link-card" aria-label="${site.name}">
+                    <div class="link-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    </div>
+                    <div class="link-card-content">
+                        <span class="link-card-title">${site.name}</span>
+                        <span class="link-card-desc">${site.description}</span>
+                    </div>
+                </a>
+            `).join('');
+
+            const mainCard = data.main ? `
+                <a href="${data.main.url}" target="_blank" class="link-card" data-protected="true" aria-label="${data.main.name}">
+                    <div class="link-card-icon" style="background: #667eea; color: white;">
+                        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </div>
+                    <div class="link-card-content">
+                        <span class="link-card-title">Main: ${data.main.name}</span>
+                        <span class="link-card-desc">${data.main.description}</span>
+                    </div>
+                </a>
+            ` : '';
+
+            container.innerHTML = `
+                <h2>Profiles & Project Sites</h2>
+                <div class="links-grid">
+                    ${mainCard}
+                    ${orgCards}
+                    ${siteCards}
+                </div>
+            `;
+        }
 
         // Language colors
         const languageColors = {
@@ -1304,6 +1580,21 @@
             const reposGrid = document.getElementById('reposGrid');
 
             try {
+                // Try to load local descriptions file
+                try {
+                    const descResponse = await fetch('descriptions.json');
+                    if (descResponse.ok) {
+                        descriptionsData = await descResponse.json();
+                        renderLinksSection(descriptionsData);
+                    }
+                } catch (descErr) {
+                    console.warn('Could not load descriptions.json', descErr);
+                    const linksSection = document.getElementById('linksSection');
+                    if (linksSection) {
+                        linksSection.innerHTML = '<p class="loading-small">Could not load profile & site descriptions. The repository list will still try to load.</p>';
+                    }
+                }
+
                 let repos = [];
                 
                 // Fetch user's personal repos
@@ -1321,7 +1612,7 @@
                     if (data.length === 0) {
                         hasMore = false;
                     } else {
-                        repos = repos.concat(data.map(repo => ({...repo, owner_type: 'user', owner_name: USERNAME})));
+                        repos = repos.concat(data.map(repo => ({...repo, owner_type: 'user', owner_name: USERNAME, description: getRepoDescription(repo)})));
                         page++;
                     }
 
@@ -1349,7 +1640,7 @@
                                 if (orgReposData.length === 0) {
                                     orgHasMore = false;
                                 } else {
-                                    repos = repos.concat(orgReposData.map(repo => ({...repo, owner_type: 'organization', owner_name: org.login, org_avatar: org.avatar_url})));
+                                    repos = repos.concat(orgReposData.map(repo => ({...repo, owner_type: 'organization', owner_name: org.login, org_avatar: org.avatar_url, description: getRepoDescription(repo)})));
                                     orgPage++;
                                 }
 
@@ -1463,6 +1754,11 @@
                 repos = repos.filter(repo => repo.language === selectedLang);
             }
 
+            // Apply fork filter
+            if (!showForks) {
+                repos = repos.filter(repo => !repo.fork);
+            }
+
             // Apply sorting
             switch (sortBy) {
                 case 'stars':
@@ -1551,6 +1847,11 @@
             }
         }
 
+        function formatShortDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
         function createRepoCard(repo, index) {
             const card = document.createElement('div');
             card.className = 'repo-card';
@@ -1558,6 +1859,7 @@
             card.setAttribute('data-protected', 'true');
             card.setAttribute('data-href', repo.html_url);
             card.setAttribute('data-target', '_blank');
+            card.setAttribute('data-fork', repo.fork ? 'true' : 'false');
             card.style.cursor = 'pointer';
 
             const languageColor = languageColors[repo.language] || languageColors['null'];
@@ -1582,6 +1884,18 @@
                             <path d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"/>
                         </svg>
                         ${repo.forks_count}
+                    </div>
+                    <div class="stat">
+                        <svg fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM4.5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM1.75 4.75A.75.75 0 012.5 4h3a.75.75 0 010 1.5h-.75v3.25c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25V5.5h-.75a.75.75 0 010-1.5h3a.75.75 0 01.75.75v.281a1.746 1.746 0 00-.25 3.219v2c0 .138-.112.25-.25.25H12a.75.75 0 010-1.5h.25v-1.5H3.5v1.5h.75a.75.75 0 010 1.5h-1.5a.25.25 0 01-.25-.25v-2a1.746 1.746 0 00-.25-3.219V5.5h.25z"/>
+                        </svg>
+                        ${repo.open_issues_count || 0}
+                    </div>
+                    <div class="stat">
+                        <svg fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 100 16A8 8 0 008 0zm0 14.5a6.5 6.5 0 110-13 6.5 6.5 0 010 13zm.75-9.5h-1.5v4.25l3.5 2.1.75-1.25-2.75-1.65V5z"/>
+                        </svg>
+                        ${formatShortDate(repo.updated_at)}
                     </div>
                 </div>
                 <div class="repo-language">

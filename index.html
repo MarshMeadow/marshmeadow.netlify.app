@@ -380,6 +380,22 @@
             color: var(--text-primary);
         }
 
+        .index-hide-gifs .gif-container,
+        .index-hide-carousel .checkout-section,
+        .index-hide-quicklinks .quick-links {
+            display: none !important;
+        }
+
+        .reduced-motion .checkout-track {
+            animation: none !important;
+        }
+
+        .reduced-motion * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
         .dropdown {
             margin-bottom: 12px;
         }
@@ -955,37 +971,71 @@
         /* Floating Action Button */
         .fab {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
+            bottom: 28px;
+            right: 28px;
+            height: 48px;
+            padding: 0 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
-            box-shadow: 0 4px 12px var(--shadow-color);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 998;
             opacity: 0;
-            transform: scale(0);
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
         }
 
         .fab.visible {
             opacity: 1;
-            transform: scale(1);
+            transform: translateY(0) scale(1);
+            pointer-events: all;
         }
 
         .fab:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 14px 40px rgba(102, 126, 234, 0.35);
+            border-color: #667eea;
+        }
+
+        .fab:active {
+            transform: translateY(-1px) scale(1);
         }
 
         .fab svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .fab:hover svg {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .fab {
+                bottom: 20px;
+                right: 20px;
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.85rem;
+            }
+
+            .fab svg {
+                width: 18px;
+                height: 18px;
+            }
         }
 
         /* Tooltip */
@@ -1199,6 +1249,20 @@
                     <span>Guide</span>
                     <button class="size-btn" onclick="openGuide()" aria-label="Open guide" style="width: 100%;">Open Guide</button>
                 </div>
+
+                <div class="setting-item">
+                    <span>View</span>
+                    <div class="size-options" style="flex-direction: column; align-items: stretch; width: 100%;">
+                        <button class="size-btn" id="toggleGifsBtn" onclick="toggleShowGifs()" aria-label="Toggle GIFs" style="width: 100%;">Hide GIFs</button>
+                        <button class="size-btn" id="toggleCarouselBtn" onclick="toggleShowCarousel()" aria-label="Toggle carousel" style="width: 100%;">Hide Carousel</button>
+                        <button class="size-btn" id="toggleQuickLinksBtn" onclick="toggleShowQuickLinks()" aria-label="Toggle quick links" style="width: 100%;">Hide Quick Links</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Motion</span>
+                    <button class="size-btn" id="toggleMotionBtn" onclick="toggleReducedMotion()" aria-label="Toggle reduced motion" style="width: 100%;">Reduce Motion</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1238,6 +1302,12 @@
                 <li><strong>Click</strong> any tag in the carousel to visit it.</li>
                 <li>Clicking personal-account or GitHub links will ask a quick puzzle first.</li>
             </ul>
+        </div>
+
+        <div class="guide-section">
+            <h4>Quick Settings</h4>
+            <p>Open the settings panel to change the theme, size, animations, and more.</p>
+            <button class="size-btn" onclick="closeGuide(); toggleSettings();" style="width: 100%; margin-top: 8px;">Open Settings</button>
         </div>
     </div>
 
@@ -1611,8 +1681,9 @@
         </div>
 
         <!-- Floating Action Button -->
-        <button class="fab tooltip visible" data-tooltip="Scroll to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <button class="fab" id="scrollTopBtn" aria-label="Scroll to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
             <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+            Top
         </button>
     </div>
 
@@ -1670,6 +1741,58 @@
             });
         }
 
+        // ==================== VIEW & MOTION TOGGLES ====================
+        const viewToggles = {
+            showGifs: true,
+            showCarousel: true,
+            showQuickLinks: true,
+            reducedMotion: false
+        };
+
+        function updateViewButtons() {
+            document.getElementById('toggleGifsBtn').textContent = viewToggles.showGifs ? 'Hide GIFs' : 'Show GIFs';
+            document.getElementById('toggleCarouselBtn').textContent = viewToggles.showCarousel ? 'Hide Carousel' : 'Show Carousel';
+            document.getElementById('toggleQuickLinksBtn').textContent = viewToggles.showQuickLinks ? 'Hide Quick Links' : 'Show Quick Links';
+            document.getElementById('toggleMotionBtn').textContent = viewToggles.reducedMotion ? 'Enable Motion' : 'Reduce Motion';
+
+            document.body.classList.toggle('index-hide-gifs', !viewToggles.showGifs);
+            document.body.classList.toggle('index-hide-carousel', !viewToggles.showCarousel);
+            document.body.classList.toggle('index-hide-quicklinks', !viewToggles.showQuickLinks);
+            document.body.classList.toggle('reduced-motion', viewToggles.reducedMotion);
+        }
+
+        function toggleShowGifs() {
+            viewToggles.showGifs = !viewToggles.showGifs;
+            localStorage.setItem('meadowShowGifs', viewToggles.showGifs);
+            updateViewButtons();
+        }
+
+        function toggleShowCarousel() {
+            viewToggles.showCarousel = !viewToggles.showCarousel;
+            localStorage.setItem('meadowShowCarousel', viewToggles.showCarousel);
+            updateViewButtons();
+        }
+
+        function toggleShowQuickLinks() {
+            viewToggles.showQuickLinks = !viewToggles.showQuickLinks;
+            localStorage.setItem('meadowShowQuickLinks', viewToggles.showQuickLinks);
+            updateViewButtons();
+        }
+
+        function toggleReducedMotion() {
+            viewToggles.reducedMotion = !viewToggles.reducedMotion;
+            localStorage.setItem('meadowReducedMotion', viewToggles.reducedMotion);
+            updateViewButtons();
+        }
+
+        function loadViewToggles() {
+            viewToggles.showGifs = localStorage.getItem('meadowShowGifs') !== 'false';
+            viewToggles.showCarousel = localStorage.getItem('meadowShowCarousel') !== 'false';
+            viewToggles.showQuickLinks = localStorage.getItem('meadowShowQuickLinks') !== 'false';
+            viewToggles.reducedMotion = localStorage.getItem('meadowReducedMotion') === 'true';
+            updateViewButtons();
+        }
+
         // Close settings menu when clicking outside
         document.addEventListener('click', function(e) {
             const settingsContainer = document.querySelector('.settings-container');
@@ -1697,6 +1820,7 @@
         const savedSize = localStorage.getItem('meadowSize') || 'normal';
         document.body.setAttribute('data-size', savedSize);
         updateSizeButtons();
+        loadViewToggles();
 
         // ==================== GUIDE PANEL ====================
         function openGuide() {
@@ -2166,6 +2290,18 @@
                 // Let clicks pass through naturally
             });
         });
+
+        // Scroll-to-top button visibility
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        if (scrollTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+        }
     </script>
 </body>
 </html>

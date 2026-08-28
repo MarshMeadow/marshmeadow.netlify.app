@@ -1,0 +1,64 @@
+{
+  "main": {
+    "name": "MarshMeadow on GitHub",
+    "url": "https://github.com/MarshMeadow",
+    "description": "My main GitHub profile with personal projects, experiments, and source code for this site."
+  },
+  "orgs": [
+    {
+      "name": "HDO PRO",
+      "url": "https://github.com/HDO-PRO",
+      "description": "Organization focused on media tools, streaming utilities, and related experiments."
+    },
+    {
+      "name": "Neko-s Index",
+      "url": "https://github.com/Neko-s-Index",
+      "description": "A curated index of anime, manga, and fandom-related projects and resources."
+    },
+    {
+      "name": "Nekomo App",
+      "url": "https://github.com/Nekomo-App",
+      "description": "The open-source home of the Nekomo app and its related tooling."
+    },
+    {
+      "name": "ReSpotF-ck",
+      "url": "https://github.com/ReSpotF-ck",
+      "description": "Spotify-related experiments and reverse-engineering utilities."
+    }
+  ],
+  "sites": [
+    {
+      "name": "Nekomo",
+      "url": "https://nekomoapp.netlify.app/",
+      "description": "Landing page and project site for the Nekomo app."
+    },
+    {
+      "name": "HDO PRO",
+      "url": "https://hdopro.netlify.app/",
+      "description": "Project showcase and information hub for HDO PRO tools."
+    },
+    {
+      "name": "N3K0s Index",
+      "url": "https://n3k0s-index.netlify.app/",
+      "description": "A browsable front-end for the Neko-s Index collection."
+    },
+    {
+      "name": "ReSpotF-ck",
+      "url": "https://respotfck.netlify.app/",
+      "description": "ReSpotF-ck project site and documentation."
+    }
+  ],
+  "repos": {
+    "marshmeadow.netlify.app": "Source files, styles, and scripts that power this personal bio and portfolio site.",
+    "Dantotsu": "A community-favorite anime and manga app with clean browsing and tracking features.",
+    "KamyRoll": "A custom streaming client and toolset for Roll and related services.",
+    "HDO-PRO.github.io": "GitHub Pages site for the HDO PRO organization.",
+    "Nekomo-App.github.io": "Marketing and documentation landing for the Nekomo App project.",
+    "n3k0s-index": "The front-end index that lists and links out to Neko-s Index resources.",
+    "respotfck": "Spotify-related experiments, scripts, and reverse-engineering helpers.",
+    "SkyTube": "A YouTube client experiment focused on lightweight playback.",
+    "fpa-site-source": "Source assets for the FPA (Fancy Explore) site.",
+    "personal-scripts": "Small utility scripts and automation helpers I use for projects.",
+    "dotfiles": "Configuration files, themes, and setup scripts for my dev environment."
+  }
+}
