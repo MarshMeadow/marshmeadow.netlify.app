@@ -1893,6 +1893,7 @@
             <p>© 2024 Meadow</p>
             <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <span style="opacity: 0.5;">Gallery (Coming Soon)</span> | <a href="skills.html">Skills</a> | <span style="opacity: 0.5;">Contact (Coming Soon)</span></p>
             <p style="margin-top: 10px; font-size: 0.85rem;">💖 Support the work: <a href="https://ko-fi.com/marshmeadow" target="_blank">Ko-fi</a> | <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank">Patreon</a></p>
+            <p style="margin-top: 8px; font-size: 0.85rem;">Data from the <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener noreferrer">GitHub API</a> • Source on <a href="https://github.com/MarshMeadow/marshmeadow.netlify.app" target="_blank" rel="noopener noreferrer">GitHub</a> • <a href="notice.html">Notice</a> • <a href="privacy.html">Privacy</a></p>
             <p style="margin-top: 10px; font-size: 0.85rem; color: #ff5f56;">⚠️ <a href="notice.html" style="color: #ff5f56; text-decoration: underline;">View notice / disclaimer</a>.</p>
         </div>
     </div>
@@ -2370,6 +2371,12 @@
                     if (descResponse.ok) {
                         descriptionsData = await descResponse.json();
                         renderLinksSection(descriptionsData);
+                    } else {
+                        console.warn('descriptions.json returned', descResponse.status);
+                        const linksSection = document.getElementById('linksSection');
+                        if (linksSection) {
+                            linksSection.innerHTML = '<p class="loading-small">Could not load profile & site descriptions (' + descResponse.status + '). The repository list will still try to load.</p>';
+                        }
                     }
                 } catch (descErr) {
                     console.warn('Could not load descriptions.json', descErr);
@@ -2388,7 +2395,7 @@
                     const response = await fetch(`https://api.github.com/users/${USERNAME}/repos?page=${page}&per_page=100&sort=updated`);
                     
                     if (!response.ok) {
-                        throw new Error('Failed to fetch repositories');
+                        throw new Error(`GitHub API error ${response.status} while fetching repositories`);
                     }
 
                     const data = await response.json();
