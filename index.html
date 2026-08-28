@@ -82,7 +82,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            padding: 10px 20px 20px;
+            padding: 10px 20px 100px;
             transition: background 0.3s ease;
             font-size: 16px;
         }
@@ -1272,6 +1272,17 @@
                 justify-content: center;
                 animation: none;
                 transform: none;
+                gap: 12px;
+            }
+
+            .checkout-tag {
+                font-size: 1rem;
+                padding: 10px 18px;
+            }
+
+            .checkout-tag svg {
+                width: 18px;
+                height: 18px;
             }
 
             .guide-panel {
@@ -1933,14 +1944,14 @@
         }
 
         function updateButtonPositionButtons() {
-            const position = localStorage.getItem('meadowButtonPosition') || (window.innerWidth <= 768 ? 'bottom' : 'top');
+            const position = localStorage.getItem('meadowButtonPosition') || 'bottom';
             document.getElementById('buttonPositionTopBtn').classList.toggle('active', position === 'top');
             document.getElementById('buttonPositionBottomBtn').classList.toggle('active', position === 'bottom');
         }
 
         function loadButtonPosition() {
             const savedPosition = localStorage.getItem('meadowButtonPosition');
-            const position = savedPosition || (window.innerWidth <= 768 ? 'bottom' : 'top');
+            const position = savedPosition || 'bottom';
             document.body.setAttribute('data-button-position', position);
             updateButtonPositionButtons();
         }

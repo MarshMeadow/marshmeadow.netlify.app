@@ -49,7 +49,7 @@
             animation: gradientShift 15s ease infinite;
             color: var(--text-primary);
             min-height: 100vh;
-            padding: 20px;
+            padding: 20px 20px 100px;
             transition: background 0.3s ease;
             font-size: 16px;
         }
@@ -2150,7 +2150,7 @@
         }
 
         function updateButtonPositionButtons() {
-            const position = localStorage.getItem('meadowButtonPosition') || (window.innerWidth <= 768 ? 'bottom' : 'top');
+            const position = localStorage.getItem('meadowButtonPosition') || 'bottom';
             document.body.setAttribute('data-button-position', position);
             document.getElementById('buttonPositionTopBtn').classList.toggle('active', position === 'top');
             document.getElementById('buttonPositionBottomBtn').classList.toggle('active', position === 'bottom');
@@ -2158,7 +2158,7 @@
 
         function loadButtonPosition() {
             const savedPosition = localStorage.getItem('meadowButtonPosition');
-            const position = savedPosition || (window.innerWidth <= 768 ? 'bottom' : 'top');
+            const position = savedPosition || 'bottom';
             document.body.setAttribute('data-button-position', position);
             updateButtonPositionButtons();
         }
@@ -2467,6 +2467,17 @@
             }
         }
 
+        function showError(msg) {
+            const error = document.getElementById('error');
+            const loading = document.getElementById('loading');
+            if (loading) loading.style.display = 'none';
+            if (error) {
+                error.style.display = 'block';
+                error.textContent = msg;
+            }
+            console.error(msg);
+        }
+
         async function fetchRepos() {
             const loading = document.getElementById('loading');
             const error = document.getElementById('error');
@@ -2564,9 +2575,7 @@
                 displayPopularRepos();
                 displayRepos();
             } catch (err) {
-                loading.style.display = 'none';
-                error.style.display = 'block';
-                error.textContent = `Error: ${err.message}. Please try again later.`;
+                showError(`Error: ${err.message}. Please try again later.`);
                 renderFallbackLinks();
             }
         }
@@ -3015,7 +3024,19 @@
             applyFilters();
         });
 
+        // Global error handling
+        window.addEventListener('error', function(e) {
+            showError('Page error: ' + e.message + ' (' + (e.filename || '') + ':' + (e.lineno || '') + ')');
+        });
+
+        window.addEventListener('unhandledrejection', function(e) {
+            const reason = e.reason;
+            const msg = reason && reason.message ? reason.message : String(reason);
+            showError('Unhandled error: ' + msg);
+        });
+
         // Initialize
+        renderFallbackLinks();
         fetchRepos();
     </script>
 </body>
