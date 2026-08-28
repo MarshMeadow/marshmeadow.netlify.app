@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Notice and disclaimer for Meadow's personal bio website.">
+    <title>Notice / Disclaimer - Meadow</title>
+    <script src="security.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #c9d1d9;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .notice-card {
+            background: rgba(22, 27, 34, 0.95);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #b4b4b4;
+        }
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: color 0.2s ease;
+        }
+
+        .back:hover {
+            color: #8e9ff5;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .notice-card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="notice-card">
+        <h1>Notice / Disclaimer</h1>
+        <p>This is a personal bio and portfolio website for Meadow. The content here is for informational and personal-use purposes only.</p>
+        <p>By viewing this site you agree not to copy, redistribute, scrape, or abuse any content, images, code, or personal information found on these pages. Personal contact and social account links are protected with a simple puzzle as an extra safeguard.</p>
+        <p>If you have questions or want to reach out, please use the public social links on the main bio page. Do not attempt to bypass the security measures or access personal contact details without permission.</p>
+        <a href="index.html" class="back">← Back to Bio</a>
+    </main>
+</body>
+</html>

@@ -8,6 +8,13 @@
     var currentAnswer = null;
     var pendingHref = '';
     var pendingTarget = '';
+    var pageMode = false;
+
+    var descEl = null;
+    var questionEl = null;
+    var inputEl = null;
+    var msgEl = null;
+    var cancelEl = null;
 
     function isSolved() {
         var solved = sessionStorage.getItem(SOLVED_KEY);
@@ -44,7 +51,7 @@
             '    left: 0;',
             '    width: 100%;',
             '    height: 100%;',
-            '    background: rgba(0, 0, 0, 0.85);',
+            '    background: rgba(0, 0, 0, 0.9);',
             '    z-index: 100000;',
             '    display: none;',
             '    justify-content: center;',
@@ -67,7 +74,7 @@
             '    text-align: center;',
             '    box-shadow: 0 10px 40px rgba(0,0,0,0.5);',
             '    width: 90%;',
-            '    max-width: 340px;',
+            '    max-width: 420px;',
             '    border: 2px solid var(--link-border, #30363d);',
             '    animation: puzzleSlideIn 0.3s ease;',
             '}',
@@ -77,13 +84,18 @@
             '}',
             '.meadow-puzzle-box h3 {',
             '    margin: 0 0 10px;',
-            '    font-size: 1.3rem;',
+            '    font-size: 1.4rem;',
             '    font-family: "Space Grotesk", sans-serif;',
             '}',
             '.meadow-puzzle-box p {',
             '    margin: 0 0 20px;',
             '    font-size: 0.95rem;',
             '    color: var(--text-secondary, #8b949e);',
+            '    line-height: 1.5;',
+            '}',
+            '.meadow-puzzle-box p a {',
+            '    color: #667eea;',
+            '    text-decoration: underline;',
             '}',
             '.meadow-puzzle-question {',
             '    font-size: 1.4rem;',
@@ -147,7 +159,7 @@
             '</style>',
             '<div class="meadow-puzzle-box">',
             '    <h3>Quick Puzzle</h3>',
-            '    <p>Prove you are human before visiting this personal account.</p>',
+            '    <p id="meadowPuzzleDescription"></p>',
             '    <div class="meadow-puzzle-question" id="meadowPuzzleQuestion"></div>',
             '    <input type="text" class="meadow-puzzle-input" id="meadowPuzzleInput" autocomplete="off" inputmode="numeric" placeholder="Your answer">',
             '    <div class="meadow-puzzle-actions">',
@@ -161,13 +173,18 @@
         document.body.appendChild(el);
         overlay = el;
 
-        var input = el.querySelector('#meadowPuzzleInput');
+        descEl = el.querySelector('#meadowPuzzleDescription');
+        questionEl = el.querySelector('#meadowPuzzleQuestion');
+        inputEl = el.querySelector('#meadowPuzzleInput');
+        msgEl = el.querySelector('#meadowPuzzleMessage');
+
         var submit = el.querySelector('#meadowPuzzleSubmit');
         var cancel = el.querySelector('#meadowPuzzleCancel');
+        cancelEl = cancel;
 
         submit.addEventListener('click', checkAnswer);
 
-        input.addEventListener('keydown', function(e) {
+        inputEl.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 checkAnswer();
             }
@@ -182,47 +199,67 @@
         var a = Math.floor(Math.random() * 9) + 2;
         var b = Math.floor(Math.random() * 9) + 2;
         currentAnswer = a + b;
-        var questionEl = overlay.querySelector('#meadowPuzzleQuestion');
         if (questionEl) {
             questionEl.textContent = 'What is ' + a + ' + ' + b + '?';
         }
-        var input = overlay.querySelector('#meadowPuzzleInput');
-        if (input) {
-            input.value = '';
-            input.focus();
+        if (inputEl) {
+            inputEl.value = '';
+            inputEl.focus();
         }
-        var msg = overlay.querySelector('#meadowPuzzleMessage');
-        if (msg) msg.textContent = '';
+        if (msgEl) msgEl.textContent = '';
     }
 
-    function showOverlay(href, target) {
-        pendingHref = href;
-        pendingTarget = target;
+    function setDescription(html) {
         createOverlay();
+        if (descEl) descEl.innerHTML = html;
+    }
+
+    function showOverlay(href, target, mode) {
+        pageMode = (mode === 'page');
+        pendingHref = href || '';
+        pendingTarget = target || '_self';
+        createOverlay();
+
+        if (cancelEl) cancelEl.style.display = pageMode ? 'none' : '';
+
+        if (pageMode) {
+            setDescription(
+                '<strong>Notice:</strong> This is a personal bio page about Meadow. ' +
+                'Please solve this quick puzzle to continue. By entering, you agree not to abuse, ' +
+                'copy, or redistribute any content on this page. ' +
+                '<a href="notice.html" target="_blank">Read full notice/disclaimer</a>.'
+            );
+        } else {
+            setDescription('Prove you are human before visiting this personal account.');
+        }
+
         generatePuzzle();
         overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
 
     function hideOverlay() {
         if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
         pendingHref = '';
         pendingTarget = '';
+        pageMode = false;
     }
 
     function checkAnswer() {
-        var input = overlay.querySelector('#meadowPuzzleInput');
-        var msg = overlay.querySelector('#meadowPuzzleMessage');
-        if (!input) return;
-
-        var value = input.value.trim();
+        var value = inputEl ? inputEl.value.trim() : '';
         if (parseInt(value, 10) === currentAnswer) {
             setSolved();
             hideOverlay();
-            openLink(pendingHref, pendingTarget);
+            if (!pageMode && pendingHref) {
+                openLink(pendingHref, pendingTarget);
+            }
         } else {
-            if (msg) msg.textContent = 'Not quite. Try again!';
-            input.value = '';
-            input.focus();
+            if (msgEl) msgEl.textContent = 'Not quite. Try again!';
+            if (inputEl) {
+                inputEl.value = '';
+                inputEl.focus();
+            }
         }
     }
 
@@ -252,13 +289,24 @@
 
             e.preventDefault();
             e.stopPropagation();
-            showOverlay(href, target);
+            showOverlay(href, target, 'link');
         }, true);
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', protectLinks);
-    } else {
+    function initPagePuzzle() {
+        if (!document.body.hasAttribute('data-page-puzzle')) return;
+        if (isSolved()) return;
+        showOverlay(null, null, 'page');
+    }
+
+    function init() {
         protectLinks();
+        initPagePuzzle();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
 })();
