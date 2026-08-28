@@ -7,53 +7,8 @@
     <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
     
     <!-- Security Script -->
-    <script>
-        // Disable right-click and common dev-tool shortcuts
-        document.addEventListener('contextmenu', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-        }, true);
-
-        document.addEventListener('keydown', function(e){
-            var k = e.keyCode || e.which,
-                ctrl = e.ctrlKey || e.metaKey,
-                sh = e.shiftKey;
-
-            // F12
-            if (k === 123) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            // Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+C, Ctrl+A, Ctrl+F
-            if (ctrl && (k === 85 || k === 83 || k === 80 || k === 67 || k === 65 || k === 70)) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            // Ctrl+Shift+I/J/C
-            if (ctrl && sh && (k === 73 || k === 74 || k === 67)) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        }, true);
-
-        // Disable copy functionality
-        document.addEventListener('copy', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-        }, true);
-
-        // Disable drag and drop
-        document.addEventListener('dragstart', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-        }, true);
-
-        // Disable text selection
-        document.addEventListener('selectstart', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-        }, true);
-    </script>
+    <script src="security.js"></script>
+    <script src="puzzle.js"></script>
     
     <style>
         * {
@@ -504,14 +459,6 @@
         </div>
     </nav>
 
-    <!-- "Are you human?" popup -->
-    <div id="popup-overlay" class="popup-overlay" style="display: none;">
-        <div id="popup" class="popup">
-            <p>Are you human?</p>
-            <button onclick="acceptHuman()">Yes</button>
-        </div>
-    </div>
-
     <!-- GIF Containers -->
     <div class="gif-container" id="gif1">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sleeping-cat.gif" alt="Sleeping Cat" style="width: 100%; height: auto;">
@@ -560,6 +507,7 @@
             <div class="dropdown-content">
                 <a href="https://marshmeadow.netlify.app/repos" target="_blank">All Repositories</a>
                 <a href="https://ko-fi.com/marshmeadow" target="_blank">Donate - Ko-Fi</a>
+                <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank">Donate - Patreon</a>
                 <a href="https://github.com/MarshMeadow" target="_blank">GitHub :: Meadow</a>
                 <a href="https://github.com/HDO-PRO" target="_blank">HDO PRO (Private)</a>
                 <a href="https://sites.google.com/view/fancyexplore/home" target="_blank">FPA Site</a>
@@ -568,7 +516,7 @@
             </div>
         </div>
 
-        <div class="dropdown">
+        <div class="dropdown" data-personal>
             <a href="javascript:void(0)" onclick="toggleDropdown(this)">Personal Contact Info<span class="arrow">▼</span></a>
             <div class="dropdown-content">
                 <a href="https://discord.com/users/Marshmeadow2772" target="_blank">Personal Discord (PRIVATE)</a>
@@ -619,25 +567,7 @@
     </div>
 
     <script>
-        // ==================== HUMAN CHECK POPUP ====================
-        function acceptHuman() {
-            localStorage.setItem('isHuman', 'true');
-            document.getElementById('popup-overlay').style.display = 'none';
-            document.body.style.pointerEvents = 'auto';
-        }
 
-        // Check if the user has passed the robot check
-        if (!localStorage.getItem('isHuman')) {
-            document.getElementById('popup-overlay').style.display = 'flex';
-            document.body.style.pointerEvents = 'none';
-        }
-
-        // Bypass popup by pressing 'B'
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'b' || e.key === 'B') {
-                acceptHuman();
-            }
-        });
 
         // ==================== DROPDOWN FUNCTIONALITY ====================
         function toggleDropdown(element) {
@@ -649,8 +579,8 @@
         function positionGif(gifContainer) {
             const x = Math.random() * (window.innerWidth - 48);
             const y = Math.random() * (window.innerHeight - 48);
-            gifContainer.style.left = ${x}px;
-            gifContainer.style.top = ${y}px;
+            gifContainer.style.left = `${x}px`;
+            gifContainer.style.top = `${y}px`;
             gifContainer.style.display = "block";
             gifContainer.classList.add('visible');
         }
@@ -673,8 +603,8 @@
             };
 
             const dragMove = (e) => {
-                gif.style.left = ${e.clientX - offsetX}px;
-                gif.style.top = ${e.clientY - offsetY}px;
+                gif.style.left = `${e.clientX - offsetX}px`;
+                gif.style.top = `${e.clientY - offsetY}px`;
             };
 
             const dragEnd = () => {
@@ -692,8 +622,8 @@
             };
 
             const touchMove = (e) => {
-                gif.style.left = ${e.touches[0].clientX - offsetX}px;
-                gif.style.top = ${e.touches[0].clientY - offsetY}px;
+                gif.style.left = `${e.touches[0].clientX - offsetX}px`;
+                gif.style.top = `${e.touches[0].clientY - offsetY}px`;
             };
 
             const touchEnd = () => {
@@ -740,16 +670,7 @@
             }, 3000);
         });
 
-        // ==================== PREVENT RIGHT-CLICK AND DEV TOOLS ====================
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        });
 
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-                e.preventDefault();
-            }
-        });
     </script>
 </body>
 </html>

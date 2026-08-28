@@ -17,53 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Security Script -->
-    <script>
-        // Disable right-click and common dev-tool shortcuts
-        document.addEventListener('contextmenu', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-        }, true);
-
-        document.addEventListener('keydown', function(e){
-            var k = e.keyCode || e.which,
-                ctrl = e.ctrlKey || e.metaKey,
-                sh = e.shiftKey;
-
-            // F12
-            if (k === 123) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            // Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+C, Ctrl+A, Ctrl+F
-            if (ctrl && (k === 85 || k === 83 || k === 80 || k === 67 || k === 65 || k === 70)) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            // Ctrl+Shift+I/J/C
-            if (ctrl && sh && (k === 73 || k === 74 || k === 67)) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        }, true);
-
-        // Disable copy functionality
-        document.addEventListener('copy', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-        }, true);
-
-        // Disable drag and drop
-        document.addEventListener('dragstart', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-        }, true);
-
-        // Disable text selection
-        document.addEventListener('selectstart', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-        }, true);
-    </script>
+    <script src="security.js"></script>
     
     <style>
         :root {
@@ -1119,15 +1073,6 @@
     </style>
 </head>
 <body>
-    <!-- "Are you human?" popup -->
-    <div id="popup-overlay" class="popup-overlay" style="display: none;">
-        <div id="popup" class="popup">
-            <p style="margin-bottom: 15px;">Are you human?</p>
-            <p style="font-size: 0.9rem; margin-bottom: 20px; color: #8b949e;">By continuing, you agree to not abuse any content on this page.</p>
-            <button onclick="acceptHuman()">I Agree</button>
-        </div>
-    </div>
-
     <!-- Settings Menu -->
     <div class="settings-container">
         <button class="settings-toggle" onclick="toggleSettings()" aria-label="Settings">
@@ -1171,8 +1116,21 @@
         <div class="header">
             <a href="https://marshmeadow.netlify.app/" class="back-link">← Back to Bio</a>
             <h1>~/Meadow's Repositories</h1>
-            <p>Explore my GitHub projects and contributions</p>
+            <p style="max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">Indie developer, coder, and gamer. Below are my personal GitHub, the organizations I work with, and the project sites I've built.</p>
             <a href="https://github.com/MarshMeadow?tab=repositories" target="_blank" class="back-link secondary">View on GitHub →</a>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;">
+                <a href="https://github.com/MarshMeadow" target="_blank" class="back-link secondary">GitHub :: Meadow</a>
+                <a href="https://github.com/HDO-PRO" target="_blank" class="back-link secondary">HDO PRO</a>
+                <a href="https://github.com/Neko-s-Index" target="_blank" class="back-link secondary">Neko-s Index</a>
+                <a href="https://github.com/Nekomo-App" target="_blank" class="back-link secondary">Nekomo App</a>
+                <a href="https://github.com/ReSpotF-ck" target="_blank" class="back-link secondary">ReSpotF-ck</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
+                <a href="https://nekomoapp.netlify.app/" target="_blank" class="back-link secondary">Nekomo Site</a>
+                <a href="https://hdopro.netlify.app/" target="_blank" class="back-link secondary">HDO PRO Site</a>
+                <a href="https://n3k0s-index.netlify.app/" target="_blank" class="back-link secondary">N3K0s Index Site</a>
+                <a href="https://respotfck.netlify.app/" target="_blank" class="back-link secondary">ReSpotF-ck Site</a>
+            </div>
         </div>
 
         <div class="search-container">
@@ -1716,25 +1674,7 @@
             searchRepos(e.target.value);
         });
 
-        // ==================== HUMAN CHECK POPUP ====================
-        function acceptHuman() {
-            localStorage.setItem('isHuman', 'true');
-            document.getElementById('popup-overlay').style.display = 'none';
-            document.body.style.pointerEvents = 'auto';
-        }
 
-        // Check if the user has passed the robot check
-        if (!localStorage.getItem('isHuman')) {
-            document.getElementById('popup-overlay').style.display = 'flex';
-            document.body.style.pointerEvents = 'none';
-        }
-
-        // Bypass popup by pressing 'B'
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'b' || e.key === 'B') {
-                acceptHuman();
-            }
-        });
 
         // Initialize
         fetchRepos();

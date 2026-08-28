@@ -21,6 +21,8 @@
     <meta name="twitter:description" content="Heyo, I am Meadow/N3K0, Indie dev, coder, like websites and apps and a gamer and more!">
     <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/88599122?v=4">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="security.js"></script>
+    <script src="puzzle.js"></script>
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -736,30 +738,9 @@
             transform: scale(1.05);
         }
 
-            @keyframes scroll {
-                0% {
-                    transform: translateX(0);
-                }
-                100% {
-                    transform: translateX(-50%);
-                }
-            }
-
-            .checkout-tag {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                padding: 8px 16px;
-                background: var(--link-bg);
-                color: var(--link-text);
-                text-decoration: none;
-                border-radius: 20px;
-                font-size: 0.85rem;
-                font-weight: 500;
-                border: 1px solid var(--link-border);
-                transition: all 0.2s ease;
-                white-space: nowrap;
-                flex-shrink: 0;
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
             gap: 6px;
             padding: 6px 12px;
             background: rgba(76, 175, 80, 0.1);
@@ -1027,15 +1008,6 @@
         </div>
     </div>
 
-    <!-- "Are you human?" popup -->
-    <div id="popup-overlay" class="popup-overlay" style="display: none;">
-        <div id="popup" class="popup">
-            <p style="margin-bottom: 15px;">Are you human?</p>
-            <p style="font-size: 0.9rem; margin-bottom: 20px; color: #8b949e;">By continuing, you agree to not abuse any content on this page.</p>
-            <button onclick="acceptHuman()">I Agree</button>
-        </div>
-    </div>
-
     <!-- GIF Containers -->
     <div class="gif-container" id="gif1">
         <img src="Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Sleeping Cat" loading="lazy" style="width: 100%; height: auto;">
@@ -1287,10 +1259,38 @@
                         <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                         KamyRoll (Made & Worked on KamyRoll TV)
                     </a>
+                    <a href="https://github.com/Neko-s-Index" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Neko-s Index
+                    </a>
+                    <a href="https://github.com/Nekomo-App" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Nekomo App
+                    </a>
+                    <a href="https://github.com/ReSpotF-ck" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        ReSpotF-ck
+                    </a>
+                    <a href="https://nekomoapp.netlify.app/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        Nekomo App Site
+                    </a>
+                    <a href="https://hdopro.netlify.app/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        HDO PRO Site
+                    </a>
+                    <a href="https://n3k0s-index.netlify.app/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        N3K0s Index Site
+                    </a>
+                    <a href="https://respotfck.netlify.app/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        ReSpotF-ck Site
+                    </a>
                 </div>
             </div>
 
-            <div class="dropdown">
+            <div class="dropdown" data-personal>
                 <button class="dropdown-toggle" onclick="toggleDropdown(this)">
                     Personal Contact
                     <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
@@ -1331,6 +1331,11 @@
             <a href="https://ko-fi.com/marshmeadow" target="_blank" class="link-btn">
                 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 Ko-Fi
+            </a>
+
+            <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-1.76 0-3.37-.64-4.62-1.7L4 22.36V2h10.82zM14.82 4.41H6v15.36l3.42-3.42c1.12 1.14 2.67 1.85 4.4 1.85 3.04 0 5.5-2.46 5.5-5.5s-2.46-5.5-5.5-5.5z"/></svg>
+                Patreon
             </a>
 
             <a href="/gallery" target="_blank" class="link-btn" style="opacity: 0.5; cursor: not-allowed;">
@@ -1429,26 +1434,6 @@
             document.body.classList.add('dark-mode');
         }
         updateThemeButtons();
-
-        // ==================== HUMAN CHECK POPUP ====================
-        function acceptHuman() {
-            localStorage.setItem('isHuman', 'true');
-            document.getElementById('popup-overlay').style.display = 'none';
-            document.body.style.pointerEvents = 'auto';
-        }
-
-        // Check if the user has passed the robot check
-        if (!localStorage.getItem('isHuman')) {
-            document.getElementById('popup-overlay').style.display = 'flex';
-            document.body.style.pointerEvents = 'none';
-        }
-
-        // Bypass popup by pressing 'B'
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'b' || e.key === 'B') {
-                acceptHuman();
-            }
-        });
 
         // ==================== GIF FUNCTIONALITY ====================
         function positionGif(gifContainer) {
