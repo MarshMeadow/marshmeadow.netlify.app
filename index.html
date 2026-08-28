@@ -217,6 +217,26 @@
             height: 20px;
         }
 
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0 15px;
+        }
+
+        .links .link-btn {
+            display: none;
+        }
+
+        .quick-links .link-btn {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            border-radius: 14px;
+            flex: 0 1 auto;
+            min-width: 70px;
+        }
+
         .dropdown {
             margin-bottom: 12px;
         }
@@ -548,10 +568,10 @@
 
         @keyframes scroll {
             0% {
-                transform: translateX(0);
+                transform: translate3d(-50%, 0, 0);
             }
             100% {
-                transform: translateX(-50%);
+                transform: translate3d(0, 0, 0);
             }
         }
 
@@ -1047,6 +1067,16 @@
             <p class="bio-tag">Private Person ♡</p>
             <p class="bio-tag">DMs can open and close at any time</p>
             <p class="bio-quote">"The only way to do great work is to love what you do." — Stay true to your path</p>
+        </div>
+
+        <div class="quick-links">
+            <a href="https://github.com/MarshMeadow" target="_blank" class="link-btn">GitHub</a>
+            <a href="https://ko-fi.com/marshmeadow" target="_blank" class="link-btn">Ko-Fi</a>
+            <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank" class="link-btn">Patreon</a>
+            <span class="link-btn" style="opacity: 0.5; cursor: not-allowed;">Gallery (Coming Soon)</span>
+            <a href="/repos" target="_blank" class="link-btn">All Repos</a>
+            <a href="/skills" target="_blank" class="link-btn">Skills</a>
+            <span class="link-btn" style="opacity: 0.5; cursor: not-allowed;">Contact (Coming Soon)</span>
         </div>
 
         <div class="checkout-section">
