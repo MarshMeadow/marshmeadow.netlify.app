@@ -79,6 +79,7 @@
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -104,6 +105,7 @@
             max-width: 480px;
             box-shadow: 0 20px 60px var(--shadow-color);
             text-align: center;
+            align-self: center;
             transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -513,6 +515,10 @@
             margin-top: 30px;
             color: var(--text-footer);
             font-size: 0.85rem;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            align-self: center;
         }
 
         .footer a {
@@ -533,6 +539,13 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            transition: top 0.3s ease, bottom 0.3s ease;
+        }
+
+        body[data-button-position="bottom"] .settings-container,
+        .settings-container.mobile-bottom {
+            top: auto;
+            bottom: 20px;
         }
 
         .guide-toggle, .settings-toggle {
@@ -1316,6 +1329,14 @@
                         <button class="size-btn" id="bioWidthWideBtn" onclick="setBioWidth('wide')" aria-label="Wide width">Wide</button>
                     </div>
                 </div>
+
+                <div class="setting-item">
+                    <span>Button Position</span>
+                    <div class="size-options">
+                        <button class="size-btn" id="buttonPositionTopBtn" onclick="setButtonPosition('top')" aria-label="Top right position">Top Right</button>
+                        <button class="size-btn" id="buttonPositionBottomBtn" onclick="setButtonPosition('bottom')" aria-label="Bottom right position">Bottom Right</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1384,7 +1405,7 @@
         </div>
     </nav>
 
-    <div style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; margin: 10px 20px; border-radius: 10px;">
+    <div class="notice-banner" style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: calc(100% - 40px); max-width: 1200px; margin: 10px auto; align-self: center; box-sizing: border-box;">
         ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
     </div>
 
@@ -1761,6 +1782,7 @@
             updateThemeButtons();
             updateSizeButtons();
             updateViewButtons();
+            updateButtonPositionButtons();
         }
 
         function setTheme(theme) {
@@ -1791,7 +1813,7 @@
         }
 
         function updateSizeButtons() {
-            const currentSize = localStorage.getItem('meadowSize') || 'normal';
+            const currentSize = localStorage.getItem('meadowSize') || 'small';
             const buttons = document.querySelectorAll('.size-btn');
             const sizeMap = { 'small': 'small', 'normal': 'normal', 'large': 'large' };
             buttons.forEach(btn => {
@@ -1805,16 +1827,16 @@
 
         // ==================== VIEW & MOTION TOGGLES ====================
         const viewToggles = {
-            showGifs: true,
-            showCarousel: true,
-            showQuickLinks: true,
-            showFooter: true,
-            showFab: true,
-            showStatus: true,
-            reducedMotion: false
+            showGifs: false,
+            showCarousel: false,
+            showQuickLinks: false,
+            showFooter: false,
+            showFab: false,
+            showStatus: false,
+            reducedMotion: true
         };
 
-        let bioWidth = 'normal';
+        let bioWidth = 'compact';
 
         function updateViewButtons() {
             document.getElementById('toggleGifsBtn').textContent = viewToggles.showGifs ? 'Hide GIFs' : 'Show GIFs';
@@ -1881,6 +1903,25 @@
             updateViewButtons();
         }
 
+        function setButtonPosition(position) {
+            localStorage.setItem('meadowButtonPosition', position);
+            document.body.setAttribute('data-button-position', position);
+            updateButtonPositionButtons();
+        }
+
+        function updateButtonPositionButtons() {
+            const position = localStorage.getItem('meadowButtonPosition') || (window.innerWidth <= 768 ? 'bottom' : 'top');
+            document.getElementById('buttonPositionTopBtn').classList.toggle('active', position === 'top');
+            document.getElementById('buttonPositionBottomBtn').classList.toggle('active', position === 'bottom');
+        }
+
+        function loadButtonPosition() {
+            const savedPosition = localStorage.getItem('meadowButtonPosition');
+            const position = savedPosition || (window.innerWidth <= 768 ? 'bottom' : 'top');
+            document.body.setAttribute('data-button-position', position);
+            updateButtonPositionButtons();
+        }
+
         function toggleReducedMotion() {
             viewToggles.reducedMotion = !viewToggles.reducedMotion;
             localStorage.setItem('meadowReducedMotion', viewToggles.reducedMotion);
@@ -1888,14 +1929,14 @@
         }
 
         function loadViewToggles() {
-            viewToggles.showGifs = localStorage.getItem('meadowShowGifs') !== 'false';
-            viewToggles.showCarousel = localStorage.getItem('meadowShowCarousel') !== 'false';
-            viewToggles.showQuickLinks = localStorage.getItem('meadowShowQuickLinks') !== 'false';
-            viewToggles.showFooter = localStorage.getItem('meadowShowFooter') !== 'false';
-            viewToggles.showFab = localStorage.getItem('meadowShowFab') !== 'false';
-            viewToggles.showStatus = localStorage.getItem('meadowShowStatus') !== 'false';
-            viewToggles.reducedMotion = localStorage.getItem('meadowReducedMotion') === 'true';
-            bioWidth = localStorage.getItem('meadowBioWidth') || 'normal';
+            viewToggles.showGifs = localStorage.getItem('meadowShowGifs') === 'true';
+            viewToggles.showCarousel = localStorage.getItem('meadowShowCarousel') === 'true';
+            viewToggles.showQuickLinks = localStorage.getItem('meadowShowQuickLinks') === 'true';
+            viewToggles.showFooter = localStorage.getItem('meadowShowFooter') === 'true';
+            viewToggles.showFab = localStorage.getItem('meadowShowFab') === 'true';
+            viewToggles.showStatus = localStorage.getItem('meadowShowStatus') === 'true';
+            viewToggles.reducedMotion = localStorage.getItem('meadowReducedMotion') !== 'false';
+            bioWidth = localStorage.getItem('meadowBioWidth') || 'compact';
             updateViewButtons();
         }
 
@@ -1923,10 +1964,11 @@
         updateThemeButtons();
 
         // Check for saved size preference
-        const savedSize = localStorage.getItem('meadowSize') || 'normal';
+        const savedSize = localStorage.getItem('meadowSize') || 'small';
         document.body.setAttribute('data-size', savedSize);
         updateSizeButtons();
         loadViewToggles();
+        loadButtonPosition();
 
         // ==================== GUIDE PANEL ====================
         function openGuide() {

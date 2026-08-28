@@ -435,6 +435,29 @@
             background: var(--link-bg);
         }
 
+        .search-ddg {
+            position: absolute;
+            top: 50%;
+            right: 46px;
+            transform: translateY(-50%);
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 3px 8px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-ddg:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            background: var(--link-bg);
+        }
+
         .filter-row {
             display: flex;
             flex-wrap: wrap;
@@ -1005,6 +1028,16 @@
             top: 20px;
             right: 20px;
             z-index: 1001;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            transition: top 0.3s ease, bottom 0.3s ease;
+        }
+
+        body[data-button-position="bottom"] .settings-container,
+        .settings-container.mobile-bottom {
+            top: auto;
+            bottom: 20px;
         }
 
         .settings-toggle {
@@ -1025,6 +1058,128 @@
             transform: scale(1.1);
             border-color: var(--accent-color);
             box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .guide-toggle {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .guide-toggle:hover {
+            transform: scale(1.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .guide-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .guide-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .guide-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 340px;
+            max-width: 85%;
+            height: 100%;
+            background: var(--card-bg);
+            border-right: 2px solid var(--border-color);
+            box-shadow: 8px 0 24px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            padding: 30px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .guide-panel.active {
+            transform: translateX(0);
+        }
+
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .guide-header h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .guide-close {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .guide-close:hover {
+            background: var(--link-bg);
+        }
+
+        .guide-section {
+            margin-bottom: 25px;
+        }
+
+        .guide-section h4 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .guide-section p, .guide-section ul {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .guide-section ul {
+            margin-left: 20px;
+        }
+
+        .guide-section li {
+            margin-bottom: 6px;
         }
 
         .settings-toggle svg {
@@ -1383,9 +1538,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .settings-toggle {
-                top: 15px;
-                right: 15px;
+            .settings-toggle, .guide-toggle {
                 width: 45px;
                 height: 45px;
             }
@@ -1465,6 +1618,7 @@
 <body>
     <!-- Settings Menu -->
     <div class="settings-container">
+        <button class="guide-toggle" onclick="toggleGuide()" aria-label="Open guide">?</button>
         <button class="settings-toggle" onclick="toggleSettings()" aria-label="Settings">
             <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
         </button>
@@ -1541,7 +1695,49 @@
                         <button class="size-btn" id="repoWidthWideBtn" onclick="setRepoWidth('wide')" aria-label="Wide width">Wide</button>
                     </div>
                 </div>
+
+                <div class="setting-item">
+                    <span>Button Position</span>
+                    <div class="size-options">
+                        <button class="size-btn" id="buttonPositionTopBtn" onclick="setButtonPosition('top')" aria-label="Top right position">Top Right</button>
+                        <button class="size-btn" id="buttonPositionBottomBtn" onclick="setButtonPosition('bottom')" aria-label="Bottom right position">Bottom Right</button>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Guide Panel -->
+    <div class="guide-overlay" id="guideOverlay" onclick="closeGuide()"></div>
+    <div class="guide-panel" id="guidePanel">
+        <div class="guide-header">
+            <h3>Repository Guide</h3>
+            <button class="guide-close" onclick="closeGuide()" aria-label="Close guide">×</button>
+        </div>
+
+        <div class="guide-section">
+            <h4>About this page</h4>
+            <p>This page shows all of Meadow's public GitHub repositories, plus the organizations they work with and the project sites they have built.</p>
+        </div>
+
+        <div class="guide-section">
+            <h4>What you can do</h4>
+            <ul>
+                <li>Search and filter repositories by name, language, stars, and more.</li>
+                <li>Sort by recently updated, most stars, most forks, or name.</li>
+                <li>Toggle compact view, layout, and visibility in Settings.</li>
+                <li>Click a repo or organization card to open it (puzzle-protected).</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <h4>Keyboard shortcuts</h4>
+            <ul>
+                <li><strong>G</strong> or <strong>?</strong> — open/close this guide</li>
+                <li><strong>T</strong> — toggle theme</li>
+                <li><strong>S</strong> — open/close settings</li>
+                <li><strong>Esc</strong> — close guide/settings</li>
+            </ul>
         </div>
     </div>
 
@@ -1556,7 +1752,7 @@
         </div>
     </nav>
 
-    <div style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; margin: 10px 20px; border-radius: 10px;">
+    <div style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: calc(100% - 40px); max-width: 1200px; margin: 10px auto; box-sizing: border-box;">
         ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
     </div>
 
@@ -1588,6 +1784,7 @@
                     placeholder="Search repositories..."
                     autocomplete="off"
                 >
+                <button class="search-ddg" id="searchDdg" onclick="searchDuckDuckGo()" aria-label="Search on DuckDuckGo" title="Search on DuckDuckGo" style="display: none;">DDG</button>
                 <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Clear search" style="display: none;">×</button>
             </div>
             <div class="filter-row">
@@ -1598,6 +1795,18 @@
                 <label class="filter-checkbox" title="Only show repositories updated within the last year">
                     <input type="checkbox" id="recentOnly">
                     Recent only
+                </label>
+                <label class="filter-checkbox" title="Only show exact name matches">
+                    <input type="checkbox" id="exactMatch">
+                    Exact name
+                </label>
+                <label class="filter-checkbox" title="Only show repos with open issues">
+                    <input type="checkbox" id="hasIssues">
+                    Has issues
+                </label>
+                <label class="filter-checkbox" title="Skip repos without a description">
+                    <input type="checkbox" id="hasDescription">
+                    Has description
                 </label>
             </div>
         </div>
@@ -1690,6 +1899,7 @@
             updateRepoLayoutButtons();
             updateShowDescriptionsButton();
             updateRepoVisibilityButtons();
+            updateButtonPositionButtons();
         }
 
         function setTheme(theme) {
@@ -1713,7 +1923,7 @@
             });
         }
 
-        let showForks = localStorage.getItem('meadowShowForks') !== 'false';
+        let showForks = localStorage.getItem('meadowShowForks') === 'true';
 
         function setSize(size) {
             document.body.setAttribute('data-size', size);
@@ -1722,7 +1932,7 @@
         }
 
         function updateSizeButtons() {
-            const currentSize = localStorage.getItem('meadowSize') || 'normal';
+            const currentSize = localStorage.getItem('meadowSize') || 'small';
             const buttons = document.querySelectorAll('.size-btn');
             buttons.forEach(btn => {
                 btn.classList.remove('active');
@@ -1867,17 +2077,25 @@
             }
         }
 
+        function searchDuckDuckGo() {
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) return;
+            const query = searchInput.value.trim();
+            if (!query) return;
+            window.open('https://duckduckgo.com/?q=' + encodeURIComponent(query), '_blank');
+        }
+
         function loadRepoSettings() {
-            const savedSize = localStorage.getItem('meadowSize') || 'normal';
+            const savedSize = localStorage.getItem('meadowSize') || 'small';
             document.body.setAttribute('data-size', savedSize);
 
-            const compact = localStorage.getItem('meadowCompact') === 'true';
+            const compact = localStorage.getItem('meadowCompact') !== 'false';
             if (compact) document.body.classList.add('compact-mode');
 
             const savedPerPage = parseInt(localStorage.getItem('meadowItemsPerPage')) || 9;
             REPOS_PER_PAGE = savedPerPage;
 
-            const savedLayout = localStorage.getItem('meadowRepoLayout') || 'grid';
+            const savedLayout = localStorage.getItem('meadowRepoLayout') || 'list';
             const grid = document.getElementById('reposGrid');
             if (grid) {
                 if (savedLayout === 'list') {
@@ -1887,13 +2105,13 @@
                 }
             }
 
-            showDescriptions = localStorage.getItem('meadowShowDescriptions') !== 'false';
+            showDescriptions = localStorage.getItem('meadowShowDescriptions') === 'true';
 
-            repoVisibility.showPopular = localStorage.getItem('meadowShowPopular') !== 'false';
-            repoVisibility.showOrgs = localStorage.getItem('meadowShowOrgs') !== 'false';
-            repoVisibility.showDonation = localStorage.getItem('meadowShowDonation') !== 'false';
-            repoVisibility.showStats = localStorage.getItem('meadowShowStats') !== 'false';
-            repoWidth = localStorage.getItem('meadowRepoWidth') || 'normal';
+            repoVisibility.showPopular = localStorage.getItem('meadowShowPopular') === 'true';
+            repoVisibility.showOrgs = localStorage.getItem('meadowShowOrgs') === 'true';
+            repoVisibility.showDonation = localStorage.getItem('meadowShowDonation') === 'true';
+            repoVisibility.showStats = localStorage.getItem('meadowShowStats') === 'true';
+            repoWidth = localStorage.getItem('meadowRepoWidth') || 'narrow';
 
             updateSizeButtons();
             updateCompactButton();
@@ -1902,7 +2120,62 @@
             updateRepoLayoutButtons();
             updateShowDescriptionsButton();
             updateRepoVisibilityButtons();
+            updateButtonPositionButtons();
         }
+
+        function setButtonPosition(position) {
+            localStorage.setItem('meadowButtonPosition', position);
+            document.body.setAttribute('data-button-position', position);
+            updateButtonPositionButtons();
+        }
+
+        function updateButtonPositionButtons() {
+            const position = localStorage.getItem('meadowButtonPosition') || (window.innerWidth <= 768 ? 'bottom' : 'top');
+            document.body.setAttribute('data-button-position', position);
+            document.getElementById('buttonPositionTopBtn').classList.toggle('active', position === 'top');
+            document.getElementById('buttonPositionBottomBtn').classList.toggle('active', position === 'bottom');
+        }
+
+        function loadButtonPosition() {
+            const savedPosition = localStorage.getItem('meadowButtonPosition');
+            const position = savedPosition || (window.innerWidth <= 768 ? 'bottom' : 'top');
+            document.body.setAttribute('data-button-position', position);
+            updateButtonPositionButtons();
+        }
+
+        function toggleGuide() {
+            const guidePanel = document.getElementById('guidePanel');
+            const guideOverlay = document.getElementById('guideOverlay');
+            const isOpen = guidePanel.classList.contains('active');
+            if (isOpen) {
+                closeGuide();
+            } else {
+                openGuide();
+            }
+        }
+
+        function openGuide() {
+            const guidePanel = document.getElementById('guidePanel');
+            const guideOverlay = document.getElementById('guideOverlay');
+            guidePanel.classList.add('active');
+            guideOverlay.classList.add('active');
+        }
+
+        function closeGuide() {
+            const guidePanel = document.getElementById('guidePanel');
+            const guideOverlay = document.getElementById('guideOverlay');
+            guidePanel.classList.remove('active');
+            guideOverlay.classList.remove('active');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'g' || e.key === 'G' || e.key === '?') {
+                toggleGuide();
+            } else if (e.key === 'Escape') {
+                closeGuide();
+                document.getElementById('settingsMenu').classList.remove('active');
+            }
+        });
 
         // Close settings menu when clicking outside
         document.addEventListener('click', function(e) {
@@ -1929,6 +2202,7 @@
         }
         updateThemeButtons();
         loadRepoSettings();
+        loadButtonPosition();
 
         const USERNAME = 'MarshMeadow';
         let REPOS_PER_PAGE = 9;
@@ -1941,12 +2215,12 @@
         let showDescriptions = true;
         let currentSearch = '';
         const repoVisibility = {
-            showPopular: true,
-            showOrgs: true,
-            showDonation: true,
-            showStats: true
+            showPopular: false,
+            showOrgs: false,
+            showDonation: false,
+            showStats: false
         };
-        let repoWidth = 'normal';
+        let repoWidth = 'narrow';
 
         function getRepoDescription(repo) {
             if (repo.description) return repo.description;
@@ -2242,8 +2516,12 @@
             const includeArchived = document.getElementById('includeArchived');
             const searchInDesc = document.getElementById('searchInDesc');
             const recentOnly = document.getElementById('recentOnly');
+            const exactMatchBox = document.getElementById('exactMatch');
+            const hasIssuesBox = document.getElementById('hasIssues');
+            const hasDescriptionBox = document.getElementById('hasDescription');
             const searchInput = document.getElementById('searchInput');
             const searchClear = document.getElementById('searchClear');
+            const searchDdg = document.getElementById('searchDdg');
 
             const selectedLang = langSelect ? langSelect.value : 'all';
             const sortBy = sortSelect ? sortSelect.value : 'updated';
@@ -2251,10 +2529,17 @@
             const showArchived = includeArchived ? includeArchived.checked : false;
             const searchDesc = searchInDesc ? searchInDesc.checked : true;
             const recent = recentOnly ? recentOnly.checked : false;
+            const exact = exactMatchBox ? exactMatchBox.checked : false;
+            const requireIssues = hasIssuesBox ? hasIssuesBox.checked : false;
+            const requireDescription = hasDescriptionBox ? hasDescriptionBox.checked : false;
             const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
             if (searchClear) {
                 searchClear.style.display = searchTerm ? 'block' : 'none';
+            }
+
+            if (searchDdg) {
+                searchDdg.style.display = searchTerm ? 'block' : 'none';
             }
 
             // Start with organization filter
@@ -2287,12 +2572,30 @@
                 repos = repos.filter(repo => new Date(repo.updated_at) >= oneYearAgo);
             }
 
+            // Apply "has open issues" filter
+            if (requireIssues) {
+                repos = repos.filter(repo => (repo.open_issues_count || 0) > 0);
+            }
+
+            // Apply "has description" filter
+            if (requireDescription) {
+                repos = repos.filter(repo => repo.description && repo.description.trim() !== '');
+            }
+
             // Apply search
             if (searchTerm !== '') {
                 repos = repos.filter(repo => {
-                    const nameMatch = repo.name.toLowerCase().includes(searchTerm);
-                    const descMatch = searchDesc && repo.description && repo.description.toLowerCase().includes(searchTerm);
-                    const langMatch = searchDesc && repo.language && repo.language.toLowerCase().includes(searchTerm);
+                    const repoName = repo.name.toLowerCase();
+                    const repoDesc = (repo.description || '').toLowerCase();
+                    const repoLang = (repo.language || '').toLowerCase();
+
+                    if (exact) {
+                        return repoName === searchTerm;
+                    }
+
+                    const nameMatch = repoName.includes(searchTerm);
+                    const descMatch = searchDesc && repoDesc.includes(searchTerm);
+                    const langMatch = searchDesc && repoLang.includes(searchTerm);
                     return nameMatch || descMatch || langMatch;
                 });
             }
@@ -2565,7 +2868,17 @@
             applyFilters();
         });
 
+        document.getElementById('exactMatch').addEventListener('change', () => {
+            applyFilters();
+        });
 
+        document.getElementById('hasIssues').addEventListener('change', () => {
+            applyFilters();
+        });
+
+        document.getElementById('hasDescription').addEventListener('change', () => {
+            applyFilters();
+        });
 
         // Initialize
         fetchRepos();
