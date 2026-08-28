@@ -66,6 +66,23 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            transition: max-width 0.3s ease;
+        }
+
+        body[data-repo-width="narrow"] .container {
+            max-width: 900px;
+        }
+
+        body[data-repo-width="wide"] .container {
+            max-width: 1400px;
+        }
+
+        .repos-hide-popular .popular-section,
+        .repos-hide-orgs .orgs-section,
+        .repos-hide-donation .donation-banner,
+        .repos-hide-stats .repo-stats,
+        .repos-hide-lang .repo-language {
+            display: none !important;
         }
 
         .header {
@@ -211,6 +228,79 @@
             padding: 20px;
         }
 
+        .orgs-section {
+            margin: 30px auto 0;
+            max-width: 900px;
+            text-align: left;
+            animation: fadeIn 0.8s ease-out 0.4s backwards;
+        }
+
+        .orgs-section h2 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .orgs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .org-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .org-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+            box-shadow: 0 16px 40px var(--shadow-color);
+        }
+
+        .org-card img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--link-bg);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .org-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            overflow: hidden;
+        }
+
+        .org-card-name {
+            font-weight: 600;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .org-card-desc {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -318,6 +408,93 @@
 
         .search-box::placeholder {
             color: var(--text-muted);
+        }
+
+        .search-box-wrapper {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .search-clear {
+            position: absolute;
+            top: 50%;
+            right: 14px;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .search-clear:hover {
+            color: var(--accent-color);
+            background: var(--link-bg);
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .filter-checkbox input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+        }
+
+        .repos-list {
+            grid-template-columns: 1fr !important;
+        }
+
+        .repos-list .repo-card {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .repos-list .repo-owner {
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .repos-list .repo-owner img {
+            width: 48px;
+            height: 48px;
+        }
+
+        .repos-list .repo-description {
+            min-height: auto;
+            margin-bottom: 0;
+            -webkit-line-clamp: 1;
+        }
+
+        .repos-list .repo-stats {
+            margin-bottom: 0;
+            justify-content: flex-end;
+        }
+
+        .repos-list .repo-language {
+            grid-column: 2;
+            justify-content: flex-start;
         }
 
         .org-filter {
@@ -866,6 +1043,9 @@
             border-radius: 16px;
             padding: 20px;
             min-width: 250px;
+            max-width: min(90vw, 340px);
+            box-sizing: border-box;
+            word-wrap: break-word;
             box-shadow: 0 8px 24px var(--shadow-color);
             display: none;
             animation: fadeIn 0.3s ease;
@@ -1185,6 +1365,24 @@
                 padding: 20px;
             }
 
+            .filter-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .popular-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .orgs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
             .settings-toggle {
                 top: 15px;
                 right: 15px;
@@ -1223,6 +1421,43 @@
             .nav-link {
                 padding: 8px 10px;
                 font-size: 0.75rem;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .filter-checkbox {
+                width: 100%;
+            }
+
+            .repos-list .repo-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .repo-name {
+                word-break: break-word;
+            }
+
+            .org-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .link-card {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -1267,6 +1502,43 @@
                     <div class="size-options" style="flex-direction: column; align-items: stretch; width: 100%;">
                         <button class="size-btn" id="toggleCompactBtn" onclick="toggleCompact()" aria-label="Toggle compact view" style="width: 100%;">Compact</button>
                         <button class="size-btn" id="toggleForksBtn" onclick="toggleShowForks()" aria-label="Toggle forked repos" style="width: 100%;">Hide Forks</button>
+                        <button class="size-btn" id="toggleDescsBtn" onclick="toggleShowDescriptions()" aria-label="Toggle descriptions" style="width: 100%;">Hide Descriptions</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Per page</span>
+                    <div class="size-options">
+                        <button class="size-btn" onclick="setItemsPerPage(9)" aria-label="9 per page">9</button>
+                        <button class="size-btn" onclick="setItemsPerPage(18)" aria-label="18 per page">18</button>
+                        <button class="size-btn" onclick="setItemsPerPage(36)" aria-label="36 per page">36</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Layout</span>
+                    <div class="size-options">
+                        <button class="size-btn" id="layoutGridBtn" onclick="setRepoLayout('grid')" aria-label="Grid layout">Grid</button>
+                        <button class="size-btn" id="layoutListBtn" onclick="setRepoLayout('list')" aria-label="List layout">List</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Visibility</span>
+                    <div class="size-options" style="flex-direction: column; align-items: stretch; width: 100%;">
+                        <button class="size-btn" id="togglePopularBtn" onclick="toggleShowPopular()" aria-label="Toggle popular section" style="width: 100%;">Hide Popular</button>
+                        <button class="size-btn" id="toggleOrgsBtn" onclick="toggleShowOrgs()" aria-label="Toggle organizations" style="width: 100%;">Hide Organizations</button>
+                        <button class="size-btn" id="toggleDonationBtn" onclick="toggleShowDonation()" aria-label="Toggle donation banner" style="width: 100%;">Hide Donation</button>
+                        <button class="size-btn" id="toggleStatsBtn" onclick="toggleShowStats()" aria-label="Toggle repo stats" style="width: 100%;">Hide Stats</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Container Width</span>
+                    <div class="size-options">
+                        <button class="size-btn" id="repoWidthNarrowBtn" onclick="setRepoWidth('narrow')" aria-label="Narrow width">Narrow</button>
+                        <button class="size-btn" id="repoWidthNormalBtn" onclick="setRepoWidth('normal')" aria-label="Normal width">Normal</button>
+                        <button class="size-btn" id="repoWidthWideBtn" onclick="setRepoWidth('wide')" aria-label="Wide width">Wide</button>
                     </div>
                 </div>
             </div>
@@ -1284,6 +1556,10 @@
         </div>
     </nav>
 
+    <div style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; margin: 10px 20px; border-radius: 10px;">
+        ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
+    </div>
+
     <div class="container">
         <div class="header">
             <a href="https://marshmeadow.netlify.app/" class="back-link">← Back to Bio</a>
@@ -1293,19 +1569,37 @@
                 <p class="loading-small">Loading profiles & sites...</p>
             </div>
 
-            <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-secondary);">
+            <div id="orgsSection" class="orgs-section" style="display: none;">
+                <h2>My Organizations</h2>
+                <div class="orgs-grid" id="orgsGrid"></div>
+            </div>
+
+            <p class="donation-banner" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-secondary);">
                 💖 Like what you see? Support the work on <a href="https://ko-fi.com/marshmeadow" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">Ko-fi</a> or <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">Patreon</a>.
             </p>
         </div>
 
         <div class="search-container">
-            <input 
-                type="text" 
-                class="search-box" 
-                id="searchInput" 
-                placeholder="Search repositories..."
-                autocomplete="off"
-            >
+            <div class="search-box-wrapper">
+                <input 
+                    type="text" 
+                    class="search-box" 
+                    id="searchInput" 
+                    placeholder="Search repositories..."
+                    autocomplete="off"
+                >
+                <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Clear search" style="display: none;">×</button>
+            </div>
+            <div class="filter-row">
+                <label class="filter-checkbox" title="Search inside repository descriptions and languages">
+                    <input type="checkbox" id="searchInDesc" checked>
+                    Search descriptions
+                </label>
+                <label class="filter-checkbox" title="Only show repositories updated within the last year">
+                    <input type="checkbox" id="recentOnly">
+                    Recent only
+                </label>
+            </div>
         </div>
 
         <div id="orgFilter" class="org-filter" style="display: none;">
@@ -1326,6 +1620,22 @@
                     <select class="filter-select" id="langSelect" onchange="filterByLanguage()">
                         <option value="all">All Languages</option>
                     </select>
+                </div>
+                <div class="filter-group">
+                    <label>Min Stars:</label>
+                    <select class="filter-select" id="minStarsSelect" onchange="applyFilters()">
+                        <option value="0">All</option>
+                        <option value="1">1+</option>
+                        <option value="10">10+</option>
+                        <option value="50">50+</option>
+                        <option value="100">100+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-checkbox" style="margin: 0;">
+                        <input type="checkbox" id="includeArchived" onchange="applyFilters()">
+                        Include archived
+                    </label>
                 </div>
             </div>
         </div>
@@ -1358,6 +1668,7 @@
             <p>© 2024 Meadow</p>
             <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <span style="opacity: 0.5;">Gallery (Coming Soon)</span> | <a href="skills.html">Skills</a> | <span style="opacity: 0.5;">Contact (Coming Soon)</span></p>
             <p style="margin-top: 10px; font-size: 0.85rem;">💖 Support the work: <a href="https://ko-fi.com/marshmeadow" target="_blank">Ko-fi</a> | <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank">Patreon</a></p>
+            <p style="margin-top: 10px; font-size: 0.85rem; color: #ff5f56;">⚠️ <a href="notice.html" style="color: #ff5f56; text-decoration: underline;">View notice / disclaimer</a>.</p>
         </div>
     </div>
 
@@ -1375,6 +1686,10 @@
             updateSizeButtons();
             updateCompactButton();
             updateShowForksButton();
+            updateItemsPerPageButtons();
+            updateRepoLayoutButtons();
+            updateShowDescriptionsButton();
+            updateRepoVisibilityButtons();
         }
 
         function setTheme(theme) {
@@ -1445,6 +1760,113 @@
             btn.classList.toggle('active', showForks);
         }
 
+        function toggleShowPopular() {
+            repoVisibility.showPopular = !repoVisibility.showPopular;
+            localStorage.setItem('meadowShowPopular', repoVisibility.showPopular);
+            updateRepoVisibilityButtons();
+            displayPopularRepos();
+        }
+
+        function toggleShowOrgs() {
+            repoVisibility.showOrgs = !repoVisibility.showOrgs;
+            localStorage.setItem('meadowShowOrgs', repoVisibility.showOrgs);
+            updateRepoVisibilityButtons();
+            renderOrgsSection(organizations);
+        }
+
+        function toggleShowDonation() {
+            repoVisibility.showDonation = !repoVisibility.showDonation;
+            localStorage.setItem('meadowShowDonation', repoVisibility.showDonation);
+            updateRepoVisibilityButtons();
+        }
+
+        function toggleShowStats() {
+            repoVisibility.showStats = !repoVisibility.showStats;
+            localStorage.setItem('meadowShowStats', repoVisibility.showStats);
+            updateRepoVisibilityButtons();
+            displayRepos();
+        }
+
+        function setRepoWidth(width) {
+            repoWidth = width;
+            localStorage.setItem('meadowRepoWidth', repoWidth);
+            updateRepoVisibilityButtons();
+        }
+
+        function updateRepoVisibilityButtons() {
+            document.getElementById('togglePopularBtn').textContent = repoVisibility.showPopular ? 'Hide Popular' : 'Show Popular';
+            document.getElementById('toggleOrgsBtn').textContent = repoVisibility.showOrgs ? 'Hide Organizations' : 'Show Organizations';
+            document.getElementById('toggleDonationBtn').textContent = repoVisibility.showDonation ? 'Hide Donation' : 'Show Donation';
+            document.getElementById('toggleStatsBtn').textContent = repoVisibility.showStats ? 'Hide Stats' : 'Show Stats';
+
+            document.body.classList.toggle('repos-hide-popular', !repoVisibility.showPopular);
+            document.body.classList.toggle('repos-hide-orgs', !repoVisibility.showOrgs);
+            document.body.classList.toggle('repos-hide-donation', !repoVisibility.showDonation);
+            document.body.classList.toggle('repos-hide-stats', !repoVisibility.showStats);
+            document.body.setAttribute('data-repo-width', repoWidth);
+
+            document.getElementById('repoWidthNarrowBtn').classList.toggle('active', repoWidth === 'narrow');
+            document.getElementById('repoWidthNormalBtn').classList.toggle('active', repoWidth === 'normal');
+            document.getElementById('repoWidthWideBtn').classList.toggle('active', repoWidth === 'wide');
+        }
+
+        function setItemsPerPage(count) {
+            REPOS_PER_PAGE = count;
+            localStorage.setItem('meadowItemsPerPage', count);
+            updateItemsPerPageButtons();
+            applyFilters();
+        }
+
+        function updateItemsPerPageButtons() {
+            const buttons = document.querySelectorAll('.size-btn[onclick^="setItemsPerPage"]');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.textContent) === REPOS_PER_PAGE) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function setRepoLayout(layout) {
+            localStorage.setItem('meadowRepoLayout', layout);
+            const grid = document.getElementById('reposGrid');
+            if (layout === 'list') {
+                grid.classList.add('repos-list');
+            } else {
+                grid.classList.remove('repos-list');
+            }
+            updateRepoLayoutButtons();
+            applyFilters();
+        }
+
+        function updateRepoLayoutButtons() {
+            const layout = localStorage.getItem('meadowRepoLayout') || 'grid';
+            document.getElementById('layoutGridBtn').classList.toggle('active', layout === 'grid');
+            document.getElementById('layoutListBtn').classList.toggle('active', layout === 'list');
+        }
+
+        function toggleShowDescriptions() {
+            showDescriptions = !showDescriptions;
+            localStorage.setItem('meadowShowDescriptions', showDescriptions);
+            updateShowDescriptionsButton();
+            displayRepos();
+        }
+
+        function updateShowDescriptionsButton() {
+            const btn = document.getElementById('toggleDescsBtn');
+            if (!btn) return;
+            btn.textContent = showDescriptions ? 'Hide Descriptions' : 'Show Descriptions';
+            btn.classList.toggle('active', !showDescriptions);
+        }
+
+        function clearSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.value = '';
+                applyFilters();
+            }
+        }
+
         function loadRepoSettings() {
             const savedSize = localStorage.getItem('meadowSize') || 'normal';
             document.body.setAttribute('data-size', savedSize);
@@ -1452,9 +1874,34 @@
             const compact = localStorage.getItem('meadowCompact') === 'true';
             if (compact) document.body.classList.add('compact-mode');
 
+            const savedPerPage = parseInt(localStorage.getItem('meadowItemsPerPage')) || 9;
+            REPOS_PER_PAGE = savedPerPage;
+
+            const savedLayout = localStorage.getItem('meadowRepoLayout') || 'grid';
+            const grid = document.getElementById('reposGrid');
+            if (grid) {
+                if (savedLayout === 'list') {
+                    grid.classList.add('repos-list');
+                } else {
+                    grid.classList.remove('repos-list');
+                }
+            }
+
+            showDescriptions = localStorage.getItem('meadowShowDescriptions') !== 'false';
+
+            repoVisibility.showPopular = localStorage.getItem('meadowShowPopular') !== 'false';
+            repoVisibility.showOrgs = localStorage.getItem('meadowShowOrgs') !== 'false';
+            repoVisibility.showDonation = localStorage.getItem('meadowShowDonation') !== 'false';
+            repoVisibility.showStats = localStorage.getItem('meadowShowStats') !== 'false';
+            repoWidth = localStorage.getItem('meadowRepoWidth') || 'normal';
+
             updateSizeButtons();
             updateCompactButton();
             updateShowForksButton();
+            updateItemsPerPageButtons();
+            updateRepoLayoutButtons();
+            updateShowDescriptionsButton();
+            updateRepoVisibilityButtons();
         }
 
         // Close settings menu when clicking outside
@@ -1484,13 +1931,22 @@
         loadRepoSettings();
 
         const USERNAME = 'MarshMeadow';
-        const REPOS_PER_PAGE = 9;
+        let REPOS_PER_PAGE = 9;
         let allRepos = [];
         let filteredRepos = [];
         let currentPage = 1;
         let organizations = [];
         let selectedOrg = null;
         let descriptionsData = null;
+        let showDescriptions = true;
+        let currentSearch = '';
+        const repoVisibility = {
+            showPopular: true,
+            showOrgs: true,
+            showDonation: true,
+            showStats: true
+        };
+        let repoWidth = 'normal';
 
         function getRepoDescription(repo) {
             if (repo.description) return repo.description;
@@ -1548,6 +2004,44 @@
                     ${siteCards}
                 </div>
             `;
+        }
+
+        function renderOrgsSection(orgs) {
+            const section = document.getElementById('orgsSection');
+            const grid = document.getElementById('orgsGrid');
+            if (!section || !grid) return;
+
+            if (!repoVisibility.showOrgs) {
+                section.style.display = 'none';
+                grid.innerHTML = '';
+                return;
+            }
+
+            if (!orgs || !orgs.length) {
+                section.style.display = 'none';
+                return;
+            }
+
+            grid.innerHTML = orgs.map(org => {
+                const name = org.login;
+                const url = `https://github.com/${org.login}`;
+                const desc = (descriptionsData && descriptionsData.orgs || [])
+                    .find(o => o.url === url || o.name === name)
+                    ?.description || org.description || 'GitHub organization';
+                const avatar = org.avatar_url || `https://github.com/${org.login}.png`;
+
+                return `
+                    <a href="${url}" target="_blank" class="org-card" data-protected="true" aria-label="${name}">
+                        <img src="${avatar}" alt="${name}" loading="lazy">
+                        <div class="org-card-info">
+                            <span class="org-card-name">${name}</span>
+                            <span class="org-card-desc">${desc}</span>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+
+            section.style.display = 'block';
         }
 
         // Language colors
@@ -1626,6 +2120,7 @@
                 if (orgsResponse.ok) {
                     const orgsData = await orgsResponse.json();
                     organizations = orgsData;
+                    renderOrgsSection(organizations);
                     
                     // Fetch repos from each organization
                     for (const org of orgsData) {
@@ -1743,8 +2238,24 @@
         function applyFilters() {
             const langSelect = document.getElementById('langSelect');
             const sortSelect = document.getElementById('sortSelect');
-            const selectedLang = langSelect.value;
-            const sortBy = sortSelect.value;
+            const minStarsSelect = document.getElementById('minStarsSelect');
+            const includeArchived = document.getElementById('includeArchived');
+            const searchInDesc = document.getElementById('searchInDesc');
+            const recentOnly = document.getElementById('recentOnly');
+            const searchInput = document.getElementById('searchInput');
+            const searchClear = document.getElementById('searchClear');
+
+            const selectedLang = langSelect ? langSelect.value : 'all';
+            const sortBy = sortSelect ? sortSelect.value : 'updated';
+            const minStars = minStarsSelect ? parseInt(minStarsSelect.value) : 0;
+            const showArchived = includeArchived ? includeArchived.checked : false;
+            const searchDesc = searchInDesc ? searchInDesc.checked : true;
+            const recent = recentOnly ? recentOnly.checked : false;
+            const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+            if (searchClear) {
+                searchClear.style.display = searchTerm ? 'block' : 'none';
+            }
 
             // Start with organization filter
             let repos = selectedOrg === null ? allRepos : allRepos.filter(repo => repo.owner_name === selectedOrg);
@@ -1757,6 +2268,33 @@
             // Apply fork filter
             if (!showForks) {
                 repos = repos.filter(repo => !repo.fork);
+            }
+
+            // Apply archived filter
+            if (!showArchived) {
+                repos = repos.filter(repo => !repo.archived);
+            }
+
+            // Apply minimum stars filter
+            if (minStars > 0) {
+                repos = repos.filter(repo => repo.stargazers_count >= minStars);
+            }
+
+            // Apply "recent only" filter (last year)
+            if (recent) {
+                const oneYearAgo = new Date();
+                oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+                repos = repos.filter(repo => new Date(repo.updated_at) >= oneYearAgo);
+            }
+
+            // Apply search
+            if (searchTerm !== '') {
+                repos = repos.filter(repo => {
+                    const nameMatch = repo.name.toLowerCase().includes(searchTerm);
+                    const descMatch = searchDesc && repo.description && repo.description.toLowerCase().includes(searchTerm);
+                    const langMatch = searchDesc && repo.language && repo.language.toLowerCase().includes(searchTerm);
+                    return nameMatch || descMatch || langMatch;
+                });
             }
 
             // Apply sorting
@@ -1783,6 +2321,11 @@
             const popularSection = document.getElementById('popularSection');
             const popularGrid = document.getElementById('popularGrid');
             
+            if (!repoVisibility.showPopular) {
+                popularSection.style.display = 'none';
+                return;
+            }
+            
             // Get top repos by stars
             const popularRepos = [...allRepos].sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 6);
             
@@ -1805,7 +2348,7 @@
 
                 card.innerHTML = `
                     <div class="repo-name">${repo.name}</div>
-                    <div class="repo-description">${repo.description || 'No description available'}</div>
+                    <div class="repo-description" style="${showDescriptions ? '' : 'display: none;'}">${repo.description || 'No description available'}</div>
                     <div class="repo-stats">
                         <span>★ ${repo.stargazers_count}</span>
                         <span>⑂ ${repo.forks_count}</span>
@@ -1822,6 +2365,14 @@
             const pagination = document.getElementById('pagination');
 
             reposGrid.innerHTML = '';
+
+            // Apply layout class
+            const layout = localStorage.getItem('meadowRepoLayout') || 'grid';
+            if (layout === 'list') {
+                reposGrid.classList.add('repos-list');
+            } else {
+                reposGrid.classList.remove('repos-list');
+            }
 
             if (filteredRepos.length === 0) {
                 noResults.style.display = 'block';
@@ -1871,7 +2422,7 @@
                     <span>${repo.owner_name}</span>
                 </div>
                 <div class="repo-name">${repo.name}</div>
-                <div class="repo-description">${repo.description || 'No description available'}</div>
+                <div class="repo-description" style="${showDescriptions ? '' : 'display: none;'}">${repo.description || 'No description available'}</div>
                 <div class="repo-stats">
                     <div class="stat">
                         <svg fill="currentColor" viewBox="0 0 16 16">
@@ -2002,8 +2553,16 @@
         }
 
         // Event listeners
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            searchRepos(e.target.value);
+        document.getElementById('searchInput').addEventListener('input', () => {
+            applyFilters();
+        });
+
+        document.getElementById('searchInDesc').addEventListener('change', () => {
+            applyFilters();
+        });
+
+        document.getElementById('recentOnly').addEventListener('change', () => {
+            applyFilters();
         });
 
 

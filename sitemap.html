@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Notice and disclaimer for Meadow's personal bio website.">
-    <title>Notice / Disclaimer - Meadow</title>
+    <meta name="description" content="Sitemap for Meadow's personal website.">
+    <title>Sitemap - Meadow</title>
     <script src="security.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,10 +50,38 @@
             color: white;
         }
 
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #e6edf3;
+        }
+
         p {
             line-height: 1.6;
             margin-bottom: 15px;
             color: #b4b4b4;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: #b4b4b4;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
 
         .back {
@@ -72,6 +100,12 @@
             text-decoration: underline;
         }
 
+        .more-links {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
         @media (max-width: 480px) {
             .notice-card {
                 padding: 25px;
@@ -85,21 +119,43 @@
 </head>
 <body>
     <main class="notice-card">
-        <h1>Notice / Disclaimer</h1>
-        <p>This is a personal bio and portfolio website for Meadow. The content here is for informational and personal-use purposes only.</p>
-        <p>By viewing this site you agree not to copy, redistribute, scrape, or abuse any content, images, code, or personal information found on these pages. Personal contact and social account links are protected with a simple puzzle as an extra safeguard.</p>
-        <p>If you have questions or want to reach out, please use the public social links on the main bio page. Do not attempt to bypass the security measures or access personal contact details without permission.</p>
+        <h1>Sitemap</h1>
+        <p>All public pages on this site.</p>
+
+        <h2>Main</h2>
+        <ul>
+            <li><a href="index.html">Bio / Home</a></li>
+            <li><a href="old.html">Old Bio (legacy)</a></li>
+        </ul>
+
+        <h2>Projects & Code</h2>
+        <ul>
+            <li><a href="repos.html">Repositories</a></li>
+            <li><a href="skills.html">Skills & Technologies</a></li>
+        </ul>
+
+        <h2>Coming Soon</h2>
+        <ul>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <h2>Info</h2>
+        <ul>
+            <li><a href="notice.html">Notice / Disclaimer</a></li>
+            <li><a href="privacy.html">Privacy Notes</a></li>
+            <li><a href="credits.html">Credits & Attributions</a></li>
+            <li><a href="pronouns.html">Pronouns</a></li>
+        </ul>
+
+        <h2>Other</h2>
+        <ul>
+            <li><a href="beta-test-page.html">Beta Test Page</a></li>
+            <li><a href="sitemap.html">Sitemap</a> (this page)</li>
+        </ul>
+
         <a href="index.html" class="back">← Back to Bio</a>
-        <p style="margin-top: 20px; color: #b4b4b4; font-size: 0.9rem;">
-            💖 Support the work: <a href="https://ko-fi.com/marshmeadow" target="_blank" style="color: #667eea; text-decoration: none;">Ko-fi</a>
-            <span style="margin: 0 8px;">|</span>
-            <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank" style="color: #667eea; text-decoration: none;">Patreon</a>
-        </p>
-        <p style="margin-top: 15px; font-size: 0.85rem;">
-            <a href="privacy.html" style="color: #667eea; text-decoration: none;">Privacy</a> • 
-            <a href="credits.html" style="color: #667eea; text-decoration: none;">Credits</a> • 
-            <a href="sitemap.html" style="color: #667eea; text-decoration: none;">Sitemap</a>
-        </p>
+        <p class="more-links"><a href="privacy.html">Privacy</a> • <a href="credits.html">Credits</a> • <a href="notice.html">Notice</a></p>
     </main>
 </body>
 </html>

@@ -396,6 +396,20 @@
             transition-duration: 0.01ms !important;
         }
 
+        .index-hide-footer .footer,
+        .index-hide-fab .fab,
+        .index-hide-status .status-indicator {
+            display: none !important;
+        }
+
+        body[data-bio-width="wide"] .bio-card {
+            max-width: 800px;
+        }
+
+        body[data-bio-width="compact"] .bio-card {
+            max-width: 420px;
+        }
+
         .dropdown {
             margin-bottom: 12px;
         }
@@ -561,6 +575,9 @@
             border-radius: 16px;
             padding: 20px;
             min-width: 250px;
+            max-width: min(90vw, 340px);
+            box-sizing: border-box;
+            word-wrap: break-word;
             box-shadow: 0 8px 24px var(--shadow-color);
             display: none;
             animation: fadeIn 0.3s ease;
@@ -1148,7 +1165,7 @@
         @media (max-width: 480px) {
             .bio-card {
                 padding: 30px 20px;
-                max-width: 100%;
+                max-width: 100% !important;
                 margin-top: 130px;
             }
 
@@ -1206,6 +1223,24 @@
                 font-size: 1rem;
                 padding: 12px 24px;
             }
+
+            .settings-menu {
+                right: -10px;
+                max-width: calc(100vw - 40px);
+            }
+
+            .bio-name {
+                word-break: break-word;
+            }
+
+            .checkout-track {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .guide-panel {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -1262,6 +1297,24 @@
                 <div class="setting-item">
                     <span>Motion</span>
                     <button class="size-btn" id="toggleMotionBtn" onclick="toggleReducedMotion()" aria-label="Toggle reduced motion" style="width: 100%;">Reduce Motion</button>
+                </div>
+
+                <div class="setting-item">
+                    <span>Visibility</span>
+                    <div class="size-options" style="flex-direction: column; align-items: stretch; width: 100%;">
+                        <button class="size-btn" id="toggleFooterBtn" onclick="toggleShowFooter()" aria-label="Toggle footer" style="width: 100%;">Hide Footer</button>
+                        <button class="size-btn" id="toggleFabBtn" onclick="toggleShowFab()" aria-label="Toggle scroll-to-top" style="width: 100%;">Hide Back-to-Top</button>
+                        <button class="size-btn" id="toggleStatusBtn" onclick="toggleShowStatus()" aria-label="Toggle status" style="width: 100%;">Hide Status</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Bio Card Width</span>
+                    <div class="size-options">
+                        <button class="size-btn" id="bioWidthCompactBtn" onclick="setBioWidth('compact')" aria-label="Compact width">Compact</button>
+                        <button class="size-btn" id="bioWidthNormalBtn" onclick="setBioWidth('normal')" aria-label="Normal width">Normal</button>
+                        <button class="size-btn" id="bioWidthWideBtn" onclick="setBioWidth('wide')" aria-label="Wide width">Wide</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1331,7 +1384,9 @@
         </div>
     </nav>
 
-
+    <div style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; margin: 10px 20px; border-radius: 10px;">
+        ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
+    </div>
 
     <div class="bio-card">
         <div class="avatar">
@@ -1663,7 +1718,7 @@
         </div>
 
         <div class="footer">
-            <p style="color: #ff5f56; font-size: 0.85rem; margin-top: 20px;">⚠️ Please do not abuse any content on this page. You agreed to this upon entering.</p>
+            <p style="color: #ff5f56; font-size: 0.85rem; margin-top: 20px;">⚠️ Please do not abuse any content on this page. You agreed to this upon entering. <a href="notice.html" style="color: #ff5f56; text-decoration: underline;">Read full notice / disclaimer</a>.</p>
             <p style="margin-top: 15px; font-size: 0.95rem; font-weight: 600;">
                 <a href="https://ko-fi.com/marshmeadow" target="_blank" style="color: #667eea; text-decoration: none;">☕ Support on Ko-fi</a>
                 <span style="margin: 0 10px; color: var(--text-muted);">|</span>
@@ -1671,6 +1726,12 @@
             </p>
             <p>© 2024 Meadow</p>
             <p class="last-updated">Last updated: August 2026</p>
+            <p style="margin-top: 8px; font-size: 0.85rem;">
+                <a href="notice.html" style="color: #667eea; text-decoration: none;">Notice</a> • 
+                <a href="privacy.html" style="color: #667eea; text-decoration: none;">Privacy</a> • 
+                <a href="credits.html" style="color: #667eea; text-decoration: none;">Credits</a> • 
+                <a href="sitemap.html" style="color: #667eea; text-decoration: none;">Sitemap</a>
+            </p>
             <p style="margin-top: 10px;">
                 <a href="/repos" target="_blank" style="color: #667eea; text-decoration: none;">All Repos</a> | 
                 <span style="opacity: 0.5;">Gallery (Coming Soon)</span> | 
@@ -1699,6 +1760,7 @@
             settingsMenu.classList.toggle('active');
             updateThemeButtons();
             updateSizeButtons();
+            updateViewButtons();
         }
 
         function setTheme(theme) {
@@ -1746,19 +1808,35 @@
             showGifs: true,
             showCarousel: true,
             showQuickLinks: true,
+            showFooter: true,
+            showFab: true,
+            showStatus: true,
             reducedMotion: false
         };
+
+        let bioWidth = 'normal';
 
         function updateViewButtons() {
             document.getElementById('toggleGifsBtn').textContent = viewToggles.showGifs ? 'Hide GIFs' : 'Show GIFs';
             document.getElementById('toggleCarouselBtn').textContent = viewToggles.showCarousel ? 'Hide Carousel' : 'Show Carousel';
             document.getElementById('toggleQuickLinksBtn').textContent = viewToggles.showQuickLinks ? 'Hide Quick Links' : 'Show Quick Links';
+            document.getElementById('toggleFooterBtn').textContent = viewToggles.showFooter ? 'Hide Footer' : 'Show Footer';
+            document.getElementById('toggleFabBtn').textContent = viewToggles.showFab ? 'Hide Back-to-Top' : 'Show Back-to-Top';
+            document.getElementById('toggleStatusBtn').textContent = viewToggles.showStatus ? 'Hide Status' : 'Show Status';
             document.getElementById('toggleMotionBtn').textContent = viewToggles.reducedMotion ? 'Enable Motion' : 'Reduce Motion';
 
             document.body.classList.toggle('index-hide-gifs', !viewToggles.showGifs);
             document.body.classList.toggle('index-hide-carousel', !viewToggles.showCarousel);
             document.body.classList.toggle('index-hide-quicklinks', !viewToggles.showQuickLinks);
+            document.body.classList.toggle('index-hide-footer', !viewToggles.showFooter);
+            document.body.classList.toggle('index-hide-fab', !viewToggles.showFab);
+            document.body.classList.toggle('index-hide-status', !viewToggles.showStatus);
             document.body.classList.toggle('reduced-motion', viewToggles.reducedMotion);
+
+            document.body.setAttribute('data-bio-width', bioWidth);
+            document.getElementById('bioWidthCompactBtn').classList.toggle('active', bioWidth === 'compact');
+            document.getElementById('bioWidthNormalBtn').classList.toggle('active', bioWidth === 'normal');
+            document.getElementById('bioWidthWideBtn').classList.toggle('active', bioWidth === 'wide');
         }
 
         function toggleShowGifs() {
@@ -1779,6 +1857,30 @@
             updateViewButtons();
         }
 
+        function toggleShowFooter() {
+            viewToggles.showFooter = !viewToggles.showFooter;
+            localStorage.setItem('meadowShowFooter', viewToggles.showFooter);
+            updateViewButtons();
+        }
+
+        function toggleShowFab() {
+            viewToggles.showFab = !viewToggles.showFab;
+            localStorage.setItem('meadowShowFab', viewToggles.showFab);
+            updateViewButtons();
+        }
+
+        function toggleShowStatus() {
+            viewToggles.showStatus = !viewToggles.showStatus;
+            localStorage.setItem('meadowShowStatus', viewToggles.showStatus);
+            updateViewButtons();
+        }
+
+        function setBioWidth(width) {
+            bioWidth = width;
+            localStorage.setItem('meadowBioWidth', bioWidth);
+            updateViewButtons();
+        }
+
         function toggleReducedMotion() {
             viewToggles.reducedMotion = !viewToggles.reducedMotion;
             localStorage.setItem('meadowReducedMotion', viewToggles.reducedMotion);
@@ -1789,7 +1891,11 @@
             viewToggles.showGifs = localStorage.getItem('meadowShowGifs') !== 'false';
             viewToggles.showCarousel = localStorage.getItem('meadowShowCarousel') !== 'false';
             viewToggles.showQuickLinks = localStorage.getItem('meadowShowQuickLinks') !== 'false';
+            viewToggles.showFooter = localStorage.getItem('meadowShowFooter') !== 'false';
+            viewToggles.showFab = localStorage.getItem('meadowShowFab') !== 'false';
+            viewToggles.showStatus = localStorage.getItem('meadowShowStatus') !== 'false';
             viewToggles.reducedMotion = localStorage.getItem('meadowReducedMotion') === 'true';
+            bioWidth = localStorage.getItem('meadowBioWidth') || 'normal';
             updateViewButtons();
         }
 
