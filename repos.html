@@ -1805,7 +1805,7 @@
             </div>
             <div class="filter-row">
                 <label class="filter-checkbox" title="Search inside repository descriptions and languages">
-                    <input type="checkbox" id="searchInDesc" checked>
+                    <input type="checkbox" id="searchInDesc">
                     Search descriptions
                 </label>
                 <label class="filter-checkbox" title="Only show repositories updated within the last year">
@@ -2121,12 +2121,12 @@
                 }
             }
 
-            showDescriptions = localStorage.getItem('meadowShowDescriptions') === 'true';
+            showDescriptions = localStorage.getItem('meadowShowDescriptions') !== 'false';
 
             repoVisibility.showPopular = localStorage.getItem('meadowShowPopular') === 'true';
             repoVisibility.showOrgs = localStorage.getItem('meadowShowOrgs') === 'true';
             repoVisibility.showDonation = localStorage.getItem('meadowShowDonation') === 'true';
-            repoVisibility.showStats = localStorage.getItem('meadowShowStats') === 'true';
+            repoVisibility.showStats = localStorage.getItem('meadowShowStats') !== 'false';
             repoWidth = localStorage.getItem('meadowRepoWidth') || 'narrow';
 
             updateSizeButtons();
@@ -2234,7 +2234,7 @@
             showPopular: false,
             showOrgs: false,
             showDonation: false,
-            showStats: false
+            showStats: true
         };
         let repoWidth = 'narrow';
 
