@@ -18,6 +18,7 @@
     
     <!-- Security Script -->
     <script src="security.js"></script>
+    <script src="puzzle.js"></script>
     
     <style>
         :root {
@@ -1117,19 +1118,25 @@
             <a href="https://marshmeadow.netlify.app/" class="back-link">← Back to Bio</a>
             <h1>~/Meadow's Repositories</h1>
             <p style="max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">Indie developer, coder, and gamer. Below are my personal GitHub, the organizations I work with, and the project sites I've built.</p>
-            <a href="https://github.com/MarshMeadow?tab=repositories" target="_blank" class="back-link secondary">View on GitHub →</a>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;">
-                <a href="https://github.com/MarshMeadow" target="_blank" class="back-link secondary">GitHub :: Meadow</a>
-                <a href="https://github.com/HDO-PRO" target="_blank" class="back-link secondary">HDO PRO</a>
-                <a href="https://github.com/Neko-s-Index" target="_blank" class="back-link secondary">Neko-s Index</a>
-                <a href="https://github.com/Nekomo-App" target="_blank" class="back-link secondary">Nekomo App</a>
-                <a href="https://github.com/ReSpotF-ck" target="_blank" class="back-link secondary">ReSpotF-ck</a>
-            </div>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
-                <a href="https://nekomoapp.netlify.app/" target="_blank" class="back-link secondary">Nekomo Site</a>
-                <a href="https://hdopro.netlify.app/" target="_blank" class="back-link secondary">HDO PRO Site</a>
-                <a href="https://n3k0s-index.netlify.app/" target="_blank" class="back-link secondary">N3K0s Index Site</a>
-                <a href="https://respotfck.netlify.app/" target="_blank" class="back-link secondary">ReSpotF-ck Site</a>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px;">
+                <p style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
+                    <strong style="color: var(--text-primary);">Main:</strong>
+                    <a href="https://github.com/MarshMeadow" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">MarshMeadow on GitHub</a>
+                </p>
+                <p style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
+                    <strong style="color: var(--text-primary);">Orgs:</strong>
+                    <a href="https://github.com/HDO-PRO" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">HDO PRO</a> •
+                    <a href="https://github.com/Neko-s-Index" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">Neko-s Index</a> •
+                    <a href="https://github.com/Nekomo-App" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">Nekomo App</a> •
+                    <a href="https://github.com/ReSpotF-ck" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">ReSpotF-ck</a>
+                </p>
+                <p style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
+                    <strong style="color: var(--text-primary);">Sites:</strong>
+                    <a href="https://nekomoapp.netlify.app/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">Nekomo</a> •
+                    <a href="https://hdopro.netlify.app/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">HDO PRO</a> •
+                    <a href="https://n3k0s-index.netlify.app/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">N3K0s Index</a> •
+                    <a href="https://respotfck.netlify.app/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">ReSpotF-ck</a>
+                </p>
             </div>
         </div>
 
@@ -1192,6 +1199,7 @@
         <div class="footer">
             <p>© 2024 Meadow</p>
             <p style="margin-top: 10px;"><a href="index.html">← Back to Bio</a> | <span style="opacity: 0.5;">Gallery (Coming Soon)</span> | <a href="skills.html">Skills</a> | <span style="opacity: 0.5;">Contact (Coming Soon)</span></p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">💖 Support the work: <a href="https://ko-fi.com/marshmeadow" target="_blank">Ko-fi</a> | <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank">Patreon</a></p>
         </div>
     </div>
 
@@ -1490,7 +1498,10 @@
                 const card = document.createElement('div');
                 card.className = 'popular-card';
                 card.style.animationDelay = `${index * 0.1}s`;
-                card.onclick = () => window.open(repo.html_url, '_blank');
+                card.setAttribute('data-protected', 'true');
+                card.setAttribute('data-href', repo.html_url);
+                card.setAttribute('data-target', '_blank');
+                card.style.cursor = 'pointer';
 
                 card.innerHTML = `
                     <div class="repo-name">${repo.name}</div>
@@ -1540,7 +1551,10 @@
             const card = document.createElement('div');
             card.className = 'repo-card';
             card.style.animationDelay = `${index * 0.1}s`;
-            card.onclick = () => window.open(repo.html_url, '_blank');
+            card.setAttribute('data-protected', 'true');
+            card.setAttribute('data-href', repo.html_url);
+            card.setAttribute('data-target', '_blank');
+            card.style.cursor = 'pointer';
 
             const languageColor = languageColors[repo.language] || languageColors['null'];
             const ownerAvatar = repo.org_avatar || `https://avatars.githubusercontent.com/u/88599122?v=4`;

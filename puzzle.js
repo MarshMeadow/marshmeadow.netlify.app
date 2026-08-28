@@ -2,7 +2,7 @@
     'use strict';
 
     var SOLVED_KEY = 'meadowPuzzleSolved';
-    var SOLVED_TTL_MS = 10 * 60 * 1000; // 10 minutes
+    var SOLVED_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
     var overlay = null;
     var currentAnswer = null;
@@ -17,14 +17,14 @@
     var cancelEl = null;
 
     function isSolved() {
-        var solved = sessionStorage.getItem(SOLVED_KEY);
+        var solved = localStorage.getItem(SOLVED_KEY);
         if (!solved) return false;
         var ts = parseInt(solved, 10);
         return !isNaN(ts) && (Date.now() - ts) < SOLVED_TTL_MS;
     }
 
     function setSolved() {
-        sessionStorage.setItem(SOLVED_KEY, Date.now().toString());
+        localStorage.setItem(SOLVED_KEY, Date.now().toString());
     }
 
     function openLink(href, target) {
@@ -264,7 +264,7 @@
     }
 
     function protectLinks() {
-        var selectors = ['[data-personal] a', 'a[data-protected]'];
+        var selectors = ['[data-personal] a', 'a[data-protected]', 'a[href*="github.com"]'];
         selectors.forEach(function(selector) {
             var links = document.querySelectorAll(selector);
             links.forEach(function(link) {
@@ -275,11 +275,11 @@
         });
 
         document.addEventListener('click', function(e) {
-            var link = e.target.closest('a[data-protected]');
+            var link = e.target.closest('[data-protected]');
             if (!link) return;
 
-            var href = link.getAttribute('href');
-            var target = link.getAttribute('target') || '_self';
+            var href = link.getAttribute('data-href') || link.getAttribute('href');
+            var target = link.getAttribute('data-target') || link.getAttribute('target') || '_self';
 
             if (!href || href === '#' || href === 'javascript:void(0)' || href.indexOf('javascript:') === 0) return;
 
