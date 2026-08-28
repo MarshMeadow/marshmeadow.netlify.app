@@ -1779,7 +1779,7 @@
         <div class="header">
             <a href="https://marshmeadow.netlify.app/" class="back-link">← Back to Bio</a>
             <h1>~/Meadow's Repositories</h1>
-            <p style="max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">Indie developer, coder, and gamer. Below are my personal GitHub, the organizations I work with, and the project sites I've built.</p>
+            <p style="max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">Indie developer, coder, and gamer. Below are my personal GitHub, the organizations I work with, and the project sites I've built. If the list doesn't load, you can also visit my <a href="https://github.com/MarshMeadow" target="_blank" rel="noopener noreferrer" data-protected="true">GitHub profile</a> or <a href="https://linktr.ee/MarshMeadow" target="_blank" rel="noopener noreferrer">Linktree</a> directly.</p>
             <div id="linksSection" class="links-section">
                 <p class="loading-small">Loading profiles & sites...</p>
             </div>
@@ -2473,9 +2473,17 @@
             if (loading) loading.style.display = 'none';
             if (error) {
                 error.style.display = 'block';
-                error.textContent = msg;
+                error.innerHTML = msg + '<br><button onclick="retryFetchRepos()" style="margin-top: 12px; padding: 8px 16px; background: var(--accent-color); color: white; border: none; border-radius: 8px; cursor: pointer;">Try Again</button>';
             }
             console.error(msg);
+        }
+
+        function retryFetchRepos() {
+            const error = document.getElementById('error');
+            if (error) error.style.display = 'none';
+            const loading = document.getElementById('loading');
+            if (loading) loading.style.display = 'block';
+            fetchRepos();
         }
 
         async function fetchRepos() {
@@ -2505,7 +2513,7 @@
                 let page = 1;
                 let hasMore = true;
                 while (hasMore) {
-                    const response = await fetchWithTimeout(`https://api.github.com/users/${USERNAME}/repos?page=${page}&per_page=100&sort=updated`);
+                    const response = await fetchWithTimeout(`https://api.github.com/users/${USERNAME}/repos?page=${page}&per_page=100&sort=updated`, {}, 30000);
                     
                     if (!response.ok) {
                         throw new Error(`GitHub API error ${response.status} while fetching repositories`);
@@ -2530,7 +2538,7 @@
                 }
 
                 // Fetch user's organizations
-                const orgsResponse = await fetchWithTimeout(`https://api.github.com/users/${USERNAME}/orgs`);
+                const orgsResponse = await fetchWithTimeout(`https://api.github.com/users/${USERNAME}/orgs`, {}, 30000);
                 if (orgsResponse.ok) {
                     const orgsData = await orgsResponse.json();
                     organizations = Array.isArray(orgsData) ? orgsData : [];
@@ -2541,7 +2549,7 @@
                         let orgPage = 1;
                         let orgHasMore = true;
                         while (orgHasMore) {
-                            const orgReposResponse = await fetchWithTimeout(`https://api.github.com/orgs/${org.login}/repos?page=${orgPage}&per_page=100&sort=updated`);
+                            const orgReposResponse = await fetchWithTimeout(`https://api.github.com/orgs/${org.login}/repos?page=${orgPage}&per_page=100&sort=updated`, {}, 30000);
                             
                             if (orgReposResponse.ok) {
                                 const orgReposData = await orgReposResponse.json();
