@@ -1827,13 +1827,13 @@
 
         // ==================== VIEW & MOTION TOGGLES ====================
         const viewToggles = {
-            showGifs: false,
-            showCarousel: false,
-            showQuickLinks: false,
-            showFooter: false,
-            showFab: false,
-            showStatus: false,
-            reducedMotion: true
+            showGifs: true,
+            showCarousel: true,
+            showQuickLinks: true,
+            showFooter: true,
+            showFab: true,
+            showStatus: true,
+            reducedMotion: false
         };
 
         let bioWidth = 'compact';
@@ -1929,13 +1929,13 @@
         }
 
         function loadViewToggles() {
-            viewToggles.showGifs = localStorage.getItem('meadowShowGifs') === 'true';
-            viewToggles.showCarousel = localStorage.getItem('meadowShowCarousel') === 'true';
-            viewToggles.showQuickLinks = localStorage.getItem('meadowShowQuickLinks') === 'true';
-            viewToggles.showFooter = localStorage.getItem('meadowShowFooter') === 'true';
-            viewToggles.showFab = localStorage.getItem('meadowShowFab') === 'true';
-            viewToggles.showStatus = localStorage.getItem('meadowShowStatus') === 'true';
-            viewToggles.reducedMotion = localStorage.getItem('meadowReducedMotion') !== 'false';
+            viewToggles.showGifs = localStorage.getItem('meadowShowGifs') !== 'false';
+            viewToggles.showCarousel = localStorage.getItem('meadowShowCarousel') !== 'false';
+            viewToggles.showQuickLinks = localStorage.getItem('meadowShowQuickLinks') !== 'false';
+            viewToggles.showFooter = localStorage.getItem('meadowShowFooter') !== 'false';
+            viewToggles.showFab = localStorage.getItem('meadowShowFab') !== 'false';
+            viewToggles.showStatus = localStorage.getItem('meadowShowStatus') !== 'false';
+            viewToggles.reducedMotion = localStorage.getItem('meadowReducedMotion') === 'true';
             bioWidth = localStorage.getItem('meadowBioWidth') || 'compact';
             updateViewButtons();
         }
