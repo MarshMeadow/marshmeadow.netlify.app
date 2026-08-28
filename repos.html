@@ -1204,6 +1204,9 @@
             box-shadow: 0 8px 24px var(--shadow-color);
             display: none;
             animation: fadeIn 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+            overscroll-behavior: contain;
         }
 
         .settings-menu.active {
@@ -1501,7 +1504,7 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             body {
-                padding: 15px;
+                padding: 15px 15px 100px;
             }
 
             .header {
@@ -2451,6 +2454,19 @@
             'null': '#8b949e'
         };
 
+        async function fetchWithTimeout(url, options = {}, timeout = 15000) {
+            const controller = new AbortController();
+            const id = setTimeout(() => controller.abort(), timeout);
+            try {
+                const response = await fetch(url, { ...options, signal: controller.signal });
+                clearTimeout(id);
+                return response;
+            } catch (err) {
+                clearTimeout(id);
+                throw err;
+            }
+        }
+
         async function fetchRepos() {
             const loading = document.getElementById('loading');
             const error = document.getElementById('error');
@@ -2459,7 +2475,7 @@
             try {
                 // Try to load local descriptions file
                 try {
-                    const descResponse = await fetch('descriptions.json');
+                    const descResponse = await fetchWithTimeout('descriptions.json');
                     if (descResponse.ok) {
                         descriptionsData = await descResponse.json();
                         renderLinksSection(descriptionsData);
@@ -2478,14 +2494,18 @@
                 let page = 1;
                 let hasMore = true;
                 while (hasMore) {
-                    const response = await fetch(`https://api.github.com/users/${USERNAME}/repos?page=${page}&per_page=100&sort=updated`);
+                    const response = await fetchWithTimeout(`https://api.github.com/users/${USERNAME}/repos?page=${page}&per_page=100&sort=updated`);
                     
                     if (!response.ok) {
                         throw new Error(`GitHub API error ${response.status} while fetching repositories`);
                     }
 
                     const data = await response.json();
-                    
+
+                    if (!Array.isArray(data)) {
+                        throw new Error('Unexpected response from GitHub API while fetching repositories');
+                    }
+
                     if (data.length === 0) {
                         hasMore = false;
                     } else {
@@ -2499,10 +2519,10 @@
                 }
 
                 // Fetch user's organizations
-                const orgsResponse = await fetch(`https://api.github.com/users/${USERNAME}/orgs`);
+                const orgsResponse = await fetchWithTimeout(`https://api.github.com/users/${USERNAME}/orgs`);
                 if (orgsResponse.ok) {
                     const orgsData = await orgsResponse.json();
-                    organizations = orgsData;
+                    organizations = Array.isArray(orgsData) ? orgsData : [];
                     renderOrgsSection(organizations);
                     
                     // Fetch repos from each organization
@@ -2510,11 +2530,16 @@
                         let orgPage = 1;
                         let orgHasMore = true;
                         while (orgHasMore) {
-                            const orgReposResponse = await fetch(`https://api.github.com/orgs/${org.login}/repos?page=${orgPage}&per_page=100&sort=updated`);
+                            const orgReposResponse = await fetchWithTimeout(`https://api.github.com/orgs/${org.login}/repos?page=${orgPage}&per_page=100&sort=updated`);
                             
                             if (orgReposResponse.ok) {
                                 const orgReposData = await orgReposResponse.json();
-                                
+
+                                if (!Array.isArray(orgReposData)) {
+                                    orgHasMore = false;
+                                    continue;
+                                }
+
                                 if (orgReposData.length === 0) {
                                     orgHasMore = false;
                                 } else {
