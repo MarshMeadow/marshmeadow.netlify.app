@@ -15,6 +15,7 @@
     var questionEl = null;
     var inputEl = null;
     var msgEl = null;
+    var submitEl = null;
     var cancelEl = null;
 
     function isPageSolved() {
@@ -37,11 +38,13 @@
     }
 
     function openLink(href, target) {
-        if (!href) return;
+        if (!href) return true;
         if (target === '_blank' || target === 'blank') {
-            window.open(href, '_blank');
+            var win = window.open(href, '_blank');
+            return !!win;
         } else {
             window.location.href = href;
+            return true;
         }
     }
 
@@ -187,11 +190,11 @@
         inputEl = el.querySelector('#meadowPuzzleInput');
         msgEl = el.querySelector('#meadowPuzzleMessage');
 
-        var submit = el.querySelector('#meadowPuzzleSubmit');
+        submitEl = el.querySelector('#meadowPuzzleSubmit');
         var cancel = el.querySelector('#meadowPuzzleCancel');
         cancelEl = cancel;
 
-        submit.addEventListener('click', checkAnswer);
+        submitEl.addEventListener('click', checkAnswer);
 
         inputEl.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -229,6 +232,10 @@
         pendingTarget = target || '_self';
         createOverlay();
 
+        if (inputEl) inputEl.style.display = '';
+        if (submitEl) submitEl.style.display = '';
+        if (msgEl) msgEl.textContent = '';
+
         if (cancelEl) cancelEl.style.display = pageMode ? 'none' : '';
 
         if (pageMode) {
@@ -255,17 +262,44 @@
         pageMode = false;
     }
 
+    function showLinkFallback(href, target) {
+        if (questionEl) questionEl.textContent = 'Correct! Click the link below if it did not open automatically.';
+        if (inputEl) inputEl.style.display = 'none';
+        if (submitEl) submitEl.style.display = 'none';
+        if (cancelEl) cancelEl.textContent = 'Close';
+        if (msgEl) {
+            msgEl.textContent = 'Open link: ';
+            var a = document.createElement('a');
+            a.href = href;
+            a.target = target;
+            a.rel = 'noopener';
+            a.textContent = href;
+            a.style.cssText = 'color: #667eea; text-decoration: underline; font-weight: 600; word-break: break-all;';
+            a.addEventListener('click', function() {
+                hideOverlay();
+            });
+            msgEl.appendChild(a);
+        }
+    }
+
     function checkAnswer() {
         var value = inputEl ? inputEl.value.trim() : '';
         if (parseInt(value, 10) === currentAnswer) {
             if (pageMode) {
                 setPageSolved();
+                hideOverlay();
             } else {
                 setLinksSolved();
-            }
-            hideOverlay();
-            if (!pageMode && pendingHref) {
-                openLink(pendingHref, pendingTarget);
+                if (pendingHref) {
+                    var opened = openLink(pendingHref, pendingTarget);
+                    if (opened) {
+                        hideOverlay();
+                    } else {
+                        showLinkFallback(pendingHref, pendingTarget);
+                    }
+                } else {
+                    hideOverlay();
+                }
             }
         } else {
             if (msgEl) msgEl.textContent = 'Not quite. Try again!';
