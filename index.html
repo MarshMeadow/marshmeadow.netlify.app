@@ -1118,16 +1118,16 @@
 
         /* Navigation Menu */
         .nav-menu {
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border-bottom: 2px solid var(--link-border);
             padding: 15px 20px;
             z-index: 999;
             box-shadow: 0 4px 20px var(--shadow-color);
+            border-radius: 0 0 16px 16px;
         }
 
         .nav-container {
@@ -1428,6 +1428,14 @@
         <img src="Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Sleeping Cat" loading="lazy" style="width: 100%; height: auto;">
     </div>
 
+    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #ffc107; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: 100%; max-width: 1200px; margin: 0 auto 8px; box-sizing: border-box;">
+        Note: Some things may not work correctly on mobile yet.
+    </div>
+
+    <div class="notice-banner" style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: 100%; max-width: 1200px; margin: 0 auto 12px; box-sizing: border-box;">
+        ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
+    </div>
+
     <!-- Navigation Menu -->
     <nav class="nav-menu">
         <div class="nav-container">
@@ -1439,14 +1447,6 @@
             <a href="https://t.me/+Kn4q7gvoqdg0OWVh" target="_blank" rel="noopener" class="nav-link">Telegram</a>
         </div>
     </nav>
-
-    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #ffc107; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: calc(100% - 40px); max-width: 1200px; margin: 80px auto 10px; box-sizing: border-box;">
-        Note: Some things may not work correctly on mobile yet.
-    </div>
-
-    <div class="notice-banner" style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: calc(100% - 40px); max-width: 1200px; margin: 10px auto; align-self: center; box-sizing: border-box;">
-        ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
-    </div>
 
     <div class="bio-card">
         <div class="avatar">
