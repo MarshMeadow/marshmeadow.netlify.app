@@ -1,7 +1,8 @@
 (function() {
     'use strict';
 
-    var SOLVED_KEY = 'meadowPuzzleSolved';
+    var PAGE_SOLVED_KEY = 'meadowPuzzleSolved';
+    var LINKS_SOLVED_KEY = 'meadowPuzzleLinksSolved';
     var SOLVED_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
     var overlay = null;
@@ -16,15 +17,23 @@
     var msgEl = null;
     var cancelEl = null;
 
-    function isSolved() {
-        var solved = localStorage.getItem(SOLVED_KEY);
+    function isPageSolved() {
+        var solved = localStorage.getItem(PAGE_SOLVED_KEY);
         if (!solved) return false;
         var ts = parseInt(solved, 10);
         return !isNaN(ts) && (Date.now() - ts) < SOLVED_TTL_MS;
     }
 
-    function setSolved() {
-        localStorage.setItem(SOLVED_KEY, Date.now().toString());
+    function setPageSolved() {
+        localStorage.setItem(PAGE_SOLVED_KEY, Date.now().toString());
+    }
+
+    function isLinksSolved() {
+        return sessionStorage.getItem(LINKS_SOLVED_KEY) === '1';
+    }
+
+    function setLinksSolved() {
+        sessionStorage.setItem(LINKS_SOLVED_KEY, '1');
     }
 
     function openLink(href, target) {
@@ -249,7 +258,11 @@
     function checkAnswer() {
         var value = inputEl ? inputEl.value.trim() : '';
         if (parseInt(value, 10) === currentAnswer) {
-            setSolved();
+            if (pageMode) {
+                setPageSolved();
+            } else {
+                setLinksSolved();
+            }
             hideOverlay();
             if (!pageMode && pendingHref) {
                 openLink(pendingHref, pendingTarget);
@@ -274,6 +287,17 @@
             });
         });
 
+        // Auto-protect any external social/contact or donation links
+        document.querySelectorAll('a[href^="http"]').forEach(function(link) {
+            try {
+                if (link.hostname && link.hostname !== location.hostname) {
+                    if (!link.hasAttribute('data-protected')) {
+                        link.setAttribute('data-protected', 'true');
+                    }
+                }
+            } catch (e) {}
+        });
+
         document.addEventListener('click', function(e) {
             var link = e.target.closest('[data-protected]');
             if (!link) return;
@@ -283,7 +307,7 @@
 
             if (!href || href === '#' || href === 'javascript:void(0)' || href.indexOf('javascript:') === 0) return;
 
-            if (isSolved()) {
+            if (isLinksSolved()) {
                 return; // allow default navigation
             }
 
@@ -295,7 +319,7 @@
 
     function initPagePuzzle() {
         if (!document.body.hasAttribute('data-page-puzzle')) return;
-        if (isSolved()) return;
+        if (isPageSolved()) return;
         showOverlay(null, null, 'page');
     }
 
