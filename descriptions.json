@@ -46,11 +46,17 @@
       "name": "ReSpotF-ck",
       "url": "https://respotfck.netlify.app/",
       "description": "ReSpotF-ck project site and documentation."
+    },
+    {
+      "name": "Dantotsu Updater",
+      "url": "https://dantotsu-app-updater.vercel.app/#/",
+      "description": "Web updater for the Dantotsu app — check for and grab the latest builds."
     }
   ],
   "repos": {
     "marshmeadow.netlify.app": "Source files, styles, and scripts that power this personal bio and portfolio site.",
     "Dantotsu": "A community-favorite anime and manga app with clean browsing and tracking features.",
+    "dantotsu-updater-web": "Web-based updater for the Dantotsu app — check for and install the latest builds.",
     "KamyRoll": "A custom streaming client and toolset for Roll and related services.",
     "HDO-PRO.github.io": "GitHub Pages site for the HDO PRO organization.",
     "Nekomo-App.github.io": "Marketing and documentation landing for the Nekomo App project.",

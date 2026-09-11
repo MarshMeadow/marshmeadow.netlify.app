@@ -2233,6 +2233,7 @@
         loadButtonPosition();
 
         const USERNAME = 'MarshMeadow';
+        const KNOWN_ORGS = ['HDO-PRO', 'Nekomo-App', 'Neko-s-Index', 'ReSpotF-ck'];
         let REPOS_PER_PAGE = 9;
         let allRepos = [];
         let filteredRepos = [];
@@ -2524,6 +2525,11 @@
                     const response = await fetchWithTimeout(`https://api.github.com/users/${USERNAME}/repos?page=${page}&per_page=100&sort=updated`, {}, 30000);
                     
                     if (!response.ok) {
+                        if ((response.status === 403 || response.status === 429) && response.headers.get('X-RateLimit-Remaining') === '0') {
+                            const reset = response.headers.get('X-RateLimit-Reset');
+                            const when = reset ? new Date(parseInt(reset, 10) * 1000).toLocaleTimeString() : 'later';
+                            throw new Error(`GitHub API rate limit reached. Try again after ${when}`);
+                        }
                         throw new Error(`GitHub API error ${response.status} while fetching repositories`);
                     }
 
@@ -2545,44 +2551,66 @@
                     }
                 }
 
-                // Fetch user's organizations
-                const orgsResponse = await fetchWithTimeout(`https://api.github.com/users/${USERNAME}/orgs`, {}, 30000);
-                if (orgsResponse.ok) {
-                    const orgsData = await orgsResponse.json();
-                    organizations = Array.isArray(orgsData) ? orgsData : [];
-                    renderOrgsSection(organizations);
-                    
-                    // Fetch repos from each organization
-                    for (const org of orgsData) {
-                        let orgPage = 1;
-                        let orgHasMore = true;
-                        while (orgHasMore) {
-                            const orgReposResponse = await fetchWithTimeout(`https://api.github.com/orgs/${org.login}/repos?page=${orgPage}&per_page=100&sort=updated`, {}, 30000);
-                            
-                            if (orgReposResponse.ok) {
-                                const orgReposData = await orgReposResponse.json();
-
-                                if (!Array.isArray(orgReposData)) {
-                                    orgHasMore = false;
-                                    continue;
-                                }
-
-                                if (orgReposData.length === 0) {
-                                    orgHasMore = false;
-                                } else {
-                                    repos = repos.concat(orgReposData.map(repo => ({...repo, owner_type: 'organization', owner_name: org.login, org_avatar: org.avatar_url, description: getRepoDescription(repo)})));
-                                    orgPage++;
-                                }
-
-                                if (repos.length >= 500) {
-                                    orgHasMore = false;
-                                }
-                            } else {
-                                orgHasMore = false;
-                            }
+                // Fetch user's organizations. Public membership is often empty,
+                // so also include orgs listed in descriptions.json / KNOWN_ORGS.
+                const orgLogins = new Set();
+                try {
+                    const orgsResponse = await fetchWithTimeout(`https://api.github.com/users/${USERNAME}/orgs`, {}, 30000);
+                    if (orgsResponse.ok) {
+                        const orgsData = await orgsResponse.json();
+                        if (Array.isArray(orgsData)) {
+                            orgsData.forEach(org => orgLogins.add(org.login));
                         }
                     }
+                } catch (orgErr) {
+                    console.warn('Could not fetch user orgs', orgErr);
                 }
+
+                const describedOrgLogins = (descriptionsData && Array.isArray(descriptionsData.orgs)
+                    ? descriptionsData.orgs.map(o => {
+                        try { return new URL(o.url).pathname.replace(/\//g, ''); } catch { return null; }
+                    })
+                    : KNOWN_ORGS
+                ).filter(Boolean);
+                describedOrgLogins.forEach(login => orgLogins.add(login));
+
+                // Load full metadata for each org (avatar, description)
+                organizations = await Promise.all([...orgLogins].map(async login => {
+                    try {
+                        const res = await fetchWithTimeout(`https://api.github.com/orgs/${encodeURIComponent(login)}`, {}, 30000);
+                        if (res.ok) return await res.json();
+                    } catch (e) {
+                        console.warn(`Could not fetch org ${login}`, e);
+                    }
+                    return { login, avatar_url: `https://github.com/${login}.png` };
+                }));
+                renderOrgsSection(organizations);
+
+                // Fetch repos from each organization in parallel
+                const orgReposResults = await Promise.all(organizations.map(async org => {
+                    const orgRepos = [];
+                    let orgPage = 1;
+                    while (true) {
+                        try {
+                            const orgReposResponse = await fetchWithTimeout(`https://api.github.com/orgs/${encodeURIComponent(org.login)}/repos?page=${orgPage}&per_page=100&sort=updated`, {}, 30000);
+                            if (!orgReposResponse.ok) break;
+                            const orgReposData = await orgReposResponse.json();
+                            if (!Array.isArray(orgReposData) || orgReposData.length === 0) break;
+                            orgRepos.push(...orgReposData.map(repo => ({...repo, owner_type: 'organization', owner_name: org.login, org_avatar: org.avatar_url, description: getRepoDescription(repo)})));
+                            if (orgReposData.length < 100 || orgRepos.length >= 500) break;
+                            orgPage++;
+                        } catch (e) {
+                            console.warn(`Could not fetch repos for org ${org.login}`, e);
+                            break;
+                        }
+                    }
+                    return orgRepos;
+                }));
+                orgReposResults.forEach(list => { repos = repos.concat(list); });
+
+                // Deduplicate repos shared between user and org listings
+                const seenIds = new Set();
+                repos = repos.filter(r => r && r.id != null && !seenIds.has(r.id) && seenIds.add(r.id));
 
                 allRepos = repos;
                 filteredRepos = repos;
