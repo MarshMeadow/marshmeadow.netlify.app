@@ -6,14 +6,11 @@
     var SOLVED_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
     var overlay = null;
-    var currentAnswer = null;
     var pendingHref = '';
     var pendingTarget = '';
     var pageMode = false;
 
     var descEl = null;
-    var questionEl = null;
-    var inputEl = null;
     var msgEl = null;
     var submitEl = null;
     var cancelEl = null;
@@ -109,28 +106,6 @@
             '    color: #667eea;',
             '    text-decoration: underline;',
             '}',
-            '.meadow-puzzle-question {',
-            '    font-size: 1.4rem;',
-            '    font-weight: 700;',
-            '    margin-bottom: 15px;',
-            '    color: var(--text-primary, #c9d1d9);',
-            '}',
-            '.meadow-puzzle-input {',
-            '    width: 100%;',
-            '    padding: 12px;',
-            '    border-radius: 10px;',
-            '    border: 2px solid var(--link-border, #30363d);',
-            '    background: var(--link-bg, #161b22);',
-            '    color: var(--text-primary, #c9d1d9);',
-            '    font-size: 1.1rem;',
-            '    text-align: center;',
-            '    margin-bottom: 15px;',
-            '    outline: none;',
-            '}',
-            '.meadow-puzzle-input:focus {',
-            '    border-color: #667eea;',
-            '    box-shadow: 0 0 15px rgba(102,126,234,0.3);',
-            '}',
             '.meadow-puzzle-actions {',
             '    display: flex;',
             '    gap: 10px;',
@@ -170,12 +145,10 @@
             '}',
             '</style>',
             '<div class="meadow-puzzle-box">',
-            '    <h3>Quick Puzzle</h3>',
+            '    <h3>Quick Check</h3>',
             '    <p id="meadowPuzzleDescription"></p>',
-            '    <div class="meadow-puzzle-question" id="meadowPuzzleQuestion"></div>',
-            '    <input type="text" class="meadow-puzzle-input" id="meadowPuzzleInput" autocomplete="off" inputmode="numeric" placeholder="Your answer">',
             '    <div class="meadow-puzzle-actions">',
-            '        <button class="meadow-puzzle-submit" id="meadowPuzzleSubmit" type="button">Submit</button>',
+            '        <button class="meadow-puzzle-submit" id="meadowPuzzleSubmit" type="button">I\'m Human &mdash; Continue</button>',
             '        <button class="meadow-puzzle-cancel" id="meadowPuzzleCancel" type="button">Cancel</button>',
             '    </div>',
             '    <div class="meadow-puzzle-message" id="meadowPuzzleMessage"></div>',
@@ -186,39 +159,16 @@
         overlay = el;
 
         descEl = el.querySelector('#meadowPuzzleDescription');
-        questionEl = el.querySelector('#meadowPuzzleQuestion');
-        inputEl = el.querySelector('#meadowPuzzleInput');
         msgEl = el.querySelector('#meadowPuzzleMessage');
 
         submitEl = el.querySelector('#meadowPuzzleSubmit');
         var cancel = el.querySelector('#meadowPuzzleCancel');
         cancelEl = cancel;
 
-        submitEl.addEventListener('click', checkAnswer);
-
-        inputEl.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                checkAnswer();
-            }
-        });
-
+        submitEl.addEventListener('click', confirmHuman);
         cancel.addEventListener('click', hideOverlay);
 
         return overlay;
-    }
-
-    function generatePuzzle() {
-        var a = Math.floor(Math.random() * 9) + 2;
-        var b = Math.floor(Math.random() * 9) + 2;
-        currentAnswer = a + b;
-        if (questionEl) {
-            questionEl.textContent = 'What is ' + a + ' + ' + b + '?';
-        }
-        if (inputEl) {
-            inputEl.value = '';
-            inputEl.focus();
-        }
-        if (msgEl) msgEl.textContent = '';
     }
 
     function setDescription(html) {
@@ -232,7 +182,6 @@
         pendingTarget = target || '_self';
         createOverlay();
 
-        if (inputEl) inputEl.style.display = '';
         if (submitEl) submitEl.style.display = '';
         if (msgEl) msgEl.textContent = '';
 
@@ -241,15 +190,14 @@
         if (pageMode) {
             setDescription(
                 '<strong>Notice:</strong> This is a personal bio page about Meadow. ' +
-                'Please solve this quick puzzle to continue. By entering, you agree not to abuse, ' +
+                'Tap continue to enter. By entering, you agree not to abuse, ' +
                 'copy, or redistribute any content on this page. ' +
                 '<a href="notice.html" target="_blank">Read full notice/disclaimer</a>.'
             );
         } else {
-            setDescription('Prove you are human before visiting this personal account.');
+            setDescription('Confirm you are human before visiting this personal account.');
         }
 
-        generatePuzzle();
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -263,8 +211,7 @@
     }
 
     function showLinkFallback(href, target) {
-        if (questionEl) questionEl.textContent = 'Correct! Click the link below if it did not open automatically.';
-        if (inputEl) inputEl.style.display = 'none';
+        if (descEl) descEl.textContent = 'Click the link below if it did not open automatically.';
         if (submitEl) submitEl.style.display = 'none';
         if (cancelEl) cancelEl.textContent = 'Close';
         if (msgEl) {
@@ -282,30 +229,21 @@
         }
     }
 
-    function checkAnswer() {
-        var value = inputEl ? inputEl.value.trim() : '';
-        if (parseInt(value, 10) === currentAnswer) {
-            if (pageMode) {
-                setPageSolved();
-                hideOverlay();
-            } else {
-                setLinksSolved();
-                if (pendingHref) {
-                    var opened = openLink(pendingHref, pendingTarget);
-                    if (opened) {
-                        hideOverlay();
-                    } else {
-                        showLinkFallback(pendingHref, pendingTarget);
-                    }
-                } else {
-                    hideOverlay();
-                }
-            }
+    function confirmHuman() {
+        if (pageMode) {
+            setPageSolved();
+            hideOverlay();
         } else {
-            if (msgEl) msgEl.textContent = 'Not quite. Try again!';
-            if (inputEl) {
-                inputEl.value = '';
-                inputEl.focus();
+            setLinksSolved();
+            if (pendingHref) {
+                var opened = openLink(pendingHref, pendingTarget);
+                if (opened) {
+                    hideOverlay();
+                } else {
+                    showLinkFallback(pendingHref, pendingTarget);
+                }
+            } else {
+                hideOverlay();
             }
         }
     }

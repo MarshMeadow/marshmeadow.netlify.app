@@ -1,14 +1,21 @@
 (function() {
     'use strict';
 
+    function isEditable(e) {
+        var t = e.target;
+        return t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+    }
+
     // Disable right-click
     document.addEventListener('contextmenu', function(e) {
+        if (isEditable(e)) return;
         e.preventDefault();
         e.stopPropagation();
     }, true);
 
     // Disable common dev-tools and copy shortcuts
     document.addEventListener('keydown', function(e) {
+        if (isEditable(e)) return;
         var k = e.keyCode || e.which;
         var ctrl = e.ctrlKey || e.metaKey;
         var sh = e.shiftKey;
@@ -34,6 +41,7 @@
 
     // Disable copy
     document.addEventListener('copy', function(e) {
+        if (isEditable(e)) return;
         e.preventDefault();
         e.stopPropagation();
     }, true);
@@ -46,6 +54,7 @@
 
     // Disable text selection
     document.addEventListener('selectstart', function(e) {
+        if (isEditable(e)) return;
         e.preventDefault();
         e.stopPropagation();
     }, true);

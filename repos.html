@@ -19,6 +19,7 @@
     <!-- Security Script -->
     <script src="security.js"></script>
     <script src="puzzle.js"></script>
+    <script src="search.js"></script>
     
     <style>
         :root {
@@ -792,6 +793,21 @@
             border-color: var(--accent-color);
         }
 
+        /* Compact settings controls */
+        .settings-menu .size-btn {
+            padding: 6px 13px;
+            font-size: 0.8rem;
+        }
+
+        .settings-menu .theme-btn {
+            padding: 7px 13px;
+            font-size: 0.85rem;
+        }
+
+        .setting-item .size-options {
+            justify-content: flex-end;
+        }
+
         .repo-name {
             color: var(--accent-color);
             font-size: 1.3rem;
@@ -1264,6 +1280,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            row-gap: 8px;
             margin-bottom: 15px;
         }
 
@@ -1676,10 +1694,10 @@
 
                 <div class="setting-item">
                     <span>View</span>
-                    <div class="size-options" style="flex-direction: column; align-items: stretch; width: 100%;">
-                        <button class="size-btn" id="toggleCompactBtn" onclick="toggleCompact()" aria-label="Toggle compact view" style="width: 100%;">Compact</button>
-                        <button class="size-btn" id="toggleForksBtn" onclick="toggleShowForks()" aria-label="Toggle forked repos" style="width: 100%;">Hide Forks</button>
-                        <button class="size-btn" id="toggleDescsBtn" onclick="toggleShowDescriptions()" aria-label="Toggle descriptions" style="width: 100%;">Hide Descriptions</button>
+                    <div class="size-options" style="flex-wrap: wrap;">
+                        <button class="size-btn" id="toggleCompactBtn" onclick="toggleCompact()" aria-label="Toggle compact view">Compact</button>
+                        <button class="size-btn" id="toggleForksBtn" onclick="toggleShowForks()" aria-label="Toggle forked repos">Hide Forks</button>
+                        <button class="size-btn" id="toggleDescsBtn" onclick="toggleShowDescriptions()" aria-label="Toggle descriptions">Hide Descs</button>
                     </div>
                 </div>
 
@@ -1702,11 +1720,11 @@
 
                 <div class="setting-item">
                     <span>Visibility</span>
-                    <div class="size-options" style="flex-direction: column; align-items: stretch; width: 100%;">
-                        <button class="size-btn" id="togglePopularBtn" onclick="toggleShowPopular()" aria-label="Toggle popular section" style="width: 100%;">Hide Popular</button>
-                        <button class="size-btn" id="toggleOrgsBtn" onclick="toggleShowOrgs()" aria-label="Toggle organizations" style="width: 100%;">Hide Organizations</button>
-                        <button class="size-btn" id="toggleDonationBtn" onclick="toggleShowDonation()" aria-label="Toggle donation banner" style="width: 100%;">Hide Donation</button>
-                        <button class="size-btn" id="toggleStatsBtn" onclick="toggleShowStats()" aria-label="Toggle repo stats" style="width: 100%;">Hide Stats</button>
+                    <div class="size-options" style="flex-wrap: wrap;">
+                        <button class="size-btn" id="togglePopularBtn" onclick="toggleShowPopular()" aria-label="Toggle popular section">Hide Popular</button>
+                        <button class="size-btn" id="toggleOrgsBtn" onclick="toggleShowOrgs()" aria-label="Toggle organizations">Hide Orgs</button>
+                        <button class="size-btn" id="toggleDonationBtn" onclick="toggleShowDonation()" aria-label="Toggle donation banner">Hide Donation</button>
+                        <button class="size-btn" id="toggleStatsBtn" onclick="toggleShowStats()" aria-label="Toggle repo stats">Hide Stats</button>
                     </div>
                 </div>
 
@@ -1749,7 +1767,7 @@
                 <li>Search and filter repositories by name, language, stars, and more.</li>
                 <li>Sort by recently updated, most stars, most forks, or name.</li>
                 <li>Toggle compact view, layout, and visibility in Settings.</li>
-                <li>Click a repo or organization card to open it (puzzle-protected).</li>
+                <li>Click a repo or organization card to open it (asks for a quick confirmation).</li>
             </ul>
         </div>
 
@@ -1759,6 +1777,7 @@
                 <li><strong>G</strong> or <strong>?</strong> — open/close this guide</li>
                 <li><strong>T</strong> — toggle theme</li>
                 <li><strong>S</strong> — open/close settings</li>
+                <li><strong>Ctrl+K</strong> or <strong>/</strong> — search the site</li>
                 <li><strong>Esc</strong> — close guide/settings</li>
             </ul>
         </div>
@@ -1788,6 +1807,9 @@
             <a href="https://marshmeadow.netlify.app/" class="back-link">← Back to Bio</a>
             <h1>~/Meadow's Repositories</h1>
             <p style="max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">Indie developer, coder, and gamer. Below are my personal GitHub, the organizations I work with, and the project sites I've built. If the list doesn't load, you can also visit my <a href="https://github.com/MarshMeadow" target="_blank" rel="noopener noreferrer" data-protected="true">GitHub profile</a> or <a href="https://linktr.ee/MarshMeadow" target="_blank" rel="noopener noreferrer">Linktree</a> directly.</p>
+            <div style="max-width: 600px; margin: 0 auto 20px; background: rgba(102, 126, 234, 0.08); border: 1px dashed var(--accent-color); border-radius: 10px; padding: 10px 16px; font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); text-align: left;">
+                <strong style="color: var(--accent-color);">Beta</strong> — This page pulls live data from the GitHub API, which can be rate-limited or slow, so repositories may not always load correctly. If that happens, the direct links above always work.
+            </div>
             <div id="linksSection" class="links-section">
                 <p class="loading-small">Loading profiles & sites...</p>
             </div>
@@ -2033,7 +2055,7 @@
 
         function updateRepoVisibilityButtons() {
             document.getElementById('togglePopularBtn').textContent = repoVisibility.showPopular ? 'Hide Popular' : 'Show Popular';
-            document.getElementById('toggleOrgsBtn').textContent = repoVisibility.showOrgs ? 'Hide Organizations' : 'Show Organizations';
+            document.getElementById('toggleOrgsBtn').textContent = repoVisibility.showOrgs ? 'Hide Orgs' : 'Show Orgs';
             document.getElementById('toggleDonationBtn').textContent = repoVisibility.showDonation ? 'Hide Donation' : 'Show Donation';
             document.getElementById('toggleStatsBtn').textContent = repoVisibility.showStats ? 'Hide Stats' : 'Show Stats';
 
@@ -2093,7 +2115,7 @@
         function updateShowDescriptionsButton() {
             const btn = document.getElementById('toggleDescsBtn');
             if (!btn) return;
-            btn.textContent = showDescriptions ? 'Hide Descriptions' : 'Show Descriptions';
+            btn.textContent = showDescriptions ? 'Hide Descs' : 'Show Descs';
             btn.classList.toggle('active', !showDescriptions);
         }
 
@@ -2197,6 +2219,9 @@
         }
 
         document.addEventListener('keydown', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
+                return;
+            }
             if (e.key === 'g' || e.key === 'G' || e.key === '?') {
                 toggleGuide();
             } else if (e.key === 'Escape') {
@@ -2250,6 +2275,7 @@
             showStats: true
         };
         let repoWidth = 'narrow';
+        let reposLoadWatchdog = null;
 
         function getRepoDescription(repo) {
             if (repo.description) return repo.description;
@@ -2309,12 +2335,12 @@
             `;
         }
 
-        function renderFallbackLinks() {
+        function renderFallbackLinks(failed) {
             const container = document.getElementById('linksSection');
             if (!container) return;
             container.innerHTML = `
                 <h2>Profiles & Project Sites</h2>
-                <p class="loading-small" style="margin-bottom: 15px;">Repo data could not load, but here are the main profiles and sites:</p>
+                ${failed ? '<p class="loading-small" style="margin-bottom: 15px;">Repo data could not load, but here are the main profiles and sites:</p>' : ''}
                 <div class="links-grid">
                     <a href="https://github.com/MarshMeadow" target="_blank" rel="noopener noreferrer" class="link-card" data-protected="true" aria-label="Main GitHub">
                         <div class="link-card-icon" style="background: #667eea; color: white;">
@@ -2482,7 +2508,7 @@
             if (loading) loading.style.display = 'none';
             if (error) {
                 error.style.display = 'block';
-                error.innerHTML = msg + '<br><button onclick="retryFetchRepos()" style="margin-top: 12px; padding: 8px 16px; background: var(--accent-color); color: white; border: none; border-radius: 8px; cursor: pointer;">Try Again</button>';
+                error.innerHTML = msg + '<br><button onclick="retryFetchRepos()" style="margin-top: 12px; padding: 8px 16px; background: var(--accent-color); color: white; border: none; border-radius: 8px; cursor: pointer;">Try Again</button> <a href="https://github.com/MarshMeadow?tab=repositories" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 12px; margin-left: 8px; padding: 8px 16px; background: var(--card-bg); color: var(--text-primary); border: 2px solid var(--border-color); border-radius: 8px; text-decoration: none;">View on GitHub</a>';
             }
             console.error(msg);
         }
@@ -2499,6 +2525,16 @@
             const loading = document.getElementById('loading');
             const error = document.getElementById('error');
             const reposGrid = document.getElementById('reposGrid');
+
+            // Watchdog: if repos still haven't loaded after 20s, stop the
+            // spinner and surface the error state with direct backup links.
+            clearTimeout(reposLoadWatchdog);
+            reposLoadWatchdog = setTimeout(function() {
+                if (loading && loading.style.display !== 'none') {
+                    showError('Repositories are taking too long to load — the GitHub API may be unreachable right now.');
+                    renderFallbackLinks(true);
+                }
+            }, 20000);
 
             try {
                 // Try to load local descriptions file
@@ -2614,13 +2650,16 @@
 
                 allRepos = repos;
                 filteredRepos = repos;
+                clearTimeout(reposLoadWatchdog);
                 loading.style.display = 'none';
+                if (error) error.style.display = 'none';
                 displayOrgFilter();
                 displayPopularRepos();
                 displayRepos();
             } catch (err) {
+                clearTimeout(reposLoadWatchdog);
                 showError(`Error: ${err.message}. Please try again later.`);
-                renderFallbackLinks();
+                renderFallbackLinks(true);
             }
         }
 

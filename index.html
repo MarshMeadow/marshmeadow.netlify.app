@@ -23,6 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="security.js"></script>
     <script src="puzzle.js"></script>
+    <script src="search.js"></script>
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -267,6 +268,22 @@
             background: #667eea;
             color: white;
             border-color: #667eea;
+        }
+
+        /* Compact settings controls */
+        .settings-menu .size-btn {
+            padding: 6px 13px;
+            font-size: 0.8rem;
+            border-radius: 9px;
+        }
+
+        .settings-menu .theme-btn {
+            padding: 7px 13px;
+            font-size: 0.85rem;
+        }
+
+        .setting-item .size-options {
+            justify-content: flex-end;
         }
 
         /* Guide Panel */
@@ -655,6 +672,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            row-gap: 8px;
             margin-bottom: 15px;
         }
 
@@ -757,6 +776,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
         }
 
         .checkout-track {
@@ -765,6 +786,7 @@
             gap: 15px;
             animation: scroll 20s linear infinite;
             padding: 0 20px;
+            width: max-content;
         }
 
         .checkout-track:hover {
@@ -1267,22 +1289,24 @@
                 word-break: break-word;
             }
 
+            .checkout-carousel {
+                height: 40px;
+                justify-content: flex-start;
+            }
+
             .checkout-track {
-                flex-wrap: wrap;
-                justify-content: center;
-                animation: none;
-                transform: none;
-                gap: 12px;
+                gap: 10px;
+                padding: 0 12px;
             }
 
             .checkout-tag {
-                font-size: 1rem;
-                padding: 10px 18px;
+                font-size: 0.8rem;
+                padding: 7px 13px;
             }
 
             .checkout-tag svg {
-                width: 18px;
-                height: 18px;
+                width: 13px;
+                height: 13px;
             }
 
             .guide-panel {
@@ -1329,29 +1353,29 @@
 
                 <div class="setting-item">
                     <span>Guide</span>
-                    <button class="size-btn" onclick="openGuide()" aria-label="Open guide" style="width: 100%;">Open Guide</button>
+                    <button class="size-btn" onclick="openGuide()" aria-label="Open guide">Open</button>
                 </div>
 
                 <div class="setting-item">
                     <span>View</span>
-                    <div class="size-options" style="flex-direction: column; align-items: stretch; width: 100%;">
-                        <button class="size-btn" id="toggleGifsBtn" onclick="toggleShowGifs()" aria-label="Toggle GIFs" style="width: 100%;">Hide GIFs</button>
-                        <button class="size-btn" id="toggleCarouselBtn" onclick="toggleShowCarousel()" aria-label="Toggle carousel" style="width: 100%;">Hide Carousel</button>
-                        <button class="size-btn" id="toggleQuickLinksBtn" onclick="toggleShowQuickLinks()" aria-label="Toggle quick links" style="width: 100%;">Hide Quick Links</button>
+                    <div class="size-options" style="flex-wrap: wrap;">
+                        <button class="size-btn" id="toggleGifsBtn" onclick="toggleShowGifs()" aria-label="Toggle GIFs">Hide GIFs</button>
+                        <button class="size-btn" id="toggleCarouselBtn" onclick="toggleShowCarousel()" aria-label="Toggle carousel">Hide Carousel</button>
+                        <button class="size-btn" id="toggleQuickLinksBtn" onclick="toggleShowQuickLinks()" aria-label="Toggle quick links">Hide Quick Links</button>
                     </div>
                 </div>
 
                 <div class="setting-item">
                     <span>Motion</span>
-                    <button class="size-btn" id="toggleMotionBtn" onclick="toggleReducedMotion()" aria-label="Toggle reduced motion" style="width: 100%;">Reduce Motion</button>
+                    <button class="size-btn" id="toggleMotionBtn" onclick="toggleReducedMotion()" aria-label="Toggle reduced motion">Reduce Motion</button>
                 </div>
 
                 <div class="setting-item">
                     <span>Visibility</span>
-                    <div class="size-options" style="flex-direction: column; align-items: stretch; width: 100%;">
-                        <button class="size-btn" id="toggleFooterBtn" onclick="toggleShowFooter()" aria-label="Toggle footer" style="width: 100%;">Hide Footer</button>
-                        <button class="size-btn" id="toggleFabBtn" onclick="toggleShowFab()" aria-label="Toggle scroll-to-top" style="width: 100%;">Hide Back-to-Top</button>
-                        <button class="size-btn" id="toggleStatusBtn" onclick="toggleShowStatus()" aria-label="Toggle status" style="width: 100%;">Hide Status</button>
+                    <div class="size-options" style="flex-wrap: wrap;">
+                        <button class="size-btn" id="toggleFooterBtn" onclick="toggleShowFooter()" aria-label="Toggle footer">Hide Footer</button>
+                        <button class="size-btn" id="toggleFabBtn" onclick="toggleShowFab()" aria-label="Toggle scroll-to-top">Hide Top Btn</button>
+                        <button class="size-btn" id="toggleStatusBtn" onclick="toggleShowStatus()" aria-label="Toggle status">Hide Status</button>
                     </div>
                 </div>
 
@@ -1385,7 +1409,7 @@
 
         <div class="guide-section">
             <h4>About this site</h4>
-            <p>This is Meadow's personal bio and project hub. It links to socials, GitHub repos, organizations, project websites, and donation pages. Some links are protected with a quick puzzle as an extra safeguard.</p>
+            <p>This is Meadow's personal bio and project hub. It links to socials, GitHub repos, organizations, project websites, and donation pages. Some links are protected with a quick confirmation as an extra safeguard.</p>
         </div>
 
         <div class="guide-section">
@@ -1405,10 +1429,11 @@
                 <li><kbd>G</kbd> or <kbd>?</kbd> — Open/close this guide</li>
                 <li><kbd>T</kbd> — Toggle dark/light theme</li>
                 <li><kbd>S</kbd> — Open/close settings</li>
+                <li><kbd>Ctrl</kbd>+<kbd>K</kbd> or <kbd>/</kbd> — Search the site</li>
                 <li><kbd>Esc</kbd> — Close guide or settings</li>
                 <li><strong>Hover</strong> over the "Things to Check Out" carousel to pause it.</li>
                 <li><strong>Click</strong> any tag in the carousel to visit it.</li>
-                <li>Clicking personal-account or GitHub links will ask a quick puzzle first.</li>
+                <li>Clicking personal-account or GitHub links will ask a quick confirmation first.</li>
             </ul>
         </div>
 
@@ -1426,14 +1451,6 @@
 
     <div class="gif-container" id="gif2" style="display: none;">
         <img src="Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Sleeping Cat" loading="lazy" style="width: 100%; height: auto;">
-    </div>
-
-    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #ffc107; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: 100%; max-width: 1200px; margin: 0 auto 8px; box-sizing: border-box;">
-        Note: Some things may not work correctly on mobile yet.
-    </div>
-
-    <div class="notice-banner" style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: 100%; max-width: 1200px; margin: 0 auto 12px; box-sizing: border-box;">
-        ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
     </div>
 
     <!-- Navigation Menu -->
@@ -1464,6 +1481,12 @@
             <p class="bio-tag">Private Person ♡</p>
             <p class="bio-tag">DMs can open and close at any time</p>
             <p class="bio-quote">"The only way to do great work is to love what you do." — Stay true to your path</p>
+            <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #ffc107; padding: 10px 14px; text-align: center; font-size: 0.8rem; border-radius: 10px; box-sizing: border-box;">
+                Note: Some things may not work correctly on mobile yet.
+            </div>
+            <div class="notice-banner" style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 10px 14px; text-align: center; font-size: 0.8rem; border-radius: 10px; box-sizing: border-box;">
+                ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
+            </div>
         </div>
 
         <div class="quick-links">
@@ -1886,7 +1909,7 @@
             document.getElementById('toggleCarouselBtn').textContent = viewToggles.showCarousel ? 'Hide Carousel' : 'Show Carousel';
             document.getElementById('toggleQuickLinksBtn').textContent = viewToggles.showQuickLinks ? 'Hide Quick Links' : 'Show Quick Links';
             document.getElementById('toggleFooterBtn').textContent = viewToggles.showFooter ? 'Hide Footer' : 'Show Footer';
-            document.getElementById('toggleFabBtn').textContent = viewToggles.showFab ? 'Hide Back-to-Top' : 'Show Back-to-Top';
+            document.getElementById('toggleFabBtn').textContent = viewToggles.showFab ? 'Hide Top Btn' : 'Show Top Btn';
             document.getElementById('toggleStatusBtn').textContent = viewToggles.showStatus ? 'Hide Status' : 'Show Status';
             document.getElementById('toggleMotionBtn').textContent = viewToggles.reducedMotion ? 'Enable Motion' : 'Reduce Motion';
 
@@ -2346,28 +2369,6 @@
                 setupGif(gif2);
             }
         };
-
-        // ==================== VIEW COUNTER ====================
-        let count = localStorage.getItem('viewCount') ? parseInt(localStorage.getItem('viewCount')) : 0;
-        document.getElementById('viewCount').innerText = count;
-
-        document.getElementById('arrow').addEventListener('click', function() {
-            const counterDiv = document.getElementById('viewCounter');
-            if (count === 0) {
-                count++;
-                localStorage.setItem('viewCount', count);
-            }
-
-            counterDiv.style.display = 'block';
-            counterDiv.style.opacity = '1';
-
-            setTimeout(() => {
-                counterDiv.style.opacity = '0';
-                setTimeout(() => {
-                    counterDiv.style.display = 'none';
-                }, 1000);
-            }, 3000);
-        });
 
         // ==================== PREVENT RIGHT-CLICK AND DEV TOOLS ====================
         // Prevent right-click context menu
