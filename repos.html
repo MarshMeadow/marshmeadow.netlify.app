@@ -218,6 +218,7 @@
             line-height: 1.4;
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -298,6 +299,7 @@
             line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -509,6 +511,7 @@
             min-height: auto;
             margin-bottom: 0;
             -webkit-line-clamp: 1;
+            line-clamp: 1;
         }
 
         .repos-list .repo-stats {
@@ -762,6 +765,7 @@
         .compact-mode .repo-description {
             font-size: 0.85rem;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
         }
 
         .compact-mode .repos-grid {
@@ -1460,7 +1464,7 @@
         .fab {
             position: fixed;
             bottom: 30px;
-            right: 30px;
+            left: 30px;
             width: 50px;
             height: 50px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1576,18 +1580,10 @@
 
             .fab {
                 bottom: 20px;
-                right: 20px;
+                left: 20px;
                 width: 45px;
                 height: 45px;
             }
-
-            body[data-button-position="bottom"] .fab {
-                right: 120px;
-            }
-        }
-
-        body[data-button-position="bottom"] .fab {
-            right: 130px;
         }
 
         @media (max-width: 480px) {
@@ -1783,14 +1779,6 @@
         </div>
     </div>
 
-    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #ffc107; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: 100%; max-width: 1200px; margin: 0 auto 8px; box-sizing: border-box;">
-        Note: Some things may not work correctly on mobile yet.
-    </div>
-
-    <div style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 10px; width: 100%; max-width: 1200px; margin: 0 auto 12px; box-sizing: border-box;">
-        ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
-    </div>
-
     <!-- Navigation Menu -->
     <nav class="nav-menu">
         <div class="nav-container">
@@ -1809,6 +1797,12 @@
             <p style="max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">Indie developer, coder, and gamer. Below are my personal GitHub, the organizations I work with, and the project sites I've built. If the list doesn't load, you can also visit my <a href="https://github.com/MarshMeadow" target="_blank" rel="noopener noreferrer" data-protected="true">GitHub profile</a> or <a href="https://linktr.ee/MarshMeadow" target="_blank" rel="noopener noreferrer">Linktree</a> directly.</p>
             <div style="max-width: 600px; margin: 0 auto 20px; background: rgba(102, 126, 234, 0.08); border: 1px dashed var(--accent-color); border-radius: 10px; padding: 10px 16px; font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); text-align: left;">
                 <strong style="color: var(--accent-color);">Beta</strong> — This page pulls live data from the GitHub API, which can be rate-limited or slow, so repositories may not always load correctly. If that happens, the direct links above always work.
+            </div>
+            <div style="max-width: 600px; margin: 0 auto 10px; background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #ffc107; padding: 10px 14px; text-align: center; font-size: 0.8rem; border-radius: 10px; box-sizing: border-box;">
+                Note: Some things may not work correctly on mobile yet.
+            </div>
+            <div class="notice-banner" style="max-width: 600px; margin: 0 auto 10px; background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 10px 14px; text-align: center; font-size: 0.8rem; border-radius: 10px; box-sizing: border-box;">
+                ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
             </div>
             <div id="linksSection" class="links-section">
                 <p class="loading-small">Loading profiles & sites...</p>
