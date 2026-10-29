@@ -3,159 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sitemap for Meadow's personal website.">
-    <title>Sitemap - Meadow</title>
-    <script src="security.js"></script>
+    <title>Sitemap — Meadow</title>
+    <meta name="description" content="Every page on Meadow's bio and portfolio site.">
+    <meta name="theme-color" content="#8d2249">
+    <link rel="icon" href="/Images/meadow-avatar.jpg" type="image/jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #c9d1d9;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .notice-card {
-            background: rgba(22, 27, 34, 0.95);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.2rem;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            color: #e6edf3;
-        }
-
-        p {
-            line-height: 1.6;
-            margin-bottom: 15px;
-            color: #b4b4b4;
-        }
-
-        ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-            color: #b4b4b4;
-        }
-
-        li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-
-        a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 10px;
-            transition: color 0.2s ease;
-        }
-
-        .back:hover {
-            color: #8e9ff5;
-            text-decoration: underline;
-        }
-
-        .more-links {
-            margin-top: 25px;
-            font-size: 0.9rem;
-            color: #8b949e;
-        }
-
-        @media (max-width: 480px) {
-            .notice-card {
-                padding: 25px;
-            }
-
-            h1 {
-                font-size: 1.6rem;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/pages.css?v=1">
+    <script src="/theme.js?v=1" defer></script>
 </head>
 <body>
-    <main class="notice-card">
+    <div class="bg-fx"></div>
+
+    <nav>
+        <a href="/" class="nav-logo">
+            <img src="/Images/meadow-avatar.jpg" alt="Meadow" style="border-radius:50%">
+            <span class="logo-text">Meadow</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-links">
+            <a href="/#about">About</a>
+            <a href="/#projects">Projects</a>
+            <a href="/#repos">Repos</a>
+            <a href="/#skills">Skills</a>
+            <a href="/#connect">Connect</a>
+            <a href="https://github.com/MarshMeadow" target="_blank" rel="noopener">GitHub</a>
+            <a href="/#support" class="nav-cta">Support</a>
+        </div>
+    </nav>
+
+    <main>
+        <p class="page-label">Info</p>
         <h1>Sitemap</h1>
-        <p>All public pages on this site.</p>
-
-        <h2>Main</h2>
-        <ul>
-            <li><a href="index.html">Bio / Home</a></li>
-            <li><a href="old.html">Old Bio (legacy)</a></li>
-        </ul>
-
-        <h2>Projects & Code</h2>
-        <ul>
-            <li><a href="repos.html">Repositories</a></li>
-            <li><a href="skills.html">Skills & Technologies</a></li>
-        </ul>
-
-        <h2>Coming Soon</h2>
-        <ul>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-
-        <h2>Info</h2>
-        <ul>
-            <li><a href="notice.html">Notice / Disclaimer</a></li>
-            <li><a href="privacy.html">Privacy Notes</a></li>
-            <li><a href="credits.html">Credits & Attributions</a></li>
-            <li><a href="pronouns.html">Pronouns</a></li>
-        </ul>
-
-        <h2>Other</h2>
-        <ul>
-            <li><a href="beta-test-page.html">Beta Test Page</a></li>
-            <li><a href="sitemap.html">Sitemap</a> (this page)</li>
-        </ul>
-
-        <a href="index.html" class="back">← Back to Bio</a>
-        <p class="more-links"><a href="privacy.html">Privacy</a> • <a href="credits.html">Credits</a> • <a href="notice.html">Notice</a></p>
+        <p class="page-sub">All public pages on this site.</p>
+        <section class="legal-section">
+            <h2>Main</h2>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#projects">Projects &amp; organizations</a></li>
+                <li><a href="/#repos">Latest repositories</a></li>
+                <li><a href="/#skills">Skills &amp; technologies</a></li>
+                <li><a href="/#connect">Socials &amp; contact</a></li>
+                <li><a href="/#support">Support</a></li>
+                <li><a href="/pronouns">Pronouns</a></li>
+            </ul>
+        </section>
+        <section class="legal-section">
+            <h2>Info</h2>
+            <ul>
+                <li><a href="/notice">Notice / Disclaimer</a></li>
+                <li><a href="/privacy">Privacy Notes</a></li>
+                <li><a href="/credits">Credits &amp; Attributions</a></li>
+                <li><a href="/sitemap">Sitemap (this page)</a></li>
+            </ul>
+        </section>
+        <section class="legal-section">
+            <h2>Archive</h2>
+            <p>The previous version of this website, kept as-is in the <code>old-code/</code> folder.</p>
+            <ul>
+                <li><a href="/old-code/">Old bio</a></li>
+                <li><a href="/old-code/repos.html">Old repositories page</a></li>
+                <li><a href="/old-code/skills.html">Old skills page</a></li>
+                <li><a href="/old-code/old.html">Legacy bio (pre-old)</a></li>
+            </ul>
+        </section>
+        <div class="btn-row"><a class="btn" href="/">&larr; Back to Home</a></div>
     </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="/Images/meadow-avatar.jpg" alt="Meadow" style="border-radius:50%">
+                <span class="logo-text">Meadow</span>
+            </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/notice">Notice</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/credits">Credits</a>
+                <a href="/sitemap">Sitemap</a>
+                <a href="https://ko-fi.com/marshmeadow" target="_blank" rel="noopener">Ko-fi</a>
+                <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank" rel="noopener">Patreon</a>
+                <a href="https://github.com/MarshMeadow" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <p class="copyright">Made with <span>&hearts;</span> by Meadow &middot; N3K0</p>
+        </div>
+    </footer>
 </body>
 </html>

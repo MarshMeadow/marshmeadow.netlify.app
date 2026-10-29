@@ -1,13 +1,19 @@
-# Netlify redirects for clean URLs
-# This file enables URLs without .html extensions
+# Netlify redirects
 
-# Redirect /page to /page.html
-/repos /repos.html 200
-/gallery /gallery.html 200
-/skills /skills.html 200
-/contact /contact.html 200
+# Clean URLs
+/notice   /notice.html   200
+/privacy  /privacy.html  200
+/credits  /credits.html  200
+/sitemap  /sitemap.html  200
 /pronouns /pronouns.html 200
-/beta-test-page /beta-test-page.html 200
 
-# Fallback for SPA-like behavior (optional)
-/* /index.html 200
+# Old pages are now sections of the single-page bio
+/repos           /#repos     301
+/skills          /#skills    301
+/gallery         /#projects  301
+/contact         /#connect   301
+/beta-test-page  /           301
+/old             /old-code/  301
+
+# Everything else
+/*  /404.html  404

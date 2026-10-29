@@ -1,0 +1,2491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meadow - Modern Bio</title>
+    <meta name="description" content="Heyo, I am Meadow/N3K0, Indie dev, coder, like websites and apps and a gamer and more! Check out my projects, gaming streams, and social links.">
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Meadow / N3K0 - Indie Developer & Gamer">
+    <meta property="og:description" content="Heyo, I am Meadow/N3K0, Indie dev, coder, like websites and apps and a gamer and more!">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/88599122?v=4">
+    <meta property="og:url" content="https://marshmeadow.netlify.app/">
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Meadow's Bio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Meadow / N3K0 - Indie Developer & Gamer">
+    <meta name="twitter:description" content="Heyo, I am Meadow/N3K0, Indie dev, coder, like websites and apps and a gamer and more!">
+    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/88599122?v=4">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="security.js"></script>
+    <script src="puzzle.js"></script>
+    <script src="search.js"></script>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --avatar-border: white;
+            --text-primary: #1a1a2e;
+            --text-secondary: #666;
+            --text-footer: #888;
+            --link-bg: white;
+            --link-text: #1a1a2e;
+            --link-border: #e0e0e0;
+            --link-hover-bg: #667eea;
+            --link-hover-text: #667eea;
+            --dropdown-bg: rgba(255, 255, 255, 0.9);
+            --dropdown-text: #1a1a2e;
+            --dropdown-hover-bg: #667eea;
+            --dropdown-hover-text: white;
+            --footer-link: #667eea;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --avatar-shadow: rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode {
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --card-bg: rgba(30, 30, 40, 0.95);
+            --avatar-border: #2a2a3e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --text-footer: #888;
+            --link-bg: rgba(40, 40, 55, 0.9);
+            --link-text: #e0e0e0;
+            --link-border: #3a3a4e;
+            --link-hover-bg: #667eea;
+            --link-hover-text: white;
+            --dropdown-bg: rgba(40, 40, 55, 0.9);
+            --dropdown-text: #e0e0e0;
+            --dropdown-hover-bg: #667eea;
+            --dropdown-hover-text: white;
+            --footer-link: #667eea;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --avatar-shadow: rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px 20px 100px;
+            transition: background 0.3s ease;
+            font-size: 16px;
+        }
+
+        body[data-size="small"] { font-size: 14px; }
+        body[data-size="large"] { font-size: 18px; }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bio-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 20px 60px var(--shadow-color);
+            text-align: center;
+            align-self: center;
+            margin-top: 70px;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid var(--avatar-border);
+            box-shadow: 0 8px 24px var(--avatar-shadow);
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .bio {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .bio-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .bio-tag {
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            background: var(--link-bg);
+            border: 1px solid var(--link-border);
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.2s ease;
+        }
+
+        .bio-tag:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .bio-quote {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            border-left: 3px solid #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 0 8px 8px 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.95em 1.45em;
+            background: var(--link-bg);
+            color: var(--link-text);
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--link-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+            color: var(--link-hover-text);
+        }
+
+        .link-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0 15px;
+        }
+
+        .links .link-btn {
+            display: none;
+        }
+
+        .quick-links .link-btn {
+            padding: 0.5em 1em;
+            font-size: 0.85rem;
+            border-radius: 14px;
+            flex: 0 1 auto;
+            min-width: 70px;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .size-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--link-border);
+            background: var(--link-bg);
+            color: var(--link-text);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .size-btn:hover,
+        .size-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Compact settings controls */
+        .settings-menu .size-btn {
+            padding: 6px 13px;
+            font-size: 0.8rem;
+            border-radius: 9px;
+        }
+
+        .settings-menu .theme-btn {
+            padding: 7px 13px;
+            font-size: 0.85rem;
+        }
+
+        .setting-item .size-options {
+            justify-content: flex-end;
+        }
+
+        /* Guide Panel */
+        .guide-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .guide-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .guide-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 340px;
+            height: 100%;
+            max-width: 85%;
+            background: var(--card-bg);
+            border-right: 2px solid var(--link-border);
+            box-shadow: 8px 0 24px rgba(0, 0, 0, 0.3);
+            z-index: 1002;
+            transform: translateX(-100%);
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .guide-panel.active {
+            transform: translateX(0);
+        }
+
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--link-border);
+        }
+
+        .guide-header h3 {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+        }
+
+        .guide-close {
+            background: var(--link-bg);
+            border: 2px solid var(--link-border);
+            color: var(--text-primary);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+
+        .guide-close:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .guide-section {
+            margin-bottom: 20px;
+        }
+
+        .guide-section h4 {
+            margin: 0 0 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .guide-section p,
+        .guide-section li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .guide-section ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .guide-section li {
+            margin-bottom: 8px;
+        }
+
+        .guide-section kbd {
+            background: var(--link-bg);
+            border: 1px solid var(--link-border);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .index-hide-gifs .gif-container,
+        .index-hide-carousel .checkout-section,
+        .index-hide-quicklinks .quick-links {
+            display: none !important;
+        }
+
+        .reduced-motion .checkout-track {
+            animation: none !important;
+        }
+
+        .reduced-motion * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        .index-hide-footer .footer,
+        .index-hide-fab .fab,
+        .index-hide-status .status-indicator {
+            display: none !important;
+        }
+
+        body[data-bio-width="wide"] .bio-card {
+            max-width: 800px;
+        }
+
+        body[data-bio-width="compact"] .bio-card {
+            max-width: 420px;
+        }
+
+        .dropdown {
+            margin-bottom: 12px;
+        }
+
+        .dropdown-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-toggle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234,  0.4);
+        }
+
+        .dropdown-toggle .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            margin-top: 8px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--dropdown-bg);
+            color: var(--dropdown-text);
+            text-decoration: none;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border: 1px solid var(--link-border);
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .dropdown.active .dropdown-content a {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+
+        .dropdown.active .dropdown-content a:nth-child(1) { animation-delay: 0.05s; }
+        .dropdown.active .dropdown-content a:nth-child(2) { animation-delay: 0.1s; }
+        .dropdown.active .dropdown-content a:nth-child(3) { animation-delay: 0.15s; }
+        .dropdown.active .dropdown-content a:nth-child(4) { animation-delay: 0.2s; }
+        .dropdown.active .dropdown-content a:nth-child(5) { animation-delay: 0.25s; }
+        .dropdown.active .dropdown-content a:nth-child(6) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .dropdown-content a:hover {
+            background: var(--dropdown-hover-bg);
+            color: var(--dropdown-hover-text);
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: var(--text-footer);
+            font-size: 0.85rem;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            align-self: center;
+        }
+
+        .footer a {
+            color: var(--footer-link);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Settings Container */
+        .settings-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            transition: top 0.3s ease, bottom 0.3s ease;
+        }
+
+        body[data-button-position="bottom"] .settings-container,
+        .settings-container.mobile-bottom {
+            top: auto;
+            bottom: 20px;
+        }
+
+        .guide-toggle, .settings-toggle {
+            background: var(--card-bg);
+            border: 2px solid var(--link-border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 0;
+        }
+
+        .guide-toggle:hover, .settings-toggle:hover {
+            transform: scale(1.1);
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .settings-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-primary);
+            transition: fill 0.3s ease;
+        }
+
+        .settings-menu {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: var(--card-bg);
+            border: 2px solid var(--link-border);
+            border-radius: 16px;
+            padding: 20px;
+            min-width: 250px;
+            max-width: min(90vw, 340px);
+            box-sizing: border-box;
+            word-wrap: break-word;
+            box-shadow: 0 8px 24px var(--shadow-color);
+            display: none;
+            animation: fadeIn 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .settings-menu.active {
+            display: block;
+        }
+
+        body[data-button-position="bottom"] .settings-menu {
+            top: auto;
+            bottom: 60px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--link-border);
+        }
+
+        .settings-header h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close-settings {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-settings:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--text-primary);
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            row-gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .setting-item span {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .theme-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .theme-btn {
+            background: var(--link-bg);
+            border: 2px solid var(--link-border);
+            border-radius: 10px;
+            padding: 8px 16px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .theme-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .theme-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .theme-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Entrance Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bio-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Staggered Link Animations */
+        .links > *,
+        .dropdown {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .links > *:nth-child(1),
+        .dropdown:nth-child(1) { animation-delay: 0.1s; }
+        .links > *:nth-child(2),
+        .dropdown:nth-child(2) { animation-delay: 0.2s; }
+        .links > *:nth-child(3),
+        .dropdown:nth-child(3) { animation-delay: 0.3s; }
+        .links > *:nth-child(4),
+        .dropdown:nth-child(4) { animation-delay: 0.4s; }
+        .links > *:nth-child(5),
+        .dropdown:nth-child(5) { animation-delay: 0.5s; }
+        .links > *:nth-child(6),
+        .dropdown:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Check Out Section */
+        .checkout-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--link-border);
+        }
+
+        .checkout-section h2 {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .checkout-carousel {
+            position: relative;
+            overflow: hidden;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+
+        .checkout-track {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: scroll 20s linear infinite;
+            padding: 0 20px;
+            width: max-content;
+        }
+
+        .checkout-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translate3d(-50%, 0, 0);
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .checkout-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--link-bg);
+            color: var(--link-text);
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--link-border);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .checkout-tag:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .checkout-tag.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px) scale(1.12);
+            box-shadow: 0 0 18px rgba(102, 126, 234, 0.7);
+            z-index: 2;
+            transition: all 0.25s ease;
+        }
+
+        .checkout-tag svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* GIF Container Styles */
+        .gif-container {
+            position: fixed;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 1s ease;
+            z-index: 100;
+        }
+
+        .gif-container.visible {
+            opacity: 1;
+        }
+
+        .gif-container.shake {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, 0); }
+            50% { transform: translate(5px, 0); }
+            75% { transform: translate(-5px, 0); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .gif-container.spin {
+            animation: spin 1s ease-in-out;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .gif-container.bounce {
+            animation: bounce 0.5s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .gif-container.pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+
+        .gif-container.follow-cursor {
+            transition: left 0.1s ease-out, top 0.1s ease-out;
+        }
+
+        .gif-container.flip {
+            animation: flip 0.5s ease-in-out;
+        }
+
+        @keyframes flip {
+            0% { transform: scaleX(1); }
+            50% { transform: scaleX(-1); }
+            100% { transform: scaleX(1); }
+        }
+
+        .gif-container.jump {
+            animation: jump 0.5s ease-in-out;
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+        }
+
+        .gif-container.color-filter {
+            filter: hue-rotate(180deg) saturate(2);
+        }
+
+        .gif-container.rotate-continuous {
+            animation: rotateContinuous 2s linear infinite;
+        }
+
+        @keyframes rotateContinuous {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .gif-container.grow {
+            transform: scale(1.5);
+            transition: transform 0.3s ease;
+        }
+
+        .gif-container.shrink {
+            transform: scale(0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .gif-container.hidden {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        /* Flip second GIF - disabled since we're using the same sleeping cat */
+        /* #gif2 img {
+            transform: scaleX(-1);
+        } */
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: all;
+        }
+
+        .popup {
+            background-color: #21262d;
+            color: #c9d1d9;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 300px;
+            z-index: 1000;
+            font-size: 1.5rem;
+        }
+
+        .popup button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .popup button:hover {
+            transform: scale(1.05);
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #4caf50;
+            margin-bottom: 15px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* Last Updated */
+        .last-updated {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            height: 48px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 998;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+        }
+
+        .fab.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+
+        .fab:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 14px 40px rgba(102, 126, 234, 0.35);
+            border-color: #667eea;
+        }
+
+        .fab:active {
+            transform: translateY(-1px) scale(1);
+        }
+
+        .fab svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .fab:hover svg {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 100px;
+            }
+
+            .fab {
+                bottom: 20px;
+                left: 20px;
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.85rem;
+            }
+
+            .fab svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-primary);
+            color: var(--card-bg);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            margin-bottom: 8px;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--link-border);
+            padding: 15px 20px;
+            z-index: 999;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border-radius: 0 0 16px 16px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: var(--link-bg);
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Adjust bio card for nav menu */
+        .bio-card {
+            margin-top: 120px;
+        }
+
+        /* Tablet Responsive */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .bio-card {
+                max-width: 450px;
+                padding: 35px;
+                margin-top: 120px;
+            }
+
+            .nav-container {
+                gap: 8px;
+            }
+
+            .nav-link {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Desktop Responsive */
+        @media (min-width: 769px) {
+            .bio-card {
+                max-width: 550px;
+                padding: 45px;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .bio-card {
+                padding: 30px 20px;
+                max-width: 100% !important;
+                margin-top: 130px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .bio {
+                font-size: 0.9rem;
+            }
+
+            .bio-tag {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+
+            .bio-quote {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+
+            .link-btn, .dropdown-toggle {
+                padding: 14px 20px;
+                font-size: 0.95rem;
+            }
+
+            .settings-toggle {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .settings-toggle svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .nav-container {
+                gap: 5px;
+            }
+
+            .nav-link {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+            }
+
+            .popup {
+                width: 85%;
+                font-size: 1.2rem;
+                padding: 20px;
+            }
+
+            .popup button {
+                font-size: 1rem;
+                padding: 12px 24px;
+            }
+
+            .settings-menu {
+                right: -10px;
+                max-width: calc(100vw - 40px);
+            }
+
+            .bio-name {
+                word-break: break-word;
+            }
+
+            .checkout-carousel {
+                height: 40px;
+                justify-content: flex-start;
+            }
+
+            .checkout-track {
+                gap: 10px;
+                padding: 0 12px;
+            }
+
+            .checkout-tag {
+                font-size: 0.8rem;
+                padding: 7px 13px;
+            }
+
+            .checkout-tag svg {
+                width: 13px;
+                height: 13px;
+            }
+
+            .guide-panel {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body data-page-puzzle>
+    <!-- Settings Menu -->
+    <div class="settings-container">
+        <button class="guide-toggle" onclick="toggleGuide()" aria-label="Open guide">?</button>
+        <button class="settings-toggle" onclick="toggleSettings()" aria-label="Settings">
+            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        </button>
+        <div class="settings-menu" id="settingsMenu">
+            <div class="settings-header">
+                <h3>Settings</h3>
+                <button class="close-settings" onclick="toggleSettings()">×</button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <span>Theme</span>
+                    <div class="theme-options">
+                        <button class="theme-btn" onclick="setTheme('dark')" aria-label="Dark mode">
+                            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+                            Dark
+                        </button>
+                        <button class="theme-btn" onclick="setTheme('light')" aria-label="Light mode">
+                            <svg viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
+                            Light
+                        </button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Size</span>
+                    <div class="size-options">
+                        <button class="size-btn" onclick="setSize('small')" aria-label="Small size">Small</button>
+                        <button class="size-btn" onclick="setSize('normal')" aria-label="Normal size">Normal</button>
+                        <button class="size-btn" onclick="setSize('large')" aria-label="Large size">Large</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Guide</span>
+                    <button class="size-btn" onclick="openGuide()" aria-label="Open guide">Open</button>
+                </div>
+
+                <div class="setting-item">
+                    <span>View</span>
+                    <div class="size-options" style="flex-wrap: wrap;">
+                        <button class="size-btn" id="toggleGifsBtn" onclick="toggleShowGifs()" aria-label="Toggle GIFs">Hide GIFs</button>
+                        <button class="size-btn" id="toggleCarouselBtn" onclick="toggleShowCarousel()" aria-label="Toggle carousel">Hide Carousel</button>
+                        <button class="size-btn" id="toggleQuickLinksBtn" onclick="toggleShowQuickLinks()" aria-label="Toggle quick links">Hide Quick Links</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Motion</span>
+                    <button class="size-btn" id="toggleMotionBtn" onclick="toggleReducedMotion()" aria-label="Toggle reduced motion">Reduce Motion</button>
+                </div>
+
+                <div class="setting-item">
+                    <span>Visibility</span>
+                    <div class="size-options" style="flex-wrap: wrap;">
+                        <button class="size-btn" id="toggleFooterBtn" onclick="toggleShowFooter()" aria-label="Toggle footer">Hide Footer</button>
+                        <button class="size-btn" id="toggleFabBtn" onclick="toggleShowFab()" aria-label="Toggle scroll-to-top">Hide Top Btn</button>
+                        <button class="size-btn" id="toggleStatusBtn" onclick="toggleShowStatus()" aria-label="Toggle status">Hide Status</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Bio Card Width</span>
+                    <div class="size-options">
+                        <button class="size-btn" id="bioWidthCompactBtn" onclick="setBioWidth('compact')" aria-label="Compact width">Compact</button>
+                        <button class="size-btn" id="bioWidthNormalBtn" onclick="setBioWidth('normal')" aria-label="Normal width">Normal</button>
+                        <button class="size-btn" id="bioWidthWideBtn" onclick="setBioWidth('wide')" aria-label="Wide width">Wide</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <span>Button Position</span>
+                    <div class="size-options">
+                        <button class="size-btn" id="buttonPositionTopBtn" onclick="setButtonPosition('top')" aria-label="Top right position">Top Right</button>
+                        <button class="size-btn" id="buttonPositionBottomBtn" onclick="setButtonPosition('bottom')" aria-label="Bottom right position">Bottom Right</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guide Panel -->
+    <div class="guide-overlay" id="guideOverlay" onclick="closeGuide()"></div>
+    <div class="guide-panel" id="guidePanel">
+        <div class="guide-header">
+            <h3>Website Guide</h3>
+            <button class="guide-close" onclick="closeGuide()" aria-label="Close guide">×</button>
+        </div>
+
+        <div class="guide-section">
+            <h4>About this site</h4>
+            <p>This is Meadow's personal bio and project hub. It links to socials, GitHub repos, organizations, project websites, and donation pages. Some links are protected with a quick confirmation as an extra safeguard.</p>
+        </div>
+
+        <div class="guide-section">
+            <h4>What you can do</h4>
+            <ul>
+                <li>Explore projects and repositories on the <strong>Repos</strong> page.</li>
+                <li>View skills and tools on the <strong>Skills</strong> page.</li>
+                <li>Support the work on <strong>Ko-fi</strong> or <strong>Patreon</strong>.</li>
+                <li>Toggle dark/light theme and change the UI size in <strong>Settings</strong>.</li>
+                <li>Open this guide with the <strong>?</strong> button or by pressing <kbd>G</kbd>.</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <h4>Keyboard & mouse shortcuts</h4>
+            <ul>
+                <li><kbd>G</kbd> or <kbd>?</kbd> — Open/close this guide</li>
+                <li><kbd>T</kbd> — Toggle dark/light theme</li>
+                <li><kbd>S</kbd> — Open/close settings</li>
+                <li><kbd>Ctrl</kbd>+<kbd>K</kbd> or <kbd>/</kbd> — Search the site</li>
+                <li><kbd>Esc</kbd> — Close guide or settings</li>
+                <li><strong>Hover</strong> over the "Things to Check Out" carousel to pause it.</li>
+                <li><strong>Click</strong> any tag in the carousel to visit it.</li>
+                <li>Clicking personal-account or GitHub links will ask a quick confirmation first.</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <h4>Quick Settings</h4>
+            <p>Open the settings panel to change the theme, size, animations, and more.</p>
+            <button class="size-btn" onclick="closeGuide(); toggleSettings();" style="width: 100%; margin-top: 8px;">Open Settings</button>
+        </div>
+    </div>
+
+    <!-- GIF Containers -->
+    <div class="gif-container" id="gif1">
+        <img src="../Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Sleeping Cat" loading="lazy" style="width: 100%; height: auto;">
+    </div>
+
+    <div class="gif-container" id="gif2" style="display: none;">
+        <img src="../Images/e8d0f1794e2520ac2367c1d21c0966e9.gif" alt="Sleeping Cat" loading="lazy" style="width: 100%; height: auto;">
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link active">Bio</a>
+            <a href="repos.html" class="nav-link">Repos</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="skills.html" class="nav-link">Skills</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <div class="bio-card">
+        <div class="avatar">
+            <img src="https://avatars.githubusercontent.com/u/88599122?v=4" alt="Meadow">
+        </div>
+
+        <h1>𝕸𝖊𝖆𝖉𝖔𝖜 𝕳. / N3K0</h1>
+        <p class="bio">Heyo, I'm Meadow/N3K0 — an indie developer, coder, and entrepreneur passionate about building websites, apps, and digital experiences. I'm also a gamer who loves exploring new worlds and pushing boundaries in everything I create.</p>
+
+        <div class="bio-details">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Available for collaborations</span>
+            </div>
+            <p class="bio-tag">Entrep / Indie Dev 💻</p>
+            <p class="bio-tag">Private Person ♡</p>
+            <p class="bio-tag">DMs can open and close at any time</p>
+            <p class="bio-quote">"The only way to do great work is to love what you do." — Stay true to your path</p>
+            <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #ffc107; padding: 10px 14px; text-align: center; font-size: 0.8rem; border-radius: 10px; box-sizing: border-box;">
+                Note: Some things may not work correctly on mobile yet.
+            </div>
+            <div class="notice-banner" style="background: rgba(255, 95, 86, 0.1); border: 1px solid #ff5f56; color: #ff5f56; padding: 10px 14px; text-align: center; font-size: 0.8rem; border-radius: 10px; box-sizing: border-box;">
+                ⚠️ Please do not abuse, copy, or redistribute any content on this page. <a href="notice.html" style="color: #ff5f56; text-decoration: underline; font-weight: 600;">Read full notice</a>.
+            </div>
+        </div>
+
+        <div class="quick-links">
+            <a href="https://github.com/MarshMeadow" target="_blank" class="link-btn">GitHub</a>
+            <a href="https://ko-fi.com/marshmeadow" target="_blank" class="link-btn">Ko-Fi</a>
+            <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank" class="link-btn">Patreon</a>
+            <a href="https://t.me/+Kn4q7gvoqdg0OWVh" target="_blank" rel="noopener" class="link-btn">Telegram</a>
+            <span class="link-btn" style="opacity: 0.5; cursor: not-allowed;">Gallery (Coming Soon)</span>
+            <a href="repos.html" target="_blank" class="link-btn">All Repos</a>
+            <a href="skills.html" target="_blank" class="link-btn">Skills</a>
+            <span class="link-btn" style="opacity: 0.5; cursor: not-allowed;">Contact (Coming Soon)</span>
+        </div>
+
+        <div class="checkout-section">
+            <h2>Things to Check Out</h2>
+            <div class="checkout-carousel">
+                <div class="checkout-track">
+                    <a href="repos.html" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        All Repos
+                    </a>
+                    <a href="https://github.com/MarshMeadow" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub :: Meadow
+                    </a>
+                    <a href="https://github.com/HDO-PRO" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        HDO PRO
+                    </a>
+                    <a href="https://dantotsu-app-updater.vercel.app/#/" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Dantotsu Updater
+                    </a>
+                    <a href="https://github.com/KamyRoll/KamyRoll" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        KamyRoll
+                    </a>
+                    <a href="https://ko-fi.com/marshmeadow" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        Donate
+                    </a>
+                    <a href="https://sites.google.com/view/fancyexplore/home" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        FPA Site
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCEut9fHi6A1HbBdVnyEfU_w" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        Gaming YouTube
+                    </a>
+                    <a href="tg://resolve?domain=marshmeadow_n3k0" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                        Telegram
+                    </a>
+                    <a href="https://www.tiktok.com/@Marshmeadow2772" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.85.06-3.7.07-5.55.01-4.25-.02-8.51.03-12.76z"/></svg>
+                        TikTok
+                    </a>
+                    <a href="gallery.html" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        Gallery
+                    </a>
+                    <a href="https://marshmeadow.netlify.app/pronouns" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                        Pronouns
+                    </a>
+                    <a href="https://discord.com/users/nekos404" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+                        Discord
+                    </a>
+                    <a href="https://www.instagram.com/marshmeadow.n3k0/" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        Instagram
+                    </a>
+                    <!-- Duplicate for seamless loop -->
+                    <a href="repos.html" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        All Repos
+                    </a>
+                    <a href="https://github.com/MarshMeadow" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub :: Meadow
+                    </a>
+                    <a href="https://github.com/HDO-PRO" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        HDO PRO
+                    </a>
+                    <a href="https://dantotsu-app-updater.vercel.app/#/" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Dantotsu Updater
+                    </a>
+                    <a href="https://github.com/KamyRoll/KamyRoll" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        KamyRoll
+                    </a>
+                    <a href="https://ko-fi.com/marshmeadow" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        Donate
+                    </a>
+                    <a href="https://sites.google.com/view/fancyexplore/home" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        FPA Site
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCEut9fHi6A1HbBdVnyEfU_w" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        Gaming YouTube
+                    </a>
+                    <a href="tg://resolve?domain=marshmeadow_n3k0" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                        Telegram
+                    </a>
+                    <a href="https://www.tiktok.com/@Marshmeadow2772" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.85.06-3.7.07-5.55.01-4.25-.02-8.51.03-12.76z"/></svg>
+                        TikTok
+                    </a>
+                    <a href="gallery.html" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        Gallery
+                    </a>
+                    <a href="https://marshmeadow.netlify.app/pronouns" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                        Pronouns
+                    </a>
+                    <a href="https://discord.com/users/nekos404" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+                        Discord
+                    </a>
+                    <a href="https://www.instagram.com/marshmeadow.n3k0/" target="_blank" class="checkout-tag">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="links">
+            <div class="dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    Gaming/Streams
+                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://www.youtube.com/channel/UCEut9fHi6A1HbBdVnyEfU_w" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        Gaming YouTube
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCaPh_lbZLmn0ik3R50RS6vA" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        YouTube (Out of Date)
+                    </a>
+                    <a href="https://www.twitch.tv/marshmeadow_n3k0" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                        Twitch (18+)
+                    </a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    Socials
+                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://marshmeadow.netlify.app/pronouns" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                        Pronouns
+                    </a>
+                    <a href="https://discord.com/users/nekos404" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+                        Discord (nekos404)
+                    </a>
+
+                    <a href="https://www.reddit.com/user/nekos404/submitted/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+                        Reddit (nekos404)
+                    </a>
+                    <a href="https://www.reddit.com/user/marshmeadows2772/submitted/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+                        Reddit (marshmeadows2772)
+                    </a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    Projects
+                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="repos.html" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        All Repositories
+                    </a>
+                    <a href="https://ko-fi.com/marshmeadow" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        Donate - Ko-Fi
+                    </a>
+
+                    <a href="https://github.com/HDO-PRO" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        HDO PRO (Private)
+                    </a>
+                    <a href="https://sites.google.com/view/fancyexplore/home" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        FPA Site
+                    </a>
+                    <a href="https://github.com/MarshMeadow/dantotsu-updater-web" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Dantotsu Updater (Web Dev)
+                    </a>
+                    <a href="https://github.com/KamyRoll/KamyRoll" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        KamyRoll (Made & Worked on KamyRoll TV)
+                    </a>
+                    <a href="https://github.com/Neko-s-Index" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Neko-s Index
+                    </a>
+                    <a href="https://github.com/Nekomo-App" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Nekomo App
+                    </a>
+                    <a href="https://github.com/ReSpotF-ck" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        ReSpotF-ck
+                    </a>
+                    <a href="https://nekomoapp.netlify.app/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        Nekomo App Site
+                    </a>
+                    <a href="https://hdopro.netlify.app/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        HDO PRO Site
+                    </a>
+                    <a href="https://n3k0s-index.netlify.app/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        N3K0s Index Site
+                    </a>
+                    <a href="https://respotfck.netlify.app/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        ReSpotF-ck Site
+                    </a>
+                    <a href="https://dantotsu-app-updater.vercel.app/#/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        Dantotsu Updater Site
+                    </a>
+                </div>
+            </div>
+
+            <div class="dropdown" data-personal>
+                <button class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    Personal Contact
+                    <svg class="arrow" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11L3 6h10l-5 5z"/></svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="https://discord.com/users/Marshmeadow2772" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+                        Personal Discord (PRIVATE)
+                    </a>
+                    <a href="tg://resolve?domain=marshmeadow_n3k0" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                        Telegram
+                    </a>
+                    <a href="https://www.instagram.com/marshmeadow.n3k0/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        Instagram (marshmeadow.n3k0)
+                    </a>
+                    <a href="https://www.instagram.com/lazy_neko404/" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        Instagram (lazy_neko404)
+                    </a>
+                    <a href="https://www.tiktok.com/@Marshmeadow2772" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.85.06-3.7.07-5.55.01-4.25-.02-8.51.03-12.76z"/></svg>
+                        TikTok
+                    </a>
+                    <a href="https://wa.me/lazy_neko404" target="_blank">
+                        <svg fill="currentColor" width="16" height="16" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.163-1.617a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <a href="https://github.com/MarshMeadow" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+
+            <a href="https://ko-fi.com/marshmeadow" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                Ko-Fi
+            </a>
+
+            <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-1.76 0-3.37-.64-4.62-1.7L4 22.36V2h10.82zM14.82 4.41H6v15.36l3.42-3.42c1.12 1.14 2.67 1.85 4.4 1.85 3.04 0 5.5-2.46 5.5-5.5s-2.46-5.5-5.5-5.5z"/></svg>
+                Patreon
+            </a>
+
+            <a href="gallery.html" target="_blank" class="link-btn" style="opacity: 0.5; cursor: not-allowed;">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Gallery <span style="font-size: 0.8rem; font-weight: 600; color: var(--accent-color);">(Coming Soon)</span>
+            </a>
+
+            <a href="repos.html" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                All Repos
+            </a>
+
+            <a href="skills.html" target="_blank" class="link-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z"/></svg>
+                Skills
+            </a>
+
+            <span class="link-btn" style="opacity: 0.6; cursor: not-allowed; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 24px; background: var(--link-bg); color: var(--link-text); border-radius: 16px; font-weight: 600; font-size: 1rem; border: 2px solid var(--link-border);">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Contact <span style="font-size: 0.8rem; font-weight: 600; color: var(--accent-color);">(Coming Soon)</span>
+            </span>
+        </div>
+
+        <div class="footer">
+            <p style="color: #ff5f56; font-size: 0.85rem; margin-top: 20px;">⚠️ Please do not abuse any content on this page. You agreed to this upon entering. <a href="notice.html" style="color: #ff5f56; text-decoration: underline;">Read full notice / disclaimer</a>.</p>
+            <p style="margin-top: 15px; font-size: 0.95rem; font-weight: 600;">
+                <a href="https://ko-fi.com/marshmeadow" target="_blank" style="color: #667eea; text-decoration: none;">☕ Support on Ko-fi</a>
+                <span style="margin: 0 10px; color: var(--text-muted);">|</span>
+                <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank" style="color: #667eea; text-decoration: none;">⭐ Support on Patreon</a>
+            </p>
+            <p>© 2024 Meadow</p>
+            <p class="last-updated">Last updated: August 2026</p>
+            <p style="margin-top: 8px; font-size: 0.85rem;">
+                <a href="notice.html" style="color: #667eea; text-decoration: none;">Notice</a> • 
+                <a href="privacy.html" style="color: #667eea; text-decoration: none;">Privacy</a> • 
+                <a href="credits.html" style="color: #667eea; text-decoration: none;">Credits</a> • 
+                <a href="sitemap.html" style="color: #667eea; text-decoration: none;">Sitemap</a>
+            </p>
+            <p style="margin-top: 10px;">
+                <a href="repos.html" target="_blank" style="color: #667eea; text-decoration: none;">All Repos</a> | 
+                <span style="opacity: 0.5;">Gallery (Coming Soon)</span> | 
+                <a href="https://linktr.ee/MarshMeadow" target="_blank" style="color: #667eea; text-decoration: none;">Linktree</a> |
+                <a href="https://github.com/MarshMeadow/marshmeadow.netlify.app" target="_blank" style="color: #667eea; text-decoration: none;">Source</a> |
+                <span style="opacity: 0.5;">Contact (Coming Soon)</span>
+            </p>
+        </div>
+
+        <!-- Floating Action Button -->
+        <button class="fab" id="scrollTopBtn" aria-label="Scroll to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+            Top
+        </button>
+    </div>
+
+    <script>
+        function toggleDropdown(button) {
+            const dropdown = button.parentElement;
+            dropdown.classList.toggle('active');
+        }
+
+        // ==================== SETTINGS MENU ====================
+        function toggleSettings() {
+            const settingsMenu = document.getElementById('settingsMenu');
+            settingsMenu.classList.toggle('active');
+            updateThemeButtons();
+            updateSizeButtons();
+            updateViewButtons();
+            updateButtonPositionButtons();
+        }
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            localStorage.setItem('meadowTheme', theme);
+            updateThemeButtons();
+        }
+
+        function updateThemeButtons() {
+            const currentTheme = localStorage.getItem('meadowTheme') || 'dark';
+            const buttons = document.querySelectorAll('.theme-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(currentTheme)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function setSize(size) {
+            document.body.setAttribute('data-size', size);
+            localStorage.setItem('meadowSize', size);
+            updateSizeButtons();
+        }
+
+        function updateSizeButtons() {
+            const currentSize = localStorage.getItem('meadowSize') || 'normal';
+            const buttons = document.querySelectorAll('.size-btn');
+            const sizeMap = { 'small': 'small', 'normal': 'normal', 'large': 'large' };
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                const btnSize = sizeMap[btn.textContent.trim().toLowerCase()];
+                if (btnSize === currentSize) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // ==================== VIEW & MOTION TOGGLES ====================
+        const viewToggles = {
+            showGifs: true,
+            showCarousel: true,
+            showQuickLinks: true,
+            showFooter: true,
+            showFab: true,
+            showStatus: true,
+            reducedMotion: false
+        };
+
+        let bioWidth = 'normal';
+
+        function updateViewButtons() {
+            document.getElementById('toggleGifsBtn').textContent = viewToggles.showGifs ? 'Hide GIFs' : 'Show GIFs';
+            document.getElementById('toggleCarouselBtn').textContent = viewToggles.showCarousel ? 'Hide Carousel' : 'Show Carousel';
+            document.getElementById('toggleQuickLinksBtn').textContent = viewToggles.showQuickLinks ? 'Hide Quick Links' : 'Show Quick Links';
+            document.getElementById('toggleFooterBtn').textContent = viewToggles.showFooter ? 'Hide Footer' : 'Show Footer';
+            document.getElementById('toggleFabBtn').textContent = viewToggles.showFab ? 'Hide Top Btn' : 'Show Top Btn';
+            document.getElementById('toggleStatusBtn').textContent = viewToggles.showStatus ? 'Hide Status' : 'Show Status';
+            document.getElementById('toggleMotionBtn').textContent = viewToggles.reducedMotion ? 'Enable Motion' : 'Reduce Motion';
+
+            document.body.classList.toggle('index-hide-gifs', !viewToggles.showGifs);
+            document.body.classList.toggle('index-hide-carousel', !viewToggles.showCarousel);
+            document.body.classList.toggle('index-hide-quicklinks', !viewToggles.showQuickLinks);
+            document.body.classList.toggle('index-hide-footer', !viewToggles.showFooter);
+            document.body.classList.toggle('index-hide-fab', !viewToggles.showFab);
+            document.body.classList.toggle('index-hide-status', !viewToggles.showStatus);
+            document.body.classList.toggle('reduced-motion', viewToggles.reducedMotion);
+
+            document.body.setAttribute('data-bio-width', bioWidth);
+            document.getElementById('bioWidthCompactBtn').classList.toggle('active', bioWidth === 'compact');
+            document.getElementById('bioWidthNormalBtn').classList.toggle('active', bioWidth === 'normal');
+            document.getElementById('bioWidthWideBtn').classList.toggle('active', bioWidth === 'wide');
+        }
+
+        function toggleShowGifs() {
+            viewToggles.showGifs = !viewToggles.showGifs;
+            localStorage.setItem('meadowShowGifs', viewToggles.showGifs);
+            updateViewButtons();
+        }
+
+        function toggleShowCarousel() {
+            viewToggles.showCarousel = !viewToggles.showCarousel;
+            localStorage.setItem('meadowShowCarousel', viewToggles.showCarousel);
+            updateViewButtons();
+        }
+
+        function toggleShowQuickLinks() {
+            viewToggles.showQuickLinks = !viewToggles.showQuickLinks;
+            localStorage.setItem('meadowShowQuickLinks', viewToggles.showQuickLinks);
+            updateViewButtons();
+        }
+
+        function toggleShowFooter() {
+            viewToggles.showFooter = !viewToggles.showFooter;
+            localStorage.setItem('meadowShowFooter', viewToggles.showFooter);
+            updateViewButtons();
+        }
+
+        function toggleShowFab() {
+            viewToggles.showFab = !viewToggles.showFab;
+            localStorage.setItem('meadowShowFab', viewToggles.showFab);
+            updateViewButtons();
+        }
+
+        function toggleShowStatus() {
+            viewToggles.showStatus = !viewToggles.showStatus;
+            localStorage.setItem('meadowShowStatus', viewToggles.showStatus);
+            updateViewButtons();
+        }
+
+        function setBioWidth(width) {
+            bioWidth = width;
+            localStorage.setItem('meadowBioWidth', bioWidth);
+            updateViewButtons();
+        }
+
+        function setButtonPosition(position) {
+            localStorage.setItem('meadowButtonPosition', position);
+            document.body.setAttribute('data-button-position', position);
+            updateButtonPositionButtons();
+        }
+
+        function updateButtonPositionButtons() {
+            const position = localStorage.getItem('meadowButtonPosition') || 'bottom';
+            document.getElementById('buttonPositionTopBtn').classList.toggle('active', position === 'top');
+            document.getElementById('buttonPositionBottomBtn').classList.toggle('active', position === 'bottom');
+        }
+
+        function loadButtonPosition() {
+            const savedPosition = localStorage.getItem('meadowButtonPosition');
+            const position = savedPosition || 'bottom';
+            document.body.setAttribute('data-button-position', position);
+            updateButtonPositionButtons();
+        }
+
+        function toggleReducedMotion() {
+            viewToggles.reducedMotion = !viewToggles.reducedMotion;
+            localStorage.setItem('meadowReducedMotion', viewToggles.reducedMotion);
+            updateViewButtons();
+        }
+
+        function loadViewToggles() {
+            viewToggles.showGifs = localStorage.getItem('meadowShowGifs') !== 'false';
+            viewToggles.showCarousel = localStorage.getItem('meadowShowCarousel') !== 'false';
+            viewToggles.showQuickLinks = localStorage.getItem('meadowShowQuickLinks') !== 'false';
+            viewToggles.showFooter = localStorage.getItem('meadowShowFooter') !== 'false';
+            viewToggles.showFab = localStorage.getItem('meadowShowFab') !== 'false';
+            viewToggles.showStatus = localStorage.getItem('meadowShowStatus') !== 'false';
+            viewToggles.reducedMotion = localStorage.getItem('meadowReducedMotion') === 'true';
+            bioWidth = localStorage.getItem('meadowBioWidth') || 'normal';
+            updateViewButtons();
+        }
+
+        // Close settings menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const settingsContainer = document.querySelector('.settings-container');
+            if (!settingsContainer.contains(e.target)) {
+                document.getElementById('settingsMenu').classList.remove('active');
+            }
+        });
+
+        // ==================== DARK MODE TOGGLE ====================
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('meadowTheme', isDarkMode ? 'dark' : 'light');
+            updateThemeButtons();
+        }
+
+        // Check for saved theme preference or default to dark mode
+        const savedTheme = localStorage.getItem('meadowTheme');
+        if (savedTheme !== 'light') {
+            document.body.classList.add('dark-mode');
+        }
+        updateThemeButtons();
+
+        // Check for saved size preference
+        const savedSize = localStorage.getItem('meadowSize') || 'normal';
+        document.body.setAttribute('data-size', savedSize);
+        updateSizeButtons();
+        loadViewToggles();
+        loadButtonPosition();
+
+        // ==================== GUIDE PANEL ====================
+        function openGuide() {
+            document.getElementById('guideOverlay').classList.add('active');
+            document.getElementById('guidePanel').classList.add('active');
+            document.getElementById('settingsMenu').classList.remove('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGuide() {
+            document.getElementById('guideOverlay').classList.remove('active');
+            document.getElementById('guidePanel').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function toggleGuide() {
+            const panel = document.getElementById('guidePanel');
+            if (panel.classList.contains('active')) {
+                closeGuide();
+            } else {
+                openGuide();
+            }
+        }
+
+        // Keyboard & mouse shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
+                return;
+            }
+
+            if (e.key === 'g' || e.key === 'G' || e.key === '?') {
+                e.preventDefault();
+                toggleGuide();
+            } else if (e.key === 't' || e.key === 'T') {
+                e.preventDefault();
+                toggleTheme();
+            } else if (e.key === 's' || e.key === 'S') {
+                e.preventDefault();
+                toggleSettings();
+            } else if (e.key === 'Escape') {
+                closeGuide();
+                document.getElementById('settingsMenu').classList.remove('active');
+            }
+        });
+
+        // Close guide on overlay click
+        document.getElementById('guideOverlay').addEventListener('click', closeGuide);
+
+        // ==================== CHECKOUT CAROUSEL CYCLE ====================
+        function cycleCheckoutTags() {
+            const tags = document.querySelectorAll('.checkout-tag');
+            if (!tags.length) return;
+            let current = 0;
+
+            setInterval(() => {
+                const previous = current === 0 ? tags.length - 1 : current - 1;
+                if (tags[previous]) tags[previous].classList.remove('active');
+                if (tags[current]) tags[current].classList.add('active');
+                current = (current + 1) % tags.length;
+            }, 2500);
+        }
+
+        cycleCheckoutTags();
+
+        // ==================== GIF FUNCTIONALITY ====================
+        function positionGif(gifContainer) {
+            const x = Math.random() * (window.innerWidth - 48);
+            const y = Math.random() * (window.innerHeight - 48);
+            gifContainer.style.left = `${x}px`;
+            gifContainer.style.top = `${y}px`;
+            gifContainer.style.display = "block";
+            gifContainer.classList.add('visible');
+        }
+
+        function setupGif(gif) {
+            let clickCount = 0;
+            let lastClickTime = 0;
+            let isFollowing = false;
+            let randomMoveInterval = null;
+            let rightClickCount = 0;
+            let lastRightClickTime = 0;
+            let isRotating = false;
+            let isGrown = false;
+            let currentScale = 1;
+
+            // Single click - shake, double click - spin, triple click - flip
+            gif.addEventListener('click', (e) => {
+                const currentTime = new Date().getTime();
+                const timeDiff = currentTime - lastClickTime;
+
+                if (timeDiff < 300) {
+                    clickCount++;
+                    if (clickCount >= 3) {
+                        // Triple click - flip
+                        gif.classList.add('flip');
+                        setTimeout(() => {
+                            gif.classList.remove('flip');
+                        }, 500);
+                        clickCount = 0;
+                    } else if (clickCount === 2) {
+                        // Double click - spin
+                        gif.classList.add('spin');
+                        setTimeout(() => {
+                            gif.classList.remove('spin');
+                        }, 1000);
+                    }
+                } else {
+                    // Single click - shake
+                    gif.classList.add('shake');
+                    setTimeout(() => {
+                        gif.classList.remove('shake');
+                    }, 500);
+                    clickCount = 1;
+                }
+
+                lastClickTime = currentTime;
+            });
+
+            // Right click - bounce, double right-click - disappear/reappear
+            gif.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                const currentTime = new Date().getTime();
+                const timeDiff = currentTime - lastRightClickTime;
+
+                if (timeDiff < 300) {
+                    // Double right-click - toggle visibility
+                    gif.classList.toggle('hidden');
+                    rightClickCount = 0;
+                } else {
+                    // Single right-click - bounce
+                    gif.classList.add('bounce');
+                    setTimeout(() => {
+                        gif.classList.remove('bounce');
+                    }, 500);
+                    rightClickCount = 1;
+                }
+
+                lastRightClickTime = currentTime;
+            });
+
+            // Middle click - pulse
+            gif.addEventListener('mousedown', (e) => {
+                if (e.button === 1) {
+                    e.preventDefault();
+                    gif.classList.add('pulse');
+                    setTimeout(() => {
+                        gif.classList.remove('pulse');
+                    }, 500);
+                }
+
+                // Shift + click - color filter
+                if (e.button === 0 && e.shiftKey) {
+                    e.preventDefault();
+                    gif.classList.toggle('color-filter');
+                }
+
+                // Alt + click - continuous rotation
+                if (e.button === 0 && e.altKey) {
+                    e.preventDefault();
+                    isRotating = !isRotating;
+                    if (isRotating) {
+                        gif.classList.add('rotate-continuous');
+                    } else {
+                        gif.classList.remove('rotate-continuous');
+                    }
+                }
+            });
+
+            // Scroll wheel - scale up/down
+            gif.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                currentScale = Math.max(0.3, Math.min(3, currentScale + delta));
+                gif.style.transform = `scale(${currentScale})`;
+            });
+
+            // Hold to follow cursor
+            let holdTimeout;
+            gif.addEventListener('mousedown', (e) => {
+                if (e.button === 0) {
+                    holdTimeout = setTimeout(() => {
+                        isFollowing = true;
+                        gif.classList.add('follow-cursor');
+                    }, 500);
+                }
+            });
+
+            gif.addEventListener('mouseup', () => {
+                clearTimeout(holdTimeout);
+                if (isFollowing) {
+                    isFollowing = false;
+                    gif.classList.remove('follow-cursor');
+                }
+            });
+
+            gif.addEventListener('mouseleave', () => {
+                clearTimeout(holdTimeout);
+                if (isFollowing) {
+                    isFollowing = false;
+                    gif.classList.remove('follow-cursor');
+                }
+            });
+
+            // Follow cursor movement
+            document.addEventListener('mousemove', (e) => {
+                if (isFollowing) {
+                    gif.style.left = `${e.clientX - 24}px`;
+                    gif.style.top = `${e.clientY - 24}px`;
+                }
+            });
+
+            // Random movement mode (press 'R' while hovering)
+            gif.addEventListener('mouseenter', () => {
+                document.addEventListener('keydown', handleRandomMove);
+            });
+
+            gif.addEventListener('mouseleave', () => {
+                document.removeEventListener('keydown', handleRandomMove);
+                if (randomMoveInterval) {
+                    clearInterval(randomMoveInterval);
+                    randomMoveInterval = null;
+                }
+            });
+
+            function handleRandomMove(e) {
+                if ((e.key === 'r' || e.key === 'R') && !randomMoveInterval) {
+                    randomMoveInterval = setInterval(() => {
+                        const x = Math.random() * (window.innerWidth - 48);
+                        const y = Math.random() * (window.innerHeight - 48);
+                        gif.style.left = `${x}px`;
+                        gif.style.top = `${y}px`;
+                    }, 1000);
+                }
+                if ((e.key === 's' || e.key === 'S') && randomMoveInterval) {
+                    clearInterval(randomMoveInterval);
+                    randomMoveInterval = null;
+                }
+
+                // Space key - jump
+                if (e.key === ' ' || e.key === 'Space') {
+                    e.preventDefault();
+                    gif.classList.add('jump');
+                    setTimeout(() => {
+                        gif.classList.remove('jump');
+                    }, 500);
+                }
+
+                // F key - flip horizontally
+                if (e.key === 'f' || e.key === 'F') {
+                    e.preventDefault();
+                    gif.classList.add('flip');
+                    setTimeout(() => {
+                        gif.classList.remove('flip');
+                    }, 500);
+                }
+
+                // G key - grow/shrink toggle
+                if (e.key === 'g' || e.key === 'G') {
+                    e.preventDefault();
+                    isGrown = !isGrown;
+                    if (isGrown) {
+                        gif.classList.add('grow');
+                        gif.classList.remove('shrink');
+                    } else {
+                        gif.classList.remove('grow');
+                        gif.classList.add('shrink');
+                    }
+                }
+            }
+
+            // Drag functionality
+            let offsetX, offsetY;
+            let isDragging = false;
+
+            const dragStart = (e) => {
+                if (e.button !== 0) return;
+                isDragging = true;
+                offsetX = e.clientX - gif.getBoundingClientRect().left;
+                offsetY = e.clientY - gif.getBoundingClientRect().top;
+                document.addEventListener('mousemove', dragMove);
+                document.addEventListener('mouseup', dragEnd);
+            };
+
+            const dragMove = (e) => {
+                if (!isDragging) return;
+                gif.style.left = `${e.clientX - offsetX}px`;
+                gif.style.top = `${e.clientY - offsetY}px`;
+            };
+
+            const dragEnd = () => {
+                isDragging = false;
+                document.removeEventListener('mousemove', dragMove);
+                document.removeEventListener('mouseup', dragEnd);
+            };
+
+            gif.addEventListener('mousedown', dragStart);
+
+            // Touch drag
+            const touchStart = (e) => {
+                isDragging = true;
+                offsetX = e.touches[0].clientX - gif.getBoundingClientRect().left;
+                offsetY = e.touches[0].clientY - gif.getBoundingClientRect().top;
+                document.addEventListener('touchmove', touchMove);
+                document.addEventListener('touchend', touchEnd);
+            };
+
+            const touchMove = (e) => {
+                if (!isDragging) return;
+                gif.style.left = `${e.touches[0].clientX - offsetX}px`;
+                gif.style.top = `${e.touches[0].clientY - offsetY}px`;
+            };
+
+            const touchEnd = () => {
+                isDragging = false;
+                document.removeEventListener('touchmove', touchMove);
+                document.removeEventListener('touchend', touchEnd);
+            };
+
+            gif.addEventListener('touchstart', touchStart);
+        }
+
+        // Initialize GIFs on load
+        window.onload = function() {
+            const gif1 = document.getElementById('gif1');
+            const gif2 = document.getElementById('gif2');
+
+            positionGif(gif1);
+            setupGif(gif1);
+
+            if (Math.random() > 0.5) {
+                positionGif(gif2);
+                setupGif(gif2);
+            }
+        };
+
+        // ==================== PREVENT RIGHT-CLICK AND DEV TOOLS ====================
+        // Prevent right-click context menu
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        // Prevent dev tools shortcuts
+        document.addEventListener('keydown', function (e) {
+            // F12 - Dev Tools
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I - Dev Tools
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+J - Console
+            if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+C - Element Inspector
+            if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U - View Source
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+C - Copy (prevent on non-input elements)
+            if (e.ctrlKey && (e.key === 'C' || e.key === 'c')) {
+                const target = e.target;
+                if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            // Ctrl+V - Paste (prevent on non-input elements)
+            if (e.ctrlKey && (e.key === 'V' || e.key === 'v')) {
+                const target = e.target;
+                if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            // Ctrl+X - Cut (prevent on non-input elements)
+            if (e.ctrlKey && (e.key === 'X' || e.key === 'x')) {
+                const target = e.target;
+                if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            // Ctrl+A - Select All (prevent on non-input elements)
+            if (e.ctrlKey && (e.key === 'A' || e.key === 'a')) {
+                const target = e.target;
+                if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            // Ctrl+S - Save
+            if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+P - Print
+            if (e.ctrlKey && (e.key === 'P' || e.key === 'p')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent text selection
+        document.addEventListener('selectstart', function (e) {
+            const target = e.target;
+            if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                e.preventDefault();
+            }
+        });
+
+        // Prevent drag
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+
+        // Prevent copy on all elements except inputs
+        document.addEventListener('copy', function (e) {
+            const target = e.target;
+            if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                e.preventDefault();
+            }
+        });
+
+        // Prevent cut on all elements except inputs
+        document.addEventListener('cut', function (e) {
+            const target = e.target;
+            if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+                e.preventDefault();
+            }
+        });
+
+        // Allow links and buttons to work normally
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('click', function (e) {
+                // Let clicks pass through naturally
+            });
+        });
+
+        // Scroll-to-top button visibility
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        if (scrollTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

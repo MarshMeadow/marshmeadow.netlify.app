@@ -3,193 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found</title>
-    <meta name="description" content="404 - Page not found on Meadow's website">
-    <link rel="icon" href="https://avatars.githubusercontent.com/u/88599122?v=4" type="image/png">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            --card-bg: rgba(30, 30, 40, 0.95);
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --accent-color: #667eea;
-            --accent-hover: #764ba2;
-            --border-color: #3a3a4e;
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --glow-color: rgba(102, 126, 234, 0.3);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        body {
-            background: var(--bg-gradient);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            transition: background 0.3s ease;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .error-container {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--border-color);
-            border-radius: 20px;
-            padding: 60px 40px;
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: 0 20px 60px var(--shadow-color);
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .cat-emoji {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        h1 {
-            color: var(--text-primary);
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .error-code {
-            color: var(--accent-color);
-            font-size: 6rem;
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 20px;
-            text-shadow: 0 0 30px var(--glow-color);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .home-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 32px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .home-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px var(--glow-color);
-        }
-
-        .countdown {
-            margin-top: 25px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .countdown span {
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .error-container {
-                padding: 40px 25px;
-            }
-
-            .error-code {
-                font-size: 4rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .cat-emoji {
-                font-size: 60px;
-            }
-        }
-    </style>
+    <title>Page Not Found — Meadow</title>
+    <meta name="description" content="This page does not exist.">
+    <meta name="theme-color" content="#8d2249">
+    <link rel="icon" href="/Images/meadow-avatar.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/pages.css?v=1">
+    <script src="/theme.js?v=1" defer></script>
+    <meta name="robots" content="noindex">
 </head>
 <body>
-    <div class="error-container">
-        <div class="cat-emoji">🐱</div>
-        <div class="error-code">404</div>
-        <h1>Oops! Page Not Found</h1>
-        <p>Looks like you've stumbled into a digital black hole! Don't worry, we'll get you back to safety in a moment.</p>
-        <a href="https://marshmeadow.netlify.app/" class="home-btn">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            Take Me Home
-        </a>
-        <div class="countdown">Redirecting in <span id="countdown">5</span> seconds...</div>
-    </div>
+    <div class="bg-fx"></div>
 
-    <script>
-        let seconds = 5;
-        const countdownEl = document.getElementById('countdown');
-        
-        const interval = setInterval(() => {
-            seconds--;
-            countdownEl.textContent = seconds;
-            
-            if (seconds <= 0) {
-                clearInterval(interval);
-                window.location.href = 'https://marshmeadow.netlify.app/';
-            }
-        }, 1000);
-    </script>
+    <nav>
+        <a href="/" class="nav-logo">
+            <img src="/Images/meadow-avatar.jpg" alt="Meadow" style="border-radius:50%">
+            <span class="logo-text">Meadow</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-links">
+            <a href="/#about">About</a>
+            <a href="/#projects">Projects</a>
+            <a href="/#repos">Repos</a>
+            <a href="/#skills">Skills</a>
+            <a href="/#connect">Connect</a>
+            <a href="https://github.com/MarshMeadow" target="_blank" rel="noopener">GitHub</a>
+            <a href="/#support" class="nav-cta">Support</a>
+        </div>
+    </nav>
+
+    <main style="text-align:center;min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div style="font-size:4rem;line-height:1">🐱</div>
+        <p class="page-label" style="margin-top:18px">Error 404</p>
+        <h1>Page not found</h1>
+        <p class="page-sub" style="margin-left:auto;margin-right:auto">Looks like you've wandered into a digital black hole. Let's get you back home.</p>
+        <div class="btn-row" style="justify-content:center">
+            <a class="btn" href="/">Take me home</a>
+            <a class="btn ghost" href="/sitemap">Sitemap</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="/Images/meadow-avatar.jpg" alt="Meadow" style="border-radius:50%">
+                <span class="logo-text">Meadow</span>
+            </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/notice">Notice</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/credits">Credits</a>
+                <a href="/sitemap">Sitemap</a>
+                <a href="https://ko-fi.com/marshmeadow" target="_blank" rel="noopener">Ko-fi</a>
+                <a href="https://www.patreon.com/cw/marshmeadow_n3k0" target="_blank" rel="noopener">Patreon</a>
+                <a href="https://github.com/MarshMeadow" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <p class="copyright">Made with <span>&hearts;</span> by Meadow &middot; N3K0</p>
+        </div>
+    </footer>
 </body>
 </html>

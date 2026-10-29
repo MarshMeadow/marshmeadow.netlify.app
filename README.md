@@ -78,13 +78,22 @@ This website is deployed using **Netlify** and updates automatically whenever ne
 
 ```text
 .
-├── index.html
-├── css/
-├── js/
-├── images/
-├── assets/
-└── README.md
+├── index.html        # Single-page bio / portfolio
+├── notice.html       # Notice / disclaimer
+├── privacy.html      # Privacy notes
+├── credits.html      # Credits & attributions
+├── sitemap.html      # Sitemap
+├── 404.html          # Not-found page
+├── pronouns.html     # Redirect
+├── pages.css         # Shared styles for the content pages
+├── theme.js          # Petals, settings panel, site search, mobile nav
+├── gate.js           # Quick human check + notice, protected personal links
+├── _redirects        # Netlify clean URLs & old-page redirects
+├── Images/
+└── old-code/         # Archive of the previous version of the site
 ```
+
+The theme is based on the [Nekomo website](https://github.com/Nekomo-App/Nekomo-Main-Web).
 
 ---
 

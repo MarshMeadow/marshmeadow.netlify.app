@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy notes for Meadow's personal bio website.">
+    <title>Privacy Notes - Meadow</title>
+    <script src="security.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #c9d1d9;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .notice-card {
+            background: rgba(22, 27, 34, 0.95);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #e6edf3;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #b4b4b4;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: #b4b4b4;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: color 0.2s ease;
+        }
+
+        .back:hover {
+            color: #8e9ff5;
+            text-decoration: underline;
+        }
+
+        .more-links {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        @media (max-width: 480px) {
+            .notice-card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="notice-card">
+        <h1>Privacy Notes</h1>
+        <p>This is a personal portfolio and bio website. I try to keep it lightweight and privacy-friendly.</p>
+
+        <h2>No cookies or tracking</h2>
+        <p>This site does not use cookies, analytics, advertising trackers, or third-party scripts that follow you around the web. The only external resources loaded are Google Fonts and data fetched directly from GitHub's public API.</p>
+
+        <h2>What is stored locally</h2>
+        <p>Some features save small preferences in your browser's <strong>localStorage</strong>. This is only used for:</p>
+        <ul>
+            <li>Remembering that you solved the puzzle so you don't have to solve it again on every link.</li>
+            <li>Theme, size, layout, and visibility settings you choose in the settings menu.</li>
+        </ul>
+        <p>This data never leaves your device and is not sent to any server.</p>
+
+        <h2>External links</h2>
+        <p>Some links go to external sites such as GitHub, Ko-fi, Patreon, and project websites. Those sites have their own privacy policies. Most external links open in a new tab and are marked where appropriate.</p>
+
+        <h2>Donations</h2>
+        <p>Donation links go through Ko-fi and Patreon. I do not collect or see any payment information directly on this site.</p>
+
+        <h2>Content use</h2>
+        <p>By viewing this site you agree not to copy, redistribute, scrape, or abuse any content, images, code, or personal information found on these pages. See the <a href="notice.html">full notice / disclaimer</a> for more details.</p>
+
+        <a href="index.html" class="back">← Back to Bio</a>
+        <p class="more-links"><a href="credits.html">Credits</a> • <a href="notice.html">Notice</a></p>
+    </main>
+</body>
+</html>
